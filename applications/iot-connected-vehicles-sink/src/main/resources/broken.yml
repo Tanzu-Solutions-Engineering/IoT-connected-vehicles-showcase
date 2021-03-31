@@ -1,0 +1,24 @@
+management.endpoints.web.exposure.include: "*"
+server:
+ port: 9000
+spring:
+  application.name: vehicleGemFireSink
+  cloud:
+    function.definition: vehicleGemFireSink
+    stream:
+      bindings:
+#        vehicleGemFireSink-in-0:
+        input:
+          destination: vehicleSink
+      function:
+        bindings:
+          vehicleGemFireSink-in-0: vehicleSink
+      rabbit:
+        bindings:
+#          vehicleGemFireSink-in-0:
+          input:
+            consumer:
+              autoBindDlq: true
+        default:
+          quorum.enabled: true
+          autoBindDlq: true

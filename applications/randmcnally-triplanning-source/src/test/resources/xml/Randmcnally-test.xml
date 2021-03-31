@@ -1,0 +1,201 @@
+<Body>
+    <GetInboundMessages_GetByIndexResponse xmlns="http://fwapi.DriverTech.com/DataService_v2">
+        <GetInboundMessages_GetByIndexResult xmlns="http://fwapi.DriverTech.com/CommonTypes/2009/04">
+            <InboundMessages>
+                <InboundMessage>
+                    <MessageHeader>
+                        <MessageId>1</MessageId>
+                        <DateTime>2018-02-14T00:27:00Z</DateTime>
+                        <Truck id="hi">
+                            <TruckName>2323</TruckName>
+                            <VIN>3GGGGGGGGGGSGV9557</VIN>
+                        </Truck>
+                        <Driver employeeId="2323" id="59">
+                            <Logon>1005</Logon>
+                        </Driver>
+                        <TransmissionMode>Cellular</TransmissionMode>
+                        <Position id="hi">
+                            <Coordinate>
+                                <Latitude>34.03074</Latitude>
+                                <Longitude>-117.596786</Longitude>
+                            </Coordinate>
+                            <Location>
+                                <City>A</City>
+                                <State>CA</State>
+                                <Region>CA</Region>
+                            </Location>
+                            <Proximity>9.9 SE</Proximity>
+                            <Bearing>0</Bearing>
+                        </Position>
+                        <VehicleContext EngineDataBusFound="true" IgnitionOn="true" InMotion="true" Odometer="232"
+                                        Speed="46" VcVersion="1">
+                            <Ext>
+                                <FuelPrimary xsi:nil="true"/>
+                                <FuelSecondary xsi:nil="true"/>
+                                <FuelLifetime xsi:nil="true"/>
+                                <EngineTimeLifetime xsi:nil="true"/>
+                            </Ext>
+                        </VehicleContext>
+                        <Ext>
+                            <ReceivedOn>2018-02-14T00:27:04.61Z</ReceivedOn>
+                        </Ext>
+                    </MessageHeader>
+                    <MessageBody>
+                        <PositionState>
+                            <HOSCurrentTotals EobrHasFailure="false" HosType="US8Day" InDrivingViolation="false"
+                                              InOnDutyViolation="false" InTotalOnDutyViolation="false" UTCOffset="-8">
+                                <DriverBase employeeId="hi" id="hi">
+                                    <Logon>1005</Logon>
+                                </DriverBase>
+                                <TruckPCBase id="194">
+                                    <TruckName>126750</TruckName>
+                                    <VIN>GGGGG</VIN>
+                                </TruckPCBase>
+                                <CalculatedOn>2018-02-14T00:27:00Z</CalculatedOn>
+                                <ReceivedOn>2018-02-14T00:27:04.583Z</ReceivedOn>
+                                <CurrentStatus>Driving</CurrentStatus>
+                                <CurrentSubStatus>Driving</CurrentSubStatus>
+                                <CurrentStatusInitiated>2018-02-14T00:11:03Z</CurrentStatusInitiated>
+                                <Position>
+                                    <Coordinate>
+                                        <Latitude>34.03074</Latitude>
+                                        <Longitude>-117.596786</Longitude>
+                                    </Coordinate>
+                                    <Location>
+                                        <City>sdsdsd</City>
+                                        <State>CA</State>
+                                        <Region>CA</Region>
+                                    </Location>
+                                    <Proximity>0.9 SE</Proximity>
+                                </Position>
+                                <LastCertified>2018-02-12</LastCertified>
+                                <RemainingDriving>34</RemainingDriving>
+                                <RemainingOnDuty>hi</RemainingOnDuty>
+                                <RemainingTotalOnDuty>hi</RemainingTotalOnDuty>
+                                <RemainingTimeBeforeSplitReset xsi:nil="true"/>
+                                <RemainingTimeBeforeContiguousReset>36000</RemainingTimeBeforeContiguousReset>
+                                <RemainingTimeBeforeTotalReset>122400</RemainingTimeBeforeTotalReset>
+                                <DriveTimeAvailableTomorrow>39600</DriveTimeAvailableTomorrow>
+                                <RemainingEffectiveDriveTime>10375</RemainingEffectiveDriveTime>
+                                <TimeGainedTowardTotalOndutyTomorrow>0</TimeGainedTowardTotalOndutyTomorrow>
+                                <DrivingSinceLastReset>34343</DrivingSinceLastReset>
+                                <OnDutySinceLastReset>40025</OnDutySinceLastReset>
+                                <TotalOnDutySinceLastReset>83313</TotalOnDutySinceLastReset>
+                                <CompleteResetEndedOn>2018-02-12T13:13:10Z</CompleteResetEndedOn>
+                                <ContiguousResetEndedOn>2018-02-13T13:19:55Z</ContiguousResetEndedOn>
+                                <SplitResetEndedOn xsi:nil="true"/>
+                                <TimeZone UseDaylightSavings="true">Pacific</TimeZone>
+                                <Ext>
+                                    <InMandatoryBreakViolation>false</InMandatoryBreakViolation>
+                                    <LastMandatoryBreakEndedOn>2018-02-13T20:31:00</LastMandatoryBreakEndedOn>
+                                    <RemainingProjectedMaxDriveTime>10375</RemainingProjectedMaxDriveTime>
+                                    <RemainingTimeBeforeMandatoryBreak>14640</RemainingTimeBeforeMandatoryBreak>
+                                    <OperationalExemption>None</OperationalExemption>
+                                    <IsEligibleFor16hrRule>true</IsEligibleFor16hrRule>
+                                    <CompleteResetStartedOn>2018-02-10T02:55:23</CompleteResetStartedOn>
+                                </Ext>
+                            </HOSCurrentTotals>
+                        </PositionState>
+                    </MessageBody>
+                </InboundMessage>
+                <InboundMessage>
+                    <MessageHeader>
+                        <MessageId>hi</MessageId>
+                        <DateTime>2018-02-14T00:26:54Z</DateTime>
+                        <Truck id="278">
+                            <TruckName>ASDADSAd</TruckName>
+                            <VIN>cfsdfds</VIN>
+                        </Truck>
+                        <Driver employeeId="hi" id="hi">
+                            <Logon>hi</Logon>
+                        </Driver>
+                        <TransmissionMode>Cellular</TransmissionMode>
+                        <Position id="hi">
+                            <Coordinate>
+                                <Latitude>34.042057</Latitude>
+                                <Longitude>-117.555176</Longitude>
+                            </Coordinate>
+                            <Location>
+                                <City>hey</City>
+                                <State>CA</State>
+                                <Region>CA</Region>
+                            </Location>
+                            <Proximity>2.4 SE</Proximity>
+                            <Bearing>0</Bearing>
+                        </Position>
+                        <VehicleContext EngineDataBusFound="true" IgnitionOn="true" InMotion="true" Odometer="hi"
+                                        Speed="0" VcVersion="1">
+                            <Ext>
+                                <FuelPrimary xsi:nil="true"/>
+                                <FuelSecondary xsi:nil="true"/>
+                                <FuelLifetime xsi:nil="true"/>
+                                <EngineTimeLifetime xsi:nil="true"/>
+                            </Ext>
+                        </VehicleContext>
+                        <Ext>
+                            <ReceivedOn>2018-02-14T00:27:04.61Z</ReceivedOn>
+                        </Ext>
+                    </MessageHeader>
+                    <MessageBody>
+                        <PositionState>
+                            <HOSCurrentTotals EobrHasFailure="false" HosType="US8Day" InDrivingViolation="false"
+                                              InOnDutyViolation="false" InTotalOnDutyViolation="false" UTCOffset="-8">
+                                <DriverBase employeeId="hi" id="hi">
+                                    <Logon>6956</Logon>
+                                </DriverBase>
+                                <TruckPCBase id="hi">
+                                    <TruckName>Hi</TruckName>
+                                    <VIN>GGGG</VIN>
+                                </TruckPCBase>
+                                <CalculatedOn>2018-02-14T00:26:54Z</CalculatedOn>
+                                <ReceivedOn>2018-02-14T00:27:04.583Z</ReceivedOn>
+                                <CurrentStatus>OnDuty</CurrentStatus>
+                                <CurrentSubStatus>OnDuty, TripInformation</CurrentSubStatus>
+                                <CurrentStatusInitiated>2018-02-13T23:00:00Z</CurrentStatusInitiated>
+                                <Position>
+                                    <Coordinate>
+                                        <Latitude>34.042057</Latitude>
+                                        <Longitude>-117.555176</Longitude>
+                                    </Coordinate>
+                                    <Location>
+                                        <City>Hey</City>
+                                        <State>CA</State>
+                                        <Region>CA</Region>
+                                    </Location>
+                                    <Proximity>2.4 SE</Proximity>
+                                </Position>
+                                <LastCertified>2018-01-10</LastCertified>
+                                <RemainingDriving>29784</RemainingDriving>
+                                <RemainingOnDuty>23586</RemainingOnDuty>
+                                <RemainingTotalOnDuty>226986</RemainingTotalOnDuty>
+                                <RemainingTimeBeforeSplitReset xsi:nil="true"/>
+                                <RemainingTimeBeforeContiguousReset>36000</RemainingTimeBeforeContiguousReset>
+                                <RemainingTimeBeforeTotalReset>122400</RemainingTimeBeforeTotalReset>
+                                <DriveTimeAvailableTomorrow>39600</DriveTimeAvailableTomorrow>
+                                <RemainingEffectiveDriveTime>23586</RemainingEffectiveDriveTime>
+                                <TimeGainedTowardTotalOndutyTomorrow>0</TimeGainedTowardTotalOndutyTomorrow>
+                                <DrivingSinceLastReset>9816</DrivingSinceLastReset>
+                                <OnDutySinceLastReset>26814</OnDutySinceLastReset>
+                                <TotalOnDutySinceLastReset>25014</TotalOnDutySinceLastReset>
+                                <CompleteResetEndedOn>2018-02-13T17:00:00Z</CompleteResetEndedOn>
+                                <ContiguousResetEndedOn>2018-02-13T17:00:00Z</ContiguousResetEndedOn>
+                                <SplitResetEndedOn xsi:nil="true"/>
+                                <TimeZone UseDaylightSavings="true">Pacific</TimeZone>
+                                <Ext>
+                                    <InMandatoryBreakViolation>false</InMandatoryBreakViolation>
+                                    <LastMandatoryBreakEndedOn>2018-02-13T23:00:00</LastMandatoryBreakEndedOn>
+                                    <RemainingProjectedMaxDriveTime>23586</RemainingProjectedMaxDriveTime>
+                                    <RemainingTimeBeforeMandatoryBreak>23586</RemainingTimeBeforeMandatoryBreak>
+                                    <OperationalExemption>None</OperationalExemption>
+                                    <IsEligibleFor16hrRule>true</IsEligibleFor16hrRule>
+                                    <CompleteResetStartedOn>2018-02-10T03:32:46</CompleteResetStartedOn>
+                                </Ext>
+                            </HOSCurrentTotals>
+                        </PositionState>
+                    </MessageBody>
+                </InboundMessage>
+            </InboundMessages>
+            <QueueDepth>2</QueueDepth>
+        </GetInboundMessages_GetByIndexResult>
+    </GetInboundMessages_GetByIndexResponse>
+</Body>
