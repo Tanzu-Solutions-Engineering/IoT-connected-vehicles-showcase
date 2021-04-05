@@ -1,0 +1,102 @@
+{
+  "GeotabData": [
+    {
+      "data": [
+        {
+          "latitude": 35.4228973,
+          "longitude": -97.6155396,
+          "speed": 66.0,
+          "dateTime": "2018-02-14T00:01:32.000Z",
+          "device": {
+            "id": "hi",
+            "vin": "hi"
+          },
+          "id": "hi"
+        },
+        {
+          "latitude": 37.954689,
+          "longitude": -122.042725,
+          "speed": 0.0,
+          "dateTime": "2018-02-14T00:01:12.000Z",
+          "device": {
+            "id": "hi",
+            "vin": "hi"
+          },
+          "id": "hi"
+        },
+        {
+          "latitude": 37.9546623,
+          "longitude": -122.042702,
+          "speed": 4.0,
+          "dateTime": "2018-02-14T00:01:18.000Z",
+          "device": {
+            "id": "hi",
+            "vin": "hi"
+          },
+          "id": "hi"
+        },
+        {
+          "latitude": 37.954586,
+          "longitude": -122.042625,
+          "speed": 0.0,
+          "dateTime": "2018-02-14T00:01:26.000Z",
+          "device": {
+            "id": "hi",
+            "vin": "hi"
+          },
+          "id": "hi"
+        },
+        {
+          "latitude": 30.5323257,
+          "longitude": -87.3046494,
+          "speed": 0.0,
+          "dateTime": "2018-02-14T00:01:33.000Z",
+          "device": {
+            "id": "hi",
+            "vin": "hi"
+          },
+          "id": "hi"
+        },
+        {
+          "latitude": 35.1296768,
+          "longitude": -95.8920441,
+          "speed": 105.0,
+          "dateTime": "2018-02-14T00:00:07.000Z",
+          "device": {
+            "id": "hi",
+            "vin": "hi"
+          },
+          "id": "hi"
+        },
+        {
+          "latitude": 35.1257362,
+          "longitude": -95.8912735,
+          "speed": 109.0,
+          "dateTime": "2018-02-14T00:00:22.000Z",
+          "device": {
+            "id": "hi",
+            "vin": "hi"
+          },
+          "id": "hi"
+        },
+        {
+          "latitude": 35.1108589,
+          "longitude": -95.890686,
+          "speed": 103.0,
+          "dateTime": "2018-02-14T00:01:18.000Z",
+          "device": {
+            "id": "hi",
+            "vin": "hi"
+          },
+          "id": "hi"
+        },
+        {
+          "latitude": 35.1071243,
+          "longitude": -95.8905563,
+          "speed": 111.0,
+          "dateTime": "2018-02-14T00:01:32.000Z"
+        }
+      ]
+    }
+  ]
+}

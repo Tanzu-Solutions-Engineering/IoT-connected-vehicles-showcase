@@ -30,7 +30,7 @@ internal class InMsgToVehicleTransformerTest{
     @Test
     internal fun transform() {
         val expected = Vehicle(vin = "3GGGGGGGGGGSGV9557"
-            ,odometer = 2326119,
+            ,odometer = 232,
             speed = 46,
             gpsLocation = expectedGpsLocation
             )

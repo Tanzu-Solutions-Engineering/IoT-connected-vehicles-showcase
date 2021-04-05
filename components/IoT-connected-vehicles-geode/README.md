@@ -32,7 +32,6 @@ create region --name=VehicleAggregation --type=PARTITION  --colocated-with=/Vehi
 
 
 
-
 ```shell script
 
 execute function --id=ClearRegionFunction --region=/Vehicle
@@ -46,3 +45,17 @@ show log --member=server1
 query --query="select * from /VehicleAggregation"
 
 ```
+
+
+# K8
+
+
+```shell script
+kubectl exec -it gemfire1-locator-0 -- gfsh
+
+connect --locator=gemfire1-locator[10334]
+```
+
+
+
+
