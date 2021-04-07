@@ -90,3 +90,4 @@ k port-forward rabbitmq-server-0 15672:15672
 ```
 
 
+k port-forward iot-connected-vehicle-dashboard 7000:7000
