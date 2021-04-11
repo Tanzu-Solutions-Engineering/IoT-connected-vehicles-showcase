@@ -2,7 +2,7 @@ package com.vmware.tanzu.data.IoT.connected.vehicle.dashboard.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.vmware.tanzu.data.IoT.connected.vehicle.dashboard.repositories.VehicleRepository
+import com.vmware.tanzu.data.IoT.vehicles.repositories.VehicleRepository
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController

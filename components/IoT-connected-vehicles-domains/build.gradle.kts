@@ -17,6 +17,9 @@ repositories {
 dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.0-M1")
+	testImplementation("org.mockito:mockito-core:3.8.0")
+	testImplementation("org.mockito:mockito-junit-jupiter:3.8.0")
 }
 
 tasks.withType<KotlinCompile> {

@@ -34,6 +34,7 @@ internal class VehicleGeneratorTest{
         println("ACTUAL: $actual");
         assertTrue(actual.speed != 0);
         assertTrue(actual.odometer != 0L);
+        assertTrue(actual.temperature != 0);
         assertTrue(actual.vin.isNotEmpty());
         assertNotNull(actual.gpsLocation);
         assertNotNull( abs(actual.gpsLocation!!.latitude) > 0);
@@ -49,4 +50,6 @@ internal class VehicleGeneratorTest{
         assertNotEquals(original,actual);
 
     }
+
+
 }

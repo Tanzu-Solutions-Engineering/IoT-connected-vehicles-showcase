@@ -91,3 +91,37 @@ k port-forward rabbitmq-server-0 15672:15672
 
 
 k port-forward iot-connected-vehicle-dashboard 7000:7000
+
+
+# WaveFront
+
+```shell script
+helm repo add wavefront https://wavefronthq.github.io/helm/
+helm repo update
+```
+
+To deploy the Wavefront Collector and Wavefront Proxy:
+
+Using helm 2:
+
+helm install wavefront/wavefront --name wavefront --set wavefront.url=https://YOUR_CLUSTER.wavefront.com --set wavefront.token=YOUR_API_TOKEN --set clusterName=<YOUR_CLUSTER_NAME> --namespace wavefront
+
+Using helm 3:
+
+kubectl create namespace wavefront
+
+```shell script
+
+```
+helm install wavefront wavefront/wavefront --set wavefront.url=https://YOUR_CLUSTER.wavefront.com --set wavefront.token=YOUR_API_TOKEN --set clusterName=<YOUR_CLUSTER_NAME> --namespace wavefront
+
+
+[Local WaveFront](https://vmware.wavefront.com/dashboards/integration-kubernetes-clusters#_v01(g:(d:7200,ls:!t,s:1617894218,w:'2h'),p:(cluster_name:(v:gregoryg-cluster))))
+
+Look for gregoryg-cluster
+
+
+
+Return generate 
+
+k delete pod vehicle-generator-app

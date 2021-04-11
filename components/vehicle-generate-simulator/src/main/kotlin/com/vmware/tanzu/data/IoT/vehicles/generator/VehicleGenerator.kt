@@ -66,6 +66,7 @@ class VehicleGenerator(
 
         return Vehicle( vin = vin,
             speed = Random.nextInt(15, 100),
+            temperature = Random.nextInt(100,300),
             odometer = this.odometer + distanceIncrements.toLong(),
             gpsLocation = GpsLocation(latLong[0],latLong[1]));
     }

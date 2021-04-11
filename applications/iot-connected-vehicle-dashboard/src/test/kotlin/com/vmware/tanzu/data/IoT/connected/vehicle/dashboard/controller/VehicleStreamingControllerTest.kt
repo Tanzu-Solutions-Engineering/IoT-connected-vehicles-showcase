@@ -1,7 +1,7 @@
 package com.vmware.tanzu.data.IoT.connected.vehicle.dashboard.controller
 
-import com.vmware.tanzu.data.IoT.connected.vehicle.dashboard.repositories.VehicleRepository
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
+import com.vmware.tanzu.data.IoT.vehicles.repositories.VehicleRepository
 import nyla.solutions.core.patterns.creational.generator.JavaBeanGeneratorCreator
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

@@ -6,4 +6,12 @@ data class Vehicle(
     var speed : Int = 0,
     var temperature: Int = 0,
     var gpsLocation: GpsLocation? = null
-)
+) {
+    var id: String?
+        get() = vin;
+        set(value)
+        {
+            if(value !=null)
+                vin = value
+        };
+}
