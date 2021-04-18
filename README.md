@@ -86,7 +86,19 @@ echo "PASWORD:" $rpwd
 
 
 ```shell script
-k port-forward rabbitmq-server-0 15672:15672
+kubectl port-forward rabbitmq-server-0 15672:15672
+```
+
+Scale RabbitMQ to 3 nodes
+
+```shell script
+kubectl apply -f cloud/k8/data-services/rabbitmq/rabbitmq-cluster-loc2-datanode3.yml
+```
+
+Scale GemFire to 2 locator and 3 datanodes
+
+```shell script
+kubectl apply -f cloud/k8/data-services/gemfire/gf-cluster-locators-2-datanodes-3.yml
 ```
 
 
@@ -125,3 +137,12 @@ Look for gregoryg-cluster
 Return generate 
 
 k delete pod vehicle-generator-app
+
+## Streaming
+
+
+mvn -Dmaven.test.skip=true install
+
+git remote -v
+origin	https://github.com/rabbitmq/rabbitmq-stream-java-client.git (fetch)
+origin	https://github.com/rabbitmq/rabbitmq-stream-java-client.git (push)

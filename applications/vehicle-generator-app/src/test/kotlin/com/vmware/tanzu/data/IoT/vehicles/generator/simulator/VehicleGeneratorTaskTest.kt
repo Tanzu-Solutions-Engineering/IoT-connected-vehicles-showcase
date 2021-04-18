@@ -1,4 +1,4 @@
-package com.vmware.tanzu.data.IoT.vehicles.generator.app
+package com.vmware.tanzu.data.IoT.vehicles.generator.simulator
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import org.junit.jupiter.api.Test

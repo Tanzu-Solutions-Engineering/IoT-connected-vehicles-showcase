@@ -1,36 +1,26 @@
-package com.vmware.tanzu.data.IoT.vehicles.generator.app
+package com.vmware.tanzu.data.IoT.vehicles.generator
 
-import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleGenerator
-import org.springframework.amqp.rabbit.core.RabbitTemplate
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
-import org.springframework.stereotype.Component
-import java.lang.Thread.sleep
 import java.util.concurrent.Executors
-
 
 /**
  * @author Gregory Green
  */
-@Component
-class VehicleGeneratorTask(
-    private val rabbitTemplate: RabbitTemplate,
-    @Value("\${vehicleCount}")
+class VehicleLoadSimulator(
+    private val sender: VehicleSender,
     private val vehicleCount: Int,
-    @Value("\${messageCount}")
     private val messageCount: Int,
-    @Value("\${distanceIncrements}")
     private val distanceIncrements: Double,
-    @Value("\${delayMs}")
     private val delayMs: Long
 ) : CommandLineRunner {
 
     private val pool = Executors.newCachedThreadPool();
 
+    /**
+     * Start multi-threading send generated vehicle information
+     * @param args the input arguments
+     */
     override fun run(vararg args: String?) {
-
-        this.rabbitTemplate.messageConverter = Jackson2JsonMessageConverter();
 
         for (vinNumber in 1 .. vehicleCount)
         {
@@ -44,15 +34,13 @@ class VehicleGeneratorTask(
                 println("publishing vehicle:$vehicle")
 
                 try {
-
-
-                    this.rabbitTemplate.convertAndSend("vehicleSink","",vehicle);
+                    this.sender.send(vehicle);
 
                     for (i in 0 until messageCount) {
                         vehicle = generator.move(vehicle, distanceIncrements);
                         println("publishing vehicle:$vehicle")
-                        this.rabbitTemplate.convertAndSend("vehicleSink","",vehicle);
-                        sleep(delayMs);
+                        this.sender.send(vehicle);
+                        Thread.sleep(delayMs);
                     }
                 }
                 catch(exception : RuntimeException)
@@ -61,9 +49,7 @@ class VehicleGeneratorTask(
                 }
 
             };
-
         }
-
 
     }
 }

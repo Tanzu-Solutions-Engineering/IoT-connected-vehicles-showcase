@@ -14,6 +14,6 @@ import java.util.function.Consumer
 class VehicleGemFireSink(
     @Qualifier("vehicleRegion") private val vehicleRegion: Region<String, Vehicle>) : Consumer<Vehicle> {
     override fun accept(vehicleData: Vehicle) {
-        vehicleRegion[vehicleData.id] = vehicleData;
+          vehicleRegion[vehicleData.id] = vehicleData;
     }
 }

@@ -1,11 +1,11 @@
-package com.vmware.tanzu.data.IoT.vehicles.generator.app
+package com.vmware.tanzu.data.IoT.vehicles.generator.streaming
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class VolvoSafecarSourceApp
+class VehicleStreamingGeneratorApp
 
 fun main(args: Array<String>) {
-	runApplication<VolvoSafecarSourceApp>(*args)
+	runApplication<VehicleStreamingGeneratorApp>(*args)
 }
