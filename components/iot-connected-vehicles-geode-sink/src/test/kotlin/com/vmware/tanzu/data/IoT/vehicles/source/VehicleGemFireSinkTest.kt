@@ -1,6 +1,7 @@
 package com.vmware.tanzu.data.IoT.vehicles.source
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
+import com.vmware.tanzu.data.IoT.vehicles.sink.VehicleGemFireSink
 import org.apache.geode.cache.Region
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

@@ -3,7 +3,7 @@ package com.vmware.tanzu.data.IoT.vehicles.generator.streaming
 import com.rabbitmq.stream.Environment
 import com.rabbitmq.stream.Producer
 import com.rabbitmq.stream.StreamException
-import com.vmware.tanzu.data.IoT.vehicles.generator.RabbitStreamingVehicleSender
+import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.RabbitStreamingVehicleSender
 import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleLoadSimulator
 import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleSender
 import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleToBytes

@@ -4,6 +4,7 @@ import com.rabbitmq.stream.Message
 import com.rabbitmq.stream.MessageBuilder
 import com.rabbitmq.stream.Producer
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
+import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.RabbitStreamingVehicleSender
 import nyla.solutions.core.patterns.creational.generator.JavaBeanGeneratorCreator
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

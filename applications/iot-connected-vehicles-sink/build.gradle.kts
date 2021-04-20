@@ -24,8 +24,6 @@ extra["springGeodeVersion"] = "1.4.3"
 
 dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation(project(":components:IoT-connected-vehicles-domains"))
-    implementation("io.pivotal.services.dataTx:dataTx-geode-extensions-core:2.4.0")
     implementation("org.springframework.boot:spring-boot-starter-amqp")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -33,6 +31,9 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-stream-binder-rabbit")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.geode:spring-geode-starter")
+    implementation(project(":components:IoT-connected-vehicles-domains"))
+    implementation(project(":components:iot-connected-vehicles-geode-sink"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.amqp:spring-rabbit-test")
 }
