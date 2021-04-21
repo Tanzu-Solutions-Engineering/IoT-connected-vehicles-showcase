@@ -25,7 +25,7 @@ dependencies {
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.springframework.amqp:spring-rabbit:2.3.5")
+//    implementation("org.springframework.amqp:spring-rabbit:2.3.5")
     implementation(project(":components:vehicle-messaging"))
     implementation("com.rabbitmq:stream-client:0.1.0-SNAPSHOT")
     implementation("org.apache.qpid:proton-j:0.33.8")

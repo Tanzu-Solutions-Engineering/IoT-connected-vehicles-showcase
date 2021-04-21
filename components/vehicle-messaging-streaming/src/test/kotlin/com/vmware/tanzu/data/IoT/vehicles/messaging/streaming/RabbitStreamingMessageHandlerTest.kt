@@ -14,20 +14,22 @@ import java.util.function.Function
  */
 internal class RabbitStreamingMessageHandlerTest{
     private var message: Message? = null;
-    private var context: MessageHandler.Context? = null;
+    private var mockContext : MessageHandler.Context? = null;
     private lateinit var consumer: Consumer<Vehicle>;
     private lateinit var mockFunction: Function<ByteArray,Vehicle>;
 
     @BeforeEach
     internal fun setUp() {
         consumer = mock<Consumer<Vehicle>>(){};
+        mockContext = mock<MessageHandler.Context>(){};
         mockFunction = mock<Function<ByteArray,Vehicle>>();
     }
 
     @Test
     internal fun handle_nullMessages() {
         var subject = RabbitStreamingMessageHandler(consumer,mockFunction);
-        subject.handle(context,message);
+        subject.handle(mockContext,message);
+        verify(mockContext, never())?.commit();
         verify(consumer, never()).accept(any());
         verify(mockFunction,never()).apply(any());
     }
@@ -36,7 +38,8 @@ internal class RabbitStreamingMessageHandlerTest{
     internal fun handle() {
         message =  mock<Message>();
         var subject = RabbitStreamingMessageHandler(consumer,mockFunction);
-        subject.handle(context,message);
+        subject.handle(mockContext,message);
+//        verify(mockContext, atLeastOnce())?.commit();
         verify(mockFunction).apply(anyOrNull());
         verify(consumer).accept(anyOrNull());
     }

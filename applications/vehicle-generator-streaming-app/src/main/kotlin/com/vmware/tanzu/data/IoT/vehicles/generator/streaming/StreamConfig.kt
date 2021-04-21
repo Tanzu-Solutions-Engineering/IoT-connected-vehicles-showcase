@@ -30,6 +30,9 @@ spring.rabbitmq.username=vmware
  */
 @Configuration
 class StreamConfig {
+    @Value("\${spring.application.name}")
+    private val applicationName: String = "VehicleGeneratorStreaming"
+
     @Value("\${delayMs}")
     private var delayMs: Long = 0;
 
@@ -64,6 +67,7 @@ class StreamConfig {
                 throw e;
         }
         val producer: Producer = environment.producerBuilder()
+            .name(applicationName)
             .stream(streamName)
             .build();
 

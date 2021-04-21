@@ -10,7 +10,6 @@ import java.util.function.Consumer
 /**
  * @author Gregory Green
  */
-//@Component("vehicleGemFireSink")
 class VehicleGemFireSink(
     private val vehicleRegion: Region<String, Vehicle>) : Consumer<Vehicle> {
     override fun accept(vehicleData: Vehicle) {

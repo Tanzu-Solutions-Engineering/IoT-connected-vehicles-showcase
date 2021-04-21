@@ -186,8 +186,8 @@ div {
         {
                 window[vehicle.vin] = L.marker([vehicle.gpsLocation.latitude, vehicle.gpsLocation.longitude]).addTo(mymap)
                 .bindPopup("<strong>vin:</strong>"+vehicle.vin+"</br/>"
-                        +" <strong>speed:</strong>"+vehicle.speed+"</br/>"
-                        +" <strong>odometer:</strong>"+vehicle.odometer);
+                        +" speed:"+vehicle.speed+"</br/>"
+                        +" odometer:"+vehicle.odometer+"</br/>");
         }
         else
         {
@@ -196,9 +196,11 @@ div {
               icon: overheatingIcon
             }).addTo(mymap)
                 .bindPopup("<strong>vin:</strong>"+vehicle.vin+"</br/>"
-                        +" <strong>speed:</strong>"+vehicle.speed+"</br/>"
-                        +" <strong>odometer:</strong>"+vehicle.odometer);
-
+                        +" speed:"+vehicle.speed+"</br/>"
+                        +" <strong style='color:red'>temperature:</strong>"+vehicle.temperature+"</br/>"
+                        +" odometer:"+vehicle.odometer+"</br/>"
+                        +" latitude:"+vehicle.gpsLocation.latitude+"</br/>"
+                        +" longitude:"+vehicle.gpsLocation.longitude);
 
         }
 

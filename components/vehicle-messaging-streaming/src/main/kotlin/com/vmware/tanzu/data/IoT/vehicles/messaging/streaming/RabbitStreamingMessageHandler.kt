@@ -21,5 +21,7 @@ class RabbitStreamingMessageHandler(
         consumer.accept(
             converter.apply(message.bodyAsBinary)
         );
+
+        println("CONSUMED: publishingId: $message.publishingId properties: ${message.properties}")
     }
 }

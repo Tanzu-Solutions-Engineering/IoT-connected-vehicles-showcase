@@ -1,4 +1,4 @@
-package com.vmware.tanzu.data.IoT.vehicles.source
+package com.vmware.tanzu.data.IoT.vehicles.streaming.geode.sink
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.sink.VehicleGemFireSink
@@ -23,7 +23,6 @@ class GeodeConfig {
 
         val region = ClientRegionFactoryBean<String, Vehicle>()
         region.cache = gemfireCache
-        region.beanName = "Vehicle"
         region.setDataPolicy(DataPolicy.EMPTY)
         return region
     }//------------------------------------------------
@@ -32,4 +31,5 @@ class GeodeConfig {
     {
         return VehicleGemFireSink(region);
     }
+
 }
