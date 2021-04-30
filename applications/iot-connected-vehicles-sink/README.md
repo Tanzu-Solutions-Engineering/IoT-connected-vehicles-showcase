@@ -1,15 +1,3 @@
-#
-
-http://localhost:7000/updates
-
-
-
-# k8
-
-k port-forward iot-connected-vehicle-dashboard 7000:7000
-
-
-
 ## Rough Notes Docker Hub
 
 From the directory with the Dockerfile

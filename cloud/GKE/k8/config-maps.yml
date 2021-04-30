@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vehicle-configmap
+data:
+  spring.data.gemfire.pool.locators: "gemfire1-locator[10334]"
+  vehicleCount: "25"
+  messageCount: "10000"
+  distanceIncrements: "1"
+  delayMs: "0"

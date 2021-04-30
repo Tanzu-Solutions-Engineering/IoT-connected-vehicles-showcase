@@ -92,7 +92,7 @@ kubectl port-forward rabbitmq-server-0 15672:15672
 Scale RabbitMQ to 3 nodes
 
 ```shell script
-kubectl apply -f cloud/k8/data-services/rabbitmq/rabbitmq-cluster-loc2-datanode3.yml
+kubectl apply -f cloud/k8/data-services/rabbitmq/rabbitmq-cluster-node3.yml
 ```
 
 Scale GemFire to 2 locator and 3 datanodes
@@ -103,6 +103,14 @@ kubectl apply -f cloud/k8/data-services/gemfire/gf-cluster-locators-2-datanodes-
 
 
 k port-forward iot-connected-vehicle-dashboard 7000:7000
+
+
+### GKE
+
+k apply -f cloud/GKE/k8/iot-connected-vehicle-dashboard.yml
+
+k apply -f cloud/GKE/k8/iot-dashboard-service.yml
+
 
 
 # WaveFront

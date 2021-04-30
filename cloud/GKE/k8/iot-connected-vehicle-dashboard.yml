@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run:  iot-connected-vehicle-dashboard
+  name:  iot-connected-vehicle-dashboard
+spec:
+  containers:
+    - env:
+        - name: spring.rabbitmq.host
+          value: rabbitmq
+        - name: spring.rabbitmq.username
+          valueFrom:
+            secretKeyRef:
+              name: vehicle-secrets
+              key: spring.rabbitmq.username
+        - name: spring.rabbitmq.password
+          valueFrom:
+            secretKeyRef:
+              name: vehicle-secrets
+              key: spring.rabbitmq.password
+        - name: spring.data.gemfire.pool.locators
+          valueFrom:
+            configMapKeyRef:
+              name: vehicle-configmap
+              key: spring.data.gemfire.pool.locators
+      image: nyla/iot-connected-vehicle-dashboard:0.0.1-SNAPSHOT
+      name: iot-connected-vehicle-dashboard

@@ -28,10 +28,10 @@ dependencies {
     implementation("org.springframework.amqp:spring-rabbit:2.3.5")
     testImplementation("org.assertj:assertj-core:3.19.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:3.1.0")
+    testImplementation("org.assertj:assertj-core:3.19.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.0-M1")
     testImplementation("org.mockito:mockito-core:3.8.0")
     testImplementation("org.mockito:mockito-junit-jupiter:3.8.0")
-    testImplementation("org.assertj:assertj-core:3.19.0")
 }
 
 tasks.withType<KotlinCompile> {
