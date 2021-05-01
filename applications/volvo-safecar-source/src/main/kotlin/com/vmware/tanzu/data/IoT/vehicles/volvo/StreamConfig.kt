@@ -2,6 +2,7 @@ package com.vmware.tanzu.data.IoT.vehicles.volvo
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import nyla.solutions.core.data.collections.QueueSupplier
+import org.springframework.amqp.rabbit.connection.SimplePropertyValueConnectionNameStrategy
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -24,6 +25,11 @@ spring.rabbitmq.username=vmware
  */
 @Configuration
 class StreamConfig {
+
+    @Bean
+    fun cns(): SimplePropertyValueConnectionNameStrategy? {
+        return SimplePropertyValueConnectionNameStrategy("spring.application.name")
+    }
 
     @Bean
     fun volvoVehicles()  :QueueSupplier<Vehicle>

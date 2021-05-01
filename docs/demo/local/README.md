@@ -67,11 +67,38 @@ java -jar applications/vehicle-generator-streaming-app/build/libs/vehicle-genera
 
 Replay
 
-Stop Streaming Sink
+First Stop Streaming Sink
 
 ```shell
 java -jar applications/iot-connected-vehicles-streaming-geode-sink/build/libs/iot-connected-vehicles-streaming-geode-sink-0.0.1-SNAPSHOT.jar --replay=true
  ```
+
+```json
+{
+  "vin": "123",
+  "odometer": 0,
+  "speed": 0,
+  "temperature": 0,
+  "gpsLocation": {
+    "latitude": 52.10575788433631,
+    "longitude": -110.12573484495269
+  }
+}
+```
+
+------------------------
+
+## MQTT
+
+rabbitmq-plugins enable rabbitmq_web_mqtt
+
+
+
+TODO
+
+
+- Everything working in GKE
+- Improve replay speed
 
 
 

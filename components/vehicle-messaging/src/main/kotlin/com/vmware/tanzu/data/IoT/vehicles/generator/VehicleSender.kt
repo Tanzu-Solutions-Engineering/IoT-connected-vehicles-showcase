@@ -7,5 +7,4 @@ import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
  */
 interface VehicleSender {
      fun send(vehicle: Vehicle)
-
 }

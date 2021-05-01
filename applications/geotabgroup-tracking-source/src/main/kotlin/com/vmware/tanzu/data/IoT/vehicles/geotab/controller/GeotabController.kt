@@ -5,11 +5,12 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
+import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleSender
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.util.*
+import java.util.function.Consumer
 import java.util.function.Function
 
 /**
@@ -17,7 +18,7 @@ import java.util.function.Function
  * @author Gregory Green
  */
 @RestController
-class GeotabController(private val queue: Queue<Vehicle>,
+class GeotabController(private val consumer: VehicleSender,
                        @Qualifier("geotabTransformer")private val transformer: Function<JsonObject,Vehicle>)
 {
     private val gson  = Gson();
@@ -32,9 +33,8 @@ class GeotabController(private val queue: Queue<Vehicle>,
             val dataArray = geotabDataArrayItem.asJsonObject.getAsJsonArray("data");
             for(dataItem in dataArray)
             {
-                queue.add(transformer.apply(dataItem.asJsonObject));
+                consumer.send(transformer.apply(dataItem.asJsonObject));
             }
         }
-
     }
 }
