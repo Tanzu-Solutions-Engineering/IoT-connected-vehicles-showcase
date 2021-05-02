@@ -3,48 +3,48 @@
     {
       "data": [
         {
-          "latitude": 35.4228973,
-          "longitude": -97.6155396,
+          "latitude": 33.93609700640341,
+          "longitude": -118.15710079078558,
           "speed": 66.0,
           "dateTime": "2018-02-14T00:01:32.000Z",
           "device": {
-            "id": "hi",
-            "vin": "hi"
+            "id": "GeotabDataLA1",
+            "vin": "GeotabDataLA1"
           },
-          "id": "hi"
+          "id": "GeotabDataLA1"
         },
         {
-          "latitude": 37.954689,
-          "longitude": -122.042725,
+          "latitude": 47.30862124208563,
+          "longitude": -107.84118712879713,
           "speed": 0.0,
           "dateTime": "2018-02-14T00:01:12.000Z",
           "device": {
-            "id": "hi",
-            "vin": "hi"
+            "id": "GeotabData2",
+            "vin": "GeotabData2"
           },
-          "id": "hi"
+          "id": "GeotabData2"
         },
         {
-          "latitude": 37.9546623,
-          "longitude": -122.042702,
+          "latitude": 37.75334401310659,
+          "longitude": -122.44812011718751,
           "speed": 4.0,
           "dateTime": "2018-02-14T00:01:18.000Z",
           "device": {
-            "id": "hi",
-            "vin": "hi"
+            "id": "GeotabDataSF3",
+            "vin": "GeotabDataSF3"
           },
-          "id": "hi"
+          "id": "GeotabDataSF3"
         },
         {
-          "latitude": 37.954586,
-          "longitude": -122.042625,
+          "latitude": 40.28860641056521,
+          "longitude": -74.58557368529947,
           "speed": 0.0,
           "dateTime": "2018-02-14T00:01:26.000Z",
           "device": {
-            "id": "hi",
-            "vin": "hi"
+            "id": "GeotabDataNJ4",
+            "vin": "GeotabDataNJ4"
           },
-          "id": "hi"
+          "id": "GeotabDataNJ4"
         },
         {
           "latitude": 30.5323257,
@@ -52,21 +52,21 @@
           "speed": 0.0,
           "dateTime": "2018-02-14T00:01:33.000Z",
           "device": {
-            "id": "hi",
-            "vin": "hi"
+            "id": "GeotabData5",
+            "vin": "GeotabData5"
           },
-          "id": "hi"
+          "id": "GeotabData5"
         },
         {
-          "latitude": 35.1296768,
-          "longitude": -95.8920441,
+          "latitude": 38.880313543080234,
+          "longitude": -77.04982770722826,
           "speed": 105.0,
           "dateTime": "2018-02-14T00:00:07.000Z",
           "device": {
-            "id": "hi",
-            "vin": "hi"
+            "id": "GeotabDataDC6",
+            "vin": "GeotabDataDC6"
           },
-          "id": "hi"
+          "id": "GeotabDataDC6"
         },
         {
           "latitude": 35.1257362,
@@ -74,21 +74,21 @@
           "speed": 109.0,
           "dateTime": "2018-02-14T00:00:22.000Z",
           "device": {
-            "id": "hi",
-            "vin": "hi"
+            "id": "GeotabDataOK7",
+            "vin": "GeotabDataOK7"
           },
-          "id": "hi"
+          "id": "GeotabDataOK7"
         },
         {
-          "latitude": 35.1108589,
-          "longitude": -95.890686,
+          "latitude": 30.31741244729631,
+          "longitude": -81.62359350525419,
           "speed": 103.0,
           "dateTime": "2018-02-14T00:01:18.000Z",
           "device": {
-            "id": "hi",
-            "vin": "hi"
+            "id": "GeotabDataFL8",
+            "vin": "GeotabDataFL8"
           },
-          "id": "hi"
+          "id": "GeotabDataFL8"
         }
       ]
     }
