@@ -35,7 +35,7 @@ Use the following command to build docker images
 ```shell script
 gradle :applications:vehicle-generator-app:bootBuildImage
 gradle :applications:iot-connected-vehicle-dashboard:bootBuildImage
-gradle :applications:IoT-connected-vehicles-sink:bootBuildImage
+gradle :applications:vehicles-geode-sink:bootBuildImage
 
 ```
 
