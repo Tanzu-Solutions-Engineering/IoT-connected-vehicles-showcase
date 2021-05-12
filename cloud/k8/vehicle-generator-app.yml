@@ -7,6 +7,14 @@ metadata:
 spec:
   containers:
     - env:
+        - name: vehicleCount
+          value: 25
+        - name: messageCount
+          value: 100000
+        - name: distanceIncrements
+          value: 1
+        - name: delayMs
+          value: 10
         - name: spring.rabbitmq.host
           value: rabbitmq
         - name: spring.rabbitmq.username

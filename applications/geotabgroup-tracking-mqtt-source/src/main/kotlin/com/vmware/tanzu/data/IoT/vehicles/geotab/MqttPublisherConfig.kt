@@ -25,11 +25,11 @@ class MqttPublisherConfig {
     @Value("\${spring.application.name:geotabgroups-tracking-source}")
     private var publisherId: String = "geotabgroups-tracking-source";
 
-    @Value("\${mqtt.connectionUrl:tcp://localhost:1883}")
-    private var connectionUrl: String = "tcp://localhost:1883";
+    @Value("\${mqtt.connectionUrl:tcp://localhost:2883}")
+    private var connectionUrl: String = "tcp://localhost:2883";
 
-    @Value("\${mqtt.topic:vehicleSink}")
-    private val topic: String = "vehicleSink";
+    @Value("\${mqtt.topic:vehicleSink.vehicleSink}")
+    private val topic: String = "vehicleSink.vehicleSink";
 
 
     @Bean

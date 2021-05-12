@@ -88,7 +88,12 @@ java -jar applications/iot-connected-vehicles-streaming-geode-sink/build/libs/io
 
 ------------------------
 
-## MQTT
+## MQTT edge
+
+
+- start a rabbitmq for DC
+- start a rabbitmq for edge
+- enable shovel and MQTT on both
 
 rabbitmq-plugins enable rabbitmq_web_mqtt
 
@@ -101,5 +106,62 @@ TODO
 - Improve replay speed
 
 
+
+
+
+docker network create edge
+
+docker run -it --hostname rabbitmqedge1 --name rabbitmqedge1 --network edge -e RABBITMQ_ERLANG_COOKIE=12345  -p 25672:15672 -p 2883:1883 -e RABBITMQ_DEFAULT_USER=guest  -e RABBITMQ_DEFAULT_PASS=guest rabbitmq:3-management
+
+
+
+```
+docker run -it --hostname rabbitmqDC1 --name rabbitmqDC1 --network edge -e RABBITMQ_ERLANG_COOKIE=12345  -p 15672:15672 -p 1883:1883 -e RABBITMQ_DEFAULT_USER=guest  -e RABBITMQ_DEFAULT_PASS=guest rabbitmq:3-management
+
+
+docker exec -it rabbitmqDC1 bash
+rabbitmqctl add_user shovel shovel
+rabbitmqctl set_permissions shovel ".*" ".*" ".*"
+
+rabbitmqctl set_user_tags shovel administrator
+
+
+rabbitmq-plugins enable  rabbitmq_shovel_management
+
+
+```
+
+```
+docker exec -it rabbitmqedge1 bash
+
+
+
+rabbitmq-plugins enable rabbitmq_mqtt rabbitmq_shovel_management
+
+rabbitmqctl set_parameter shovel dc1-shovel  '{"src-protocol": "amqp091", "src-uri": "amqp://", "src-queue": "vehicleSink.vehicleSink", "dest-protocol": "amqp091", "dest-uri": "amqp://shovel:shovel@rabbitmqDC1", "dest-queue": "vehicleSink.vehicleSink"}'
+
+```
+
+----------------
+
+# MQTT
+docker exec -it rabbitmqDC1 bash
+rabbitmqctl add_user mqtt mqtt
+rabbitmqctl set_permissions mqtt ".*" ".*" ".*"
+rabbitmq-plugins enable rabbitmq_mqtt
+
+rabbitmqadmin declare queue name=vehicleSink.vehicleSink queue_type=quorum
+
+rabbitmqadmin declare binding source=amq.topic  destination=vehicleSink.vehicleSink routing_key=vehicleSink.vehicleSink
+
+
+
+docker exec -it rabbitmqedge1 bash
+rabbitmqctl add_user mqtt mqtt
+rabbitmqctl set_permissions mqtt ".*" ".*" ".*"
+
+rabbitmqadmin declare queue name=vehicleSink.vehicleSink queue_type=quorum
+
+rabbitmqadmin declare binding source=amq.topic  destination=vehicleSink.vehicleSink routing_key=vehicleSink.vehicleSink
 
 

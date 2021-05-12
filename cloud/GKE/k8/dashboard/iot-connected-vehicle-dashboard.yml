@@ -24,5 +24,6 @@ spec:
             configMapKeyRef:
               name: vehicle-configmap
               key: spring.data.gemfire.pool.locators
-      image: nyla/iot-connected-vehicle-dashboard:0.0.1-SNAPSHOT
+      image: nyla/iot-connected-vehicle-dashboard:0.0.2-SNAPSHOT
+      imagePullPolicy: Always
       name: iot-connected-vehicle-dashboard

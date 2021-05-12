@@ -5,7 +5,7 @@ metadata:
     run:  vehicles-geode-sink
   name:  vehicles-geode-sink
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       name:  vehicles-geode-sink
@@ -16,6 +16,8 @@ spec:
     spec:
       containers:
         - env:
+            - name: spring.cloud.stream.bindings.vehicleGemFireSink-in-0.consumer.concurrency
+              value: "5"
             - name: spring.rabbitmq.host
               value: rabbitmq
             - name: spring_rabbitmq_username

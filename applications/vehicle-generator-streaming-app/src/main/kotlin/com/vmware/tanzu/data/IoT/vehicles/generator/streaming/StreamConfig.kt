@@ -34,7 +34,7 @@ class StreamConfig {
     private val applicationName: String = "VehicleGeneratorStreaming"
 
     @Value("\${delayMs}")
-    private var delayMs: Long = 0;
+    private var delayMs: Long = 2;
 
     @Value("\${distanceIncrements}")
     private var distanceIncrements: Double = 1.0;

@@ -39,7 +39,7 @@ internal class MqttVehicleSenderTest {
     }
 
     //-----------------------------------------------------------
-    @Test
+//    @Test
     fun integrationTest() {
         val publisherId: String = UUID.randomUUID().toString()
         val mqttClient: IMqttClient = MqttClient("tcp://localhost:1883", publisherId, MemoryPersistence())

@@ -14,7 +14,9 @@ import java.util.concurrent.Executors
  * @author Gregory Green
  */
 @Component
-class VehicleGeneratorTask(
+class
+
+VehicleGeneratorTask(
     private val rabbitTemplate: RabbitTemplate,
     @Value("\${vehicleCount}")
     private val vehicleCount: Int,
