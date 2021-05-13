@@ -29,12 +29,12 @@ internal class VehicleGeneratorTaskTest{
 
 
     @Test
-    internal fun run() {
+    internal fun process() {
 
         subject = VehicleGeneratorTask(rabbitTemplate,vehicleCount,messageCount, distanceIncrements,delayMs);
 
         val args = "";
-        subject.run(args);
+        subject.process();
         sleep(100);
         Mockito.verify(rabbitTemplate, atLeastOnce())
             .convertAndSend(anyString(),anyString(),any<Object>());

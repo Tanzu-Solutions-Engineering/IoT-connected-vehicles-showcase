@@ -17,7 +17,7 @@ open -n -a "Google Chrome" --args "--new-window" "http://localhost:7070/pulse/cl
 ## Dashboard
 
 ```shell script
-java -jar applications/iot-connected-vehicle-dashboard/build/libs/iot-connected-vehicle-dashboard-0.0.1-SNAPSHOT.jar
+java -jar applications/iot-connected-vehicle-dashboard/build/libs/iot-connected-vehicle-dashboard-0.0.2-SNAPSHOT.jar
 ```
 
 ```shell script
@@ -27,7 +27,7 @@ open -n -a "Google Chrome" --args "--new-window" "http://localhost:7000"
 ## Sink
 
 ```shell script
-java -jar applications/iot-connected-vehicles-sink/build/libs/iot-connected-vehicles-sink-0.0.1-SNAPSHOT.jar
+ java -jar applications/vehicles-geode-sink/build/libs/vehicles-geode-sink-0.0.1-SNAPSHOT.jar
 ```
 
 ## Generator

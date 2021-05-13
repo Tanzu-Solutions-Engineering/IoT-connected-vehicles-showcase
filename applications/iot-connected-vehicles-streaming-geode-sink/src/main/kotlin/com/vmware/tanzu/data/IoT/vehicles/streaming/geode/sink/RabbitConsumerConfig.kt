@@ -59,7 +59,6 @@ class RabbitConsumerConfig {
 
                 var consumerBuilder = environment.consumerBuilder()
                     .stream(streamName)
-//                    .name(applicationName)
                     .offset(OffsetSpecification.offset(0L))
                     .messageHandler(messageHandler)
                     .build();

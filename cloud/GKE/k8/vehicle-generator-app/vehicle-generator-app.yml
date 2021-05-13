@@ -8,6 +8,7 @@ spec:
   containers:
     - name: envar-demo-container
       image: nyla/vehicle-generator-app:0.0.1-SNAPSHOT
+      imagePullPolicy: Always
       env:
         - name: vehicleCount
           value: "5"

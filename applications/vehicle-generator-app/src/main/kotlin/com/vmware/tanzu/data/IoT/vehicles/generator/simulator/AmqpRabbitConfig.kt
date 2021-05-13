@@ -23,7 +23,7 @@ spring.rabbitmq.port=5672
 spring.rabbitmq.username=vmware
  */
 @Configuration
-class StreamConfig {
+class AmqpRabbitConfig {
 
 
     @Bean

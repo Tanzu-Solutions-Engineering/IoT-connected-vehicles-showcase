@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 import java.lang.Thread.sleep
 import java.util.concurrent.Executors
+import java.util.concurrent.Future
 
 
 /**
@@ -28,15 +29,24 @@ VehicleGeneratorTask(
     private val delayMs: Long
 ) : CommandLineRunner {
 
+
     private val pool = Executors.newCachedThreadPool();
 
     override fun run(vararg args: String?) {
+        while (true) {
+            process();
+        }
+    }
+
+    fun process() {
 
         this.rabbitTemplate.messageConverter = Jackson2JsonMessageConverter();
 
-        for (vinNumber in 1 .. vehicleCount)
-        {
-            pool.submit {
+        var futures: MutableList<Future<*>> = mutableListOf();
+        var future: Future<*>? = null;
+
+        for (vinNumber in 1..vehicleCount) {
+            future = pool.submit {
                 val generator = VehicleGenerator(
                     distanceIncrements = distanceIncrements,
                     vin = "V$vinNumber"
@@ -48,24 +58,26 @@ VehicleGeneratorTask(
                 try {
 
 
-                    this.rabbitTemplate.convertAndSend("vehicleSink","",vehicle);
+                    this.rabbitTemplate.convertAndSend("vehicleSink", "", vehicle);
 
                     for (i in 0 until messageCount) {
                         vehicle = generator.move(vehicle, distanceIncrements);
                         println("publishing vehicle:$vehicle")
-                        this.rabbitTemplate.convertAndSend("vehicleSink","",vehicle);
+                        this.rabbitTemplate.convertAndSend("vehicleSink", "", vehicle);
                         sleep(delayMs);
                     }
-                }
-                catch(exception : RuntimeException)
-                {
+                } catch (exception: RuntimeException) {
                     exception.printStackTrace();
                 }
 
             };
 
+            futures.add(future!!);
         }
 
+        for (f in futures) {
+            f.get(); //wait for the completion
+        }
 
     }
 }
