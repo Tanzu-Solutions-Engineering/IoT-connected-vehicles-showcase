@@ -51,7 +51,7 @@ cd /Users/devtools/integration/messaging/rabbit/rabbitmq-streaming/docker-stream
 ./run.sh
 ```
 
-## Applications
+#### Applications
 
 
 Streaming GemFire sink

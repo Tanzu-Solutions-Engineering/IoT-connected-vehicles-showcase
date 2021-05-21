@@ -13,25 +13,19 @@ import org.springframework.context.annotation.Configuration
 
 
 /**
- * spring.cloud.stream.bindings.input-in-0.group=someGroup
-spring.cloud.stream.bindings.input-in-0.consumer.batch-mode=true
-spring.cloud.stream.rabbit.bindings.input-in-0.consumer.enable-batching=true
-spring.cloud.stream.rabbit.bindings.input-in-0.consumer.batch-size=10
-spring.cloud.stream.rabbit.bindings.input-in-0.consumer.receive-timeout=200
 
-spring.cloud.function.definition=vehicles;beaconRequests
-spring.cloud.function.definition=vehicles
-spring.cloud.stream.bindings.vehicles-out-0.destination=vehicles
-spring.cloud.stream.bindings.beaconRequests-in-0.destination=beaconRequests
-
-spring.rabbitmq.password=tanzu
-spring.rabbitmq.port=5672
-spring.rabbitmq.username=vmware
  */
 @Configuration
-class StreamConfig {
+class RabbitmqStreamConfig {
+
+    @Value("\${rabbitmq.streaming.host}")
+    private var host: String = "";
+
+    @Value("\${rabbitmq.streaming.port}")
+    private var port: Int = 0;
+
     @Value("\${spring.application.name}")
-    private val applicationName: String = "VehicleGeneratorStreaming"
+    private var applicationName: String = "VehicleGeneratorStreaming"
 
     @Value("\${delayMs}")
     private var delayMs: Long = 2;
@@ -51,7 +45,10 @@ class StreamConfig {
     @Bean
     fun sender() : VehicleSender
     {
-        val environment: Environment = Environment.builder().build()
+        val environment: Environment = Environment.builder()
+            .port(port)
+            .host(host)
+            .build()
 
         var creator = environment.streamCreator().stream(streamName);
 

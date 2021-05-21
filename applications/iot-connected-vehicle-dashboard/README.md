@@ -8,6 +8,7 @@ http://localhost:7000/updates
 
 k port-forward iot-connected-vehicle-dashboard 7000:7000
 
+k apply -f cloud/GKE/k8/dashboard
 
 
 ## Rough Notes Docker Hub

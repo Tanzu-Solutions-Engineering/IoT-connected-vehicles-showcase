@@ -15,7 +15,13 @@ import java.time.Duration
  * @author Gregory Green
  */
 @Configuration
-class RabbitConsumerConfig {
+class RabbitStreamingConsumerConfig {
+
+    @Value("\${rabbitmq.streaming.host}")
+    private var host: String = "localhost";
+
+    @Value("\${rabbitmq.streaming.port}")
+    private var port: Int = 5551;
 
     @Value("\${spring.application.name}")
     private val applicationName: String = "VehicleStreamingGeodeSink";
@@ -36,7 +42,9 @@ class RabbitConsumerConfig {
     @Bean
     fun commandLineRunner(messageHandler: MessageHandler): CommandLineRunner
     {
-        val environment: Environment = Environment.builder().build()
+        val environment: Environment = Environment.builder()
+            .host(host)
+            .port(port).build()
         var creator = environment.streamCreator().stream(streamName);
 
         try{
