@@ -32,7 +32,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.geode:spring-geode-starter")
     implementation(project(":components:IoT-connected-vehicles-domains"))
-    implementation(project(":components:iot-connected-vehicles-geode-sink"))
+    implementation(project(":components:iot-connected-vehicles-repository-sink"))
     implementation(project(":components:vehicle-messaging"))
     implementation(project(":components:vehicle-messaging-mqtt"))
     implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0")

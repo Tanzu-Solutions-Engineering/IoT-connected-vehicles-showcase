@@ -1,7 +1,7 @@
 package com.vmware.tanzu.data.IoT.vehicles.mqtt.geode.sink
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
-import com.vmware.tanzu.data.IoT.vehicles.sink.VehicleGemFireSink
+import com.vmware.tanzu.data.IoT.vehicles.sink.VehicleRepositorySink
 import org.apache.geode.cache.DataPolicy
 import org.apache.geode.cache.GemFireCache
 import org.apache.geode.cache.Region
@@ -18,18 +18,4 @@ import org.springframework.data.gemfire.config.annotation.EnableSecurity
 @EnableSecurity
 @EnablePdx
 class GeodeConfig {
-    @Bean("Vehicle")
-    fun simpleRegion(gemfireCache: GemFireCache): ClientRegionFactoryBean<String, Vehicle> {
-
-        val region = ClientRegionFactoryBean<String, Vehicle>()
-        region.cache = gemfireCache
-        region.setDataPolicy(DataPolicy.EMPTY)
-        return region
-    }//------------------------------------------------
-    @Bean("vehicleGemFireSink")
-    fun sink(@Qualifier("Vehicle") region : Region<String, Vehicle>) : VehicleGemFireSink
-    {
-        return VehicleGemFireSink(region);
-    }
-
 }

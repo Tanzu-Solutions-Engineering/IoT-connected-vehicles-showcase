@@ -14,13 +14,10 @@ repositories {
 }
 
 extra["springCloudVersion"] = "2020.0.1"
-extra["springGeodeVersion"] = "1.4.3"
 
 dependencies {
     implementation("org.springframework:spring-context:5.3.1")
     implementation("org.springframework.data:spring-data-commons:2.4.5")
-    implementation("org.apache.geode:geode-core:1.13.1")
-    implementation("org.apache.geode:geode-lucene:1.13.1")
     implementation("org.junit.jupiter:junit-jupiter:5.4.2")
     implementation("org.apache.logging.log4j:log4j-api:2.13.1")
     implementation(project(":components:IoT-connected-vehicles-domains"))
