@@ -1,7 +1,7 @@
 package com.vmware.tanzu.data.IoT.vehicles.source
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
-import com.vmware.tanzu.data.IoT.vehicles.repositories.VehicleRepository
+import com.vmware.tanzu.data.IoT.vehicles.telemetry.repositories.VehicleTelemetryRepository
 import org.hibernate.cfg.AvailableSettings
 import org.hibernate.dialect.PostgreSQL9Dialect
 import org.springframework.context.annotation.Bean
@@ -15,7 +15,7 @@ import javax.sql.DataSource
 
 
 @Configuration
-@EnableJpaRepositories(basePackageClasses = [VehicleRepository::class])
+@EnableJpaRepositories(basePackageClasses = [VehicleTelemetryRepository::class])
 @EnableTransactionManagement
 class JdbcJpaConfig {
     @Bean
@@ -24,7 +24,7 @@ class JdbcJpaConfig {
         em.dataSource = dataSource
         em.setPackagesToScan(Vehicle::class.java.packageName)
         em.setMappingResources(
-            "hibernate/Vehicle.hbm.xml"
+            "hibernate/VehicleTelemetry.hbm.xml"
         )
         //these needed to be added to have all hibernate config done in one place.
         em.jpaPropertyMap[AvailableSettings.CURRENT_SESSION_CONTEXT_CLASS] = SpringSessionContext::class.java.name

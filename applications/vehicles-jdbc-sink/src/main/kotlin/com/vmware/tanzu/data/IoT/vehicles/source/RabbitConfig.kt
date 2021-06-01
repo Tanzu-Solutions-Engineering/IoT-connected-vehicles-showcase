@@ -1,7 +1,7 @@
 package com.vmware.tanzu.data.IoT.vehicles.source
 
-import com.vmware.tanzu.data.IoT.vehicles.sink.VehicleRepositorySink
-import org.springframework.amqp.rabbit.connection.ConnectionFactory
+import com.vmware.tanzu.data.IoT.vehicles.sink.VehicleTelemetryRepositorySink
+import com.vmware.tanzu.data.IoT.vehicles.telemetry.repositories.VehicleTelemetryRepository
 import org.springframework.amqp.rabbit.connection.ConnectionNameStrategy
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -18,8 +18,8 @@ class RabbitConfig {
 
 
     @Bean
-    fun vehicleRepositorySink(repository: com.vmware.tanzu.data.IoT.vehicles.repositories.VehicleRepository): VehicleRepositorySink {
-        return VehicleRepositorySink(repository);
+    fun vehicleTelemetryRepositorySink(repository: VehicleTelemetryRepository): VehicleTelemetryRepositorySink {
+        return VehicleTelemetryRepositorySink(repository);
     }
 
     @Bean

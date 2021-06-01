@@ -1,0 +1,23 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.vmware.tanzu.data.IoT.vehicles.domains.VehicleTelemetry" table="vehicle_telemetry">
+        <id name="id" type="long" column="telemetry_id">
+            <generator class="identity"/>
+        </id>
+                <property name="captureTimestamp" column="capture_ts" type="LocalDateTime"/>
+        <component
+                name="gpsLocation"
+                class="com.vmware.tanzu.data.IoT.vehicles.domains.GpsLocation"
+                lazy="false">
+            <property name="latitude" column="latitude" type="double"/>
+            <property name="longitude" column="longitude" type="double"/>
+        </component>
+        <property name="speed" column="speed" type="int"/>
+        <property name="temperature" column="temperature" type="int"/>
+        <property name="odometer" column="odometer" type="long"/>
+        <property name="vin" column="vin" type="string"/>
+    </class>
+</hibernate-mapping>

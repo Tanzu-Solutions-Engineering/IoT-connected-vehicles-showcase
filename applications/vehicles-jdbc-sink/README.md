@@ -1,22 +1,12 @@
-## Rough Notes Docker
-
-From the directory with the Dockerfile
-
-
-```shell
-gradle :applications:vehicles-geode-sink:bootBuildImage
+```json
+{
+  "vin" : "123",
+  "odometer" :23232,
+  "speed " :55,
+  "temperature" : 95,
+  "gpsLocation" : {
+    "latitude": 1.1232323,
+    "longitude":  1.1232
+  }
+}
 ```
-
-
-```shell script
-docker tag vehicles-geode-sink:0.0.1-SNAPSHOT nyla/vehicles-geode-sink:0.0.1-SNAPSHOT 
-
-docker login
-docker push nyla/vehicles-geode-sink:0.0.1-SNAPSHOT
-```
-
-
-```shell
-k apply -f cloud/GKE/k8/geode-sink
-```
-
