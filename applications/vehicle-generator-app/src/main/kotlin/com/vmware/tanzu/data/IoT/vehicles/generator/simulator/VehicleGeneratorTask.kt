@@ -43,7 +43,7 @@ VehicleGeneratorTask(
         this.rabbitTemplate.messageConverter = Jackson2JsonMessageConverter();
 
         var futures: MutableList<Future<*>> = mutableListOf();
-        var future: Future<*>? = null;
+        var future: Future<*>?;
 
         for (vinNumber in 1..vehicleCount) {
             future = pool.submit {

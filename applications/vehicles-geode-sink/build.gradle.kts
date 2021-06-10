@@ -33,6 +33,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.geode:spring-geode-starter")
     implementation(project(":components:IoT-connected-vehicles-domains"))
+    implementation(project(":components:iot-connected-vehicles-repository"))
     implementation(project(":components:iot-connected-vehicles-repository-sink"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.amqp:spring-rabbit-test")

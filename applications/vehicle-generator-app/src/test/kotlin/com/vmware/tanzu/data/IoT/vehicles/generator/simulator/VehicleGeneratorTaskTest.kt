@@ -33,10 +33,9 @@ internal class VehicleGeneratorTaskTest{
 
         subject = VehicleGeneratorTask(rabbitTemplate,vehicleCount,messageCount, distanceIncrements,delayMs);
 
-        val args = "";
         subject.process();
         sleep(100);
         Mockito.verify(rabbitTemplate, atLeastOnce())
-            .convertAndSend(anyString(),anyString(),any<Object>());
+            .convertAndSend(anyString(),anyString(),any<Any>());
     }
 }
