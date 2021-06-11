@@ -10,7 +10,13 @@ import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.kotlin.*
 
+/**
+ * Unit test for StreamingConsumerSpringRunner
+ * @author Gregory Green
+ */
 internal class StreamingConsumerSpringRunnerTest {
+
+    private lateinit var creator: StreamCreation;
 
     private lateinit var consumer: Consumer;
 
@@ -61,12 +67,15 @@ internal class StreamingConsumerSpringRunnerTest {
 
         environment = mock<Environment>{
             on{ consumerBuilder()} doReturn consumerBuilder;
+        }
+
+        creator = mock<StreamCreation>(){
 
         }
     }
 
     @Test
-    @DisplayName("Given replay=true when run then offet set")
+    @DisplayName("Given replay=true when run then offset set")
     fun replay() {
         replay = true;
 
@@ -77,10 +86,12 @@ internal class StreamingConsumerSpringRunnerTest {
             streamName,
             applicationName,
             messageHandler,
+            creator,
             offset,
             environment
         );
         subject.run("");
+        verify(creator).create(streamName);
         verify(consumerBuilder).stream(any());
         verify(consumerBuilder).offset(any());
         verify(consumerBuilder).messageHandler(any());
@@ -88,7 +99,7 @@ internal class StreamingConsumerSpringRunnerTest {
     }
 
     @Test
-    @DisplayName("Given replay=false when run then offet set")
+    @DisplayName("Given replay=false when do not set offset")
     fun replayFalse() {
         replay = false;
 
@@ -99,10 +110,12 @@ internal class StreamingConsumerSpringRunnerTest {
             streamName,
             applicationName,
             messageHandler,
+            creator,
             offset,
             environment
         );
         subject.run("");
+        verify(creator).create(streamName);
         verify(consumerBuilder, never()).offset(any());
         verify(consumerBuilder).stream(any());
         verify(consumerBuilder).name(any());

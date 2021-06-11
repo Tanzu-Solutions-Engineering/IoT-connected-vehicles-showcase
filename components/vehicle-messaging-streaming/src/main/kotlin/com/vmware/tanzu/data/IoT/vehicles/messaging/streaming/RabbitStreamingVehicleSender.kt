@@ -7,13 +7,22 @@ import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleSender
 import java.util.function.Function
 
 /**
+ * This class is responsible for publish vehicle data using a given streaming
+ * producer.
+ * @param producer the stream producer
+ * @param converter converts a given vehicle structure to a message  payload
+ *
  * @author Gregory Green
  */
 class RabbitStreamingVehicleSender(private val producer: Producer, private val converter: Function<Vehicle,ByteArray>) :
     VehicleSender
 {
-    val sumOfTwoNumber : (Int, Int) -> Int = { a: Int, b: Int -> a + b }
+    private val sumOfTwoNumber : (Int, Int) -> Int = { a: Int, b: Int -> a + b }
 
+    /**
+     * Send the vehicle using streaming
+     * @param vehicle the vehicle data
+     */
     override fun send(vehicle: Vehicle)
     {
         val msg = producer.messageBuilder()
