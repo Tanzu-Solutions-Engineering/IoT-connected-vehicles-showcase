@@ -1,13 +1,12 @@
 package com.vmware.tanzu.data.IoT.vehicles.source
 
 import com.vmware.tanzu.data.IoT.vehicles.repositories.VehicleRepository
-import com.vmware.tanzu.data.IoT.vehicles.sink.VehicleRepositorySink
-import com.vmware.tanzu.data.IoT.vehicles.sink.VehicleTelemetryRepositorySink
-import com.vmware.tanzu.data.IoT.vehicles.telemetry.repositories.VehicleTelemetryRepository
+import com.vmware.tanzu.data.IoT.vehicles.sink.vehicle.VehicleRepositorySink
 import org.springframework.amqp.rabbit.connection.ConnectionNameStrategy
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.scheduling.annotation.EnableAsync
 
 /**
  * @author Gregory Green

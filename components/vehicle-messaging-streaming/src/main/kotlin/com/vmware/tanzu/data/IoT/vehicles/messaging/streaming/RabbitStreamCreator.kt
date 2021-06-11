@@ -3,6 +3,7 @@ package com.vmware.tanzu.data.IoT.vehicles.messaging.streaming
 import com.rabbitmq.stream.Environment
 import com.rabbitmq.stream.StreamException
 import nyla.solutions.core.patterns.creational.BuilderDirector
+import org.springframework.stereotype.Component
 
 /**
  * Create an instance of a stream

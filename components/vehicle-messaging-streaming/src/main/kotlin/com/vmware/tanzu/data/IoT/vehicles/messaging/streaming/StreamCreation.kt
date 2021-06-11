@@ -6,4 +6,4 @@ package com.vmware.tanzu.data.IoT.vehicles.messaging.streaming
  */
 interface StreamCreation{
     fun create(streamName: String);
-}
+}   

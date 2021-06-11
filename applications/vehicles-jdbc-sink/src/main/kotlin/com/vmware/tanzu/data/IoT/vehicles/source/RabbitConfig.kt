@@ -1,7 +1,5 @@
 package com.vmware.tanzu.data.IoT.vehicles.source
 
-import com.vmware.tanzu.data.IoT.vehicles.sink.VehicleTelemetryRepositorySink
-import com.vmware.tanzu.data.IoT.vehicles.telemetry.repositories.VehicleTelemetryRepository
 import org.springframework.amqp.rabbit.connection.ConnectionNameStrategy
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean

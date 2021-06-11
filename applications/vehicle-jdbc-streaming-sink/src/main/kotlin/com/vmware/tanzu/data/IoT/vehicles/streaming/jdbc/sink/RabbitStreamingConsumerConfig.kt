@@ -3,7 +3,7 @@ package com.vmware.tanzu.data.IoT.vehicles.streaming.jdbc.sink
 import com.rabbitmq.stream.*
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.generator.BytesToVehicle
-import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.RabbitStreamingMessageHandler
+import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.RabbitStreamingConsumerHandler
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
@@ -36,7 +36,7 @@ class RabbitStreamingConsumerConfig {
     @Bean
     fun messageHandler(@Qualifier("vehicleGemFireSink")consumer: java.util.function.Consumer<Vehicle>): MessageHandler
     {
-        return RabbitStreamingMessageHandler(consumer,BytesToVehicle());
+        return RabbitStreamingConsumerHandler(consumer,BytesToVehicle());
     }
     //-----------------------------------------------
     @Bean

@@ -1,22 +1,19 @@
 package com.vmware.tanzu.data.IoT.vehicles.streaming.geode.sink
 
-import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
-import com.vmware.tanzu.data.IoT.vehicles.sink.VehicleRepositorySink
-import org.apache.geode.cache.DataPolicy
-import org.apache.geode.cache.GemFireCache
-import org.apache.geode.cache.Region
-import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.context.annotation.Bean
+import com.vmware.tanzu.data.IoT.vehicles.repositories.VehicleRepository
+import com.vmware.tanzu.data.IoT.vehicles.sink.vehicle.VehicleRepositorySink
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
-import org.springframework.data.gemfire.client.ClientRegionFactoryBean
-import org.springframework.data.gemfire.config.annotation.ClientCacheApplication
-import org.springframework.data.gemfire.config.annotation.EnablePdx
-import org.springframework.data.gemfire.config.annotation.EnableSecurity
+import org.springframework.data.gemfire.config.annotation.*
+import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories
 
 @Configuration
 @ClientCacheApplication(name = "iot-connected-vehicles-sink")
 @EnableSecurity
-@EnablePdx
+//@EnablePdx
+@EnableGemfireRepositories(basePackageClasses = [VehicleRepository::class])
+@EnableEntityDefinedRegions
+@EnableClusterDefinedRegions
+@ComponentScan(basePackageClasses = [VehicleRepositorySink::class])
 class GeodeConfig {
-
 }

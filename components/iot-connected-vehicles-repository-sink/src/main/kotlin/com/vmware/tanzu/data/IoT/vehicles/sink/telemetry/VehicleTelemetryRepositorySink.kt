@@ -1,4 +1,4 @@
-package com.vmware.tanzu.data.IoT.vehicles.sink
+package com.vmware.tanzu.data.IoT.vehicles.sink.telemetry
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.IVehicle
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle

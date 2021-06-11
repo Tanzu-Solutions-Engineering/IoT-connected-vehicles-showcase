@@ -25,11 +25,11 @@ class StreamingConsumerSpringRunner(
     @Value("\${spring.application.name}")
     private val applicationName: String,
     private val messageHandler: MessageHandler,
-    private val creator: StreamCreation,
-    private val offset: Long = 0,
     private val environment: Environment = Environment.builder()
         .host(host)
-        .port(port).build()
+        .port(port).build(),
+    private val creator: StreamCreation = RabbitStreamCreator(environment),
+    private val offset: Long = 0
 ) : CommandLineRunner {
 
     /**

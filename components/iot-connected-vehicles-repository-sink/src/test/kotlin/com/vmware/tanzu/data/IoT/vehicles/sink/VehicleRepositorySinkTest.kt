@@ -2,6 +2,7 @@ package com.vmware.tanzu.data.IoT.vehicles.sink
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.repositories.VehicleRepository
+import com.vmware.tanzu.data.IoT.vehicles.sink.vehicle.VehicleRepositorySink
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

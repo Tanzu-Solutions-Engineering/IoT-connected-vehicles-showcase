@@ -12,7 +12,7 @@ import java.util.function.Function
 /**
  * @author Gregory Green
  */
-internal class RabbitStreamingMessageHandlerTest{
+internal class RabbitStreamingConsumerHandlerTest{
     private var message: Message? = null;
     private var mockContext : MessageHandler.Context? = null;
     private lateinit var consumer: Consumer<Vehicle>;
@@ -27,7 +27,7 @@ internal class RabbitStreamingMessageHandlerTest{
 
     @Test
     internal fun handle_nullMessages() {
-        var subject = RabbitStreamingMessageHandler(consumer,mockFunction);
+        var subject = RabbitStreamingConsumerHandler(consumer,mockFunction);
         subject.handle(mockContext,message);
         verify(mockContext, never())?.commit();
         verify(consumer, never()).accept(any());
@@ -37,7 +37,7 @@ internal class RabbitStreamingMessageHandlerTest{
     @Test
     internal fun handle() {
         message =  mock<Message>();
-        var subject = RabbitStreamingMessageHandler(consumer,mockFunction);
+        var subject = RabbitStreamingConsumerHandler(consumer,mockFunction);
         subject.handle(mockContext,message);
 //        verify(mockContext, atLeastOnce())?.commit();
         verify(mockFunction).apply(anyOrNull());

@@ -86,9 +86,9 @@ internal class StreamingConsumerSpringRunnerTest {
             streamName,
             applicationName,
             messageHandler,
+            environment,
             creator,
-            offset,
-            environment
+            offset
         );
         subject.run("");
         verify(creator).create(streamName);
@@ -110,9 +110,9 @@ internal class StreamingConsumerSpringRunnerTest {
             streamName,
             applicationName,
             messageHandler,
+            environment,
             creator,
-            offset,
-            environment
+            offset
         );
         subject.run("");
         verify(creator).create(streamName);
