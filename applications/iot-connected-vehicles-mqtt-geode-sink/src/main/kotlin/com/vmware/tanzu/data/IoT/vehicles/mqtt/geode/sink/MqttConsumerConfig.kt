@@ -1,7 +1,7 @@
 package com.vmware.tanzu.data.IoT.vehicles.mqtt.geode.sink
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
-import com.vmware.tanzu.data.IoT.vehicles.generator.BytesToVehicle
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.consumer.BytesToVehicle
 import com.vmware.tanzu.data.IoT.vehicles.messaging.mqtt.MqttVehicleMessageListener
 import org.eclipse.paho.client.mqttv3.IMqttClient
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener

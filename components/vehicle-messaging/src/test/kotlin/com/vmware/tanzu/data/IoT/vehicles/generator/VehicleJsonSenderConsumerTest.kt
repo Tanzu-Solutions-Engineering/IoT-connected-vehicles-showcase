@@ -1,6 +1,8 @@
 package com.vmware.tanzu.data.IoT.vehicles.generator
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
+import com.vmware.tanzu.data.IoT.vehicles.messaging.VehicleJsonSenderConsumer
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn

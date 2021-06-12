@@ -1,7 +1,7 @@
 package com.vmware.tanzu.data.IoT.vehicles.source
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
-import com.vmware.tanzu.data.IoT.vehicles.telemetry.repositories.VehicleTelemetryRepository
+import com.vmware.tanzu.data.IoT.vehicles.messaging.telemetry.repositories.VehicleTelemetryRepository
 import org.hibernate.cfg.AvailableSettings
 import org.hibernate.dialect.PostgreSQL9Dialect
 import org.springframework.context.annotation.Bean

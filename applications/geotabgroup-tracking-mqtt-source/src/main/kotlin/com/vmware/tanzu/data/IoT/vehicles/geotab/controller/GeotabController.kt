@@ -5,12 +5,11 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
-import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleSender
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.util.function.Consumer
 import java.util.function.Function
 
 /**

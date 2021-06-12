@@ -1,6 +1,7 @@
 package com.vmware.tanzu.data.IoT.vehicles.generator
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.converter.VehicleToBytes
 import nyla.solutions.core.patterns.creational.generator.JavaBeanGeneratorCreator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

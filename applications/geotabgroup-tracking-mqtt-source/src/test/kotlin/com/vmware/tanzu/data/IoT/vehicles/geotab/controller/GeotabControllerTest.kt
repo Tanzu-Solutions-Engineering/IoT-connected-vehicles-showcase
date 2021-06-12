@@ -2,7 +2,7 @@ package com.vmware.tanzu.data.IoT.vehicles.geotab.controller
 
 import com.google.gson.JsonObject
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
-import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleSender
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
 import nyla.solutions.core.io.IO
 import nyla.solutions.core.patterns.creational.generator.JavaBeanGeneratorCreator
 import org.junit.jupiter.api.BeforeEach

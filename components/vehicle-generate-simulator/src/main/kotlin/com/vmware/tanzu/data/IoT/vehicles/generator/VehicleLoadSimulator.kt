@@ -1,16 +1,26 @@
 package com.vmware.tanzu.data.IoT.vehicles.generator
 
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
+import org.springframework.stereotype.Component
 import java.util.concurrent.Executors
 
 /**
  * @author Gregory Green
  */
+@Component
 class VehicleLoadSimulator(
     private val sender: VehicleSender,
+    @Value("\${vehicleCount}")
     private val vehicleCount: Int,
+
+    @Value("\${messageCount}")
     private val messageCount: Int,
+
+    @Value("\${distanceIncrements}")
     private val distanceIncrements: Double,
+    @Value("\${delayMs}")
     private val delayMs: Long
 ) : CommandLineRunner {
 

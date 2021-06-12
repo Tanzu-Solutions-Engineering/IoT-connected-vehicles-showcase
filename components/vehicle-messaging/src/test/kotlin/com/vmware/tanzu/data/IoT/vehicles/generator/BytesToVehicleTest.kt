@@ -2,6 +2,7 @@ package com.vmware.tanzu.data.IoT.vehicles.generator
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.consumer.BytesToVehicle
 import nyla.solutions.core.patterns.creational.generator.JavaBeanGeneratorCreator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

@@ -1,4 +1,4 @@
-package com.vmware.tanzu.data.IoT.vehicles.generator
+package com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.consumer
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle

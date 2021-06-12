@@ -1,8 +1,11 @@
-package com.vmware.tanzu.data.IoT.vehicles.messaging.streaming
+package com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.runner
 
 import com.rabbitmq.stream.Environment
 import com.rabbitmq.stream.MessageHandler
 import com.rabbitmq.stream.OffsetSpecification
+import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.StreamSetup
+import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.RabbitStreamSetup
+import nyla.solutions.core.patterns.creational.Creator
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
@@ -16,19 +19,13 @@ import java.time.Duration
 class StreamingConsumerSpringRunner(
     @Value("\${rabbitmq.streaming.replay}")
     private val replay: Boolean,
-    @Value("\${rabbitmq.streaming.host}")
-    private val host: String,
-    @Value("\${rabbitmq.streaming.port}")
-    private val port: Int,
     @Value("\${rabbitmq.streaming.name}")
     private val streamName: String,
     @Value("\${spring.application.name}")
     private val applicationName: String,
     private val messageHandler: MessageHandler,
-    private val environment: Environment = Environment.builder()
-        .host(host)
-        .port(port).build(),
-    private val creator: StreamCreation = RabbitStreamCreator(environment),
+    private val envCreator : Creator<Environment>,
+    private val streamSetup: StreamSetup,
     private val offset: Long = 0
 ) : CommandLineRunner {
 
@@ -38,8 +35,9 @@ class StreamingConsumerSpringRunner(
      * @throws Exception on error
      */
     override fun run(vararg args: String?) {
+        val environment = envCreator.create();
 
-        this.creator.create(streamName);
+        this.streamSetup.initialize(streamName);
 
         if (replay) {
             println("=========== REPLAYING ALL STREAM  MESSAGES ======================");

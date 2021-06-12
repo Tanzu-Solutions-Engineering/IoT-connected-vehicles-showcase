@@ -3,7 +3,7 @@ package com.vmware.tanzu.data.IoT.vehicles.sink.telemetry
 import com.vmware.tanzu.data.IoT.vehicles.domains.IVehicle
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.domains.VehicleTelemetry
-import com.vmware.tanzu.data.IoT.vehicles.telemetry.repositories.VehicleTelemetryRepository
+import com.vmware.tanzu.data.IoT.vehicles.messaging.telemetry.repositories.VehicleTelemetryRepository
 import org.springframework.stereotype.Service
 import java.util.function.Consumer
 import java.util.function.Function

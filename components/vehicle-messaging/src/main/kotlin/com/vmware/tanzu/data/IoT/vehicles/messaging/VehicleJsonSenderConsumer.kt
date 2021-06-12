@@ -1,6 +1,8 @@
-package com.vmware.tanzu.data.IoT.vehicles.generator
+package com.vmware.tanzu.data.IoT.vehicles.messaging
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.consumer.StringToVehicle
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
 import java.util.function.Consumer
 import java.util.function.Function
 
@@ -9,7 +11,8 @@ import java.util.function.Function
  * @author Gregory Green
  */
 class VehicleJsonSenderConsumer(private val vehicleSender: VehicleSender,
-                                private val converter: Function<String, Vehicle> =  StringToVehicle()) : Consumer<String>
+                                private val converter: Function<String, Vehicle> =  StringToVehicle()
+) : Consumer<String>
 {
     /**
      * Performs this operation on the given argument.

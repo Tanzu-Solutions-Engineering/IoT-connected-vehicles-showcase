@@ -1,4 +1,4 @@
-package com.vmware.tanzu.data.IoT.vehicles.messaging.streaming
+package com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.consumer
 
 import com.rabbitmq.stream.Message
 import com.rabbitmq.stream.MessageHandler

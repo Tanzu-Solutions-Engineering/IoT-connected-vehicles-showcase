@@ -2,8 +2,8 @@ package com.vmware.tanzu.data.IoT.vehicles.streaming.jdbc.sink
 
 import com.rabbitmq.stream.*
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
-import com.vmware.tanzu.data.IoT.vehicles.generator.BytesToVehicle
-import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.RabbitStreamingConsumerHandler
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.consumer.BytesToVehicle
+import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.consumer.RabbitStreamingConsumerHandler
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
@@ -36,7 +36,7 @@ class RabbitStreamingConsumerConfig {
     @Bean
     fun messageHandler(@Qualifier("vehicleGemFireSink")consumer: java.util.function.Consumer<Vehicle>): MessageHandler
     {
-        return RabbitStreamingConsumerHandler(consumer,BytesToVehicle());
+        return RabbitStreamingConsumerHandler(consumer, BytesToVehicle());
     }
     //-----------------------------------------------
     @Bean
@@ -65,7 +65,7 @@ class RabbitStreamingConsumerConfig {
             {
                 println("=========== REPLAYING ALL STREAM  MESSAGES ======================");
 
-                var consumerBuilder = environment.consumerBuilder()
+                environment.consumerBuilder()
                     .stream(streamName)
                     .offset(OffsetSpecification.offset(0L))
                     .messageHandler(messageHandler)
@@ -73,7 +73,7 @@ class RabbitStreamingConsumerConfig {
             }
             else
             {
-                var consumerBuilder = environment.consumerBuilder()
+                environment.consumerBuilder()
                     .stream(streamName)
                     .name(applicationName).autoCommitStrategy()
                     .messageCountBeforeCommit(50_000)

@@ -4,6 +4,9 @@ import com.rabbitmq.stream.Consumer
 import com.rabbitmq.stream.ConsumerBuilder
 import com.rabbitmq.stream.Environment
 import com.rabbitmq.stream.MessageHandler
+import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.StreamSetup
+import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.runner.StreamingConsumerSpringRunner
+import nyla.solutions.core.patterns.creational.Creator
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -16,7 +19,7 @@ import org.mockito.kotlin.*
  */
 internal class StreamingConsumerSpringRunnerTest {
 
-    private lateinit var creator: StreamCreation;
+    private lateinit var streamSetup: StreamSetup;
 
     private lateinit var consumer: Consumer;
 
@@ -25,6 +28,8 @@ internal class StreamingConsumerSpringRunnerTest {
     private lateinit var consumerBuilder : ConsumerBuilder;
 
     private lateinit var environment: Environment;
+
+    private lateinit var environmentCreator : Creator<Environment>;
 
     private lateinit var strategyConsumerBuilder : ConsumerBuilder;
     private lateinit var autoCommitStrategy : ConsumerBuilder.AutoCommitStrategy;
@@ -68,9 +73,10 @@ internal class StreamingConsumerSpringRunnerTest {
         environment = mock<Environment>{
             on{ consumerBuilder()} doReturn consumerBuilder;
         }
+        streamSetup = mock<StreamSetup>();
 
-        creator = mock<StreamCreation>(){
-
+        environmentCreator = mock<Creator<Environment>>{
+            on{create()} doReturn environment;
         }
     }
 
@@ -81,17 +87,15 @@ internal class StreamingConsumerSpringRunnerTest {
 
         var subject = StreamingConsumerSpringRunner(
             replay,
-            host,
-            port,
             streamName,
             applicationName,
-            messageHandler,
-            environment,
-            creator,
-            offset
+            envCreator = environmentCreator,
+            messageHandler = messageHandler,
+            streamSetup = streamSetup,
+            offset = offset
         );
         subject.run("");
-        verify(creator).create(streamName);
+        verify(streamSetup).initialize(streamName);
         verify(consumerBuilder).stream(any());
         verify(consumerBuilder).offset(any());
         verify(consumerBuilder).messageHandler(any());
@@ -105,17 +109,15 @@ internal class StreamingConsumerSpringRunnerTest {
 
         var subject = StreamingConsumerSpringRunner(
             replay,
-            host,
-            port,
             streamName,
             applicationName,
-            messageHandler,
-            environment,
-            creator,
-            offset
+            envCreator= environmentCreator,
+            messageHandler = messageHandler,
+            streamSetup = streamSetup,
+            offset = offset
         );
         subject.run("");
-        verify(creator).create(streamName);
+        verify(streamSetup).initialize(streamName);
         verify(consumerBuilder, never()).offset(any());
         verify(consumerBuilder).stream(any());
         verify(consumerBuilder).name(any());

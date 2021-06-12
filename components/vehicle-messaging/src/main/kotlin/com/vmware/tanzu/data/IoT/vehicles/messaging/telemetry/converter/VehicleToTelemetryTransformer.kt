@@ -1,4 +1,4 @@
-package com.vmware.tanzu.data.IoT.vehicles.generator
+package com.vmware.tanzu.data.IoT.vehicles.messaging.telemetry.converter
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.IVehicle
 import com.vmware.tanzu.data.IoT.vehicles.domains.VehicleTelemetry

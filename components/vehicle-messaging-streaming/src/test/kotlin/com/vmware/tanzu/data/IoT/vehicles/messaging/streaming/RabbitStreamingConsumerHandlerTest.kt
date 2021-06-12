@@ -3,6 +3,7 @@ package com.vmware.tanzu.data.IoT.vehicles.messaging.streaming
 import com.rabbitmq.stream.Message
 import com.rabbitmq.stream.MessageHandler
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
+import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.consumer.RabbitStreamingConsumerHandler
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*

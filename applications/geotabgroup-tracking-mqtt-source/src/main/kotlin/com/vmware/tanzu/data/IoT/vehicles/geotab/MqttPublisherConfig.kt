@@ -1,7 +1,7 @@
 package com.vmware.tanzu.data.IoT.vehicles.geotab
 
-import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleSender
-import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleToBytes
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.converter.VehicleToBytes
 import com.vmware.tanzu.data.IoT.vehicles.messaging.mqtt.MqttVehicleSender
 import org.eclipse.paho.client.mqttv3.IMqttClient
 import org.eclipse.paho.client.mqttv3.MqttClient
@@ -46,7 +46,7 @@ class MqttPublisherConfig {
 
         publisher.connect(options)
 
-        return MqttVehicleSender(topic,publisher,VehicleToBytes());
+        return MqttVehicleSender(topic,publisher, VehicleToBytes());
     }
 
 }

@@ -1,5 +1,6 @@
 package com.vmware.tanzu.data.IoT.vehicles.generator
 
+import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
 import org.springframework.boot.CommandLineRunner
 import java.util.concurrent.Executors
 

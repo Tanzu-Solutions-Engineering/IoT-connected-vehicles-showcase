@@ -4,7 +4,7 @@ import com.vmware.tanzu.data.IoT.vehicles.domains.IVehicle
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.domains.VehicleTelemetry
 import com.vmware.tanzu.data.IoT.vehicles.sink.telemetry.VehicleTelemetryRepositorySink
-import com.vmware.tanzu.data.IoT.vehicles.telemetry.repositories.VehicleTelemetryRepository
+import com.vmware.tanzu.data.IoT.vehicles.messaging.telemetry.repositories.VehicleTelemetryRepository
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.extension.ExtendWith
