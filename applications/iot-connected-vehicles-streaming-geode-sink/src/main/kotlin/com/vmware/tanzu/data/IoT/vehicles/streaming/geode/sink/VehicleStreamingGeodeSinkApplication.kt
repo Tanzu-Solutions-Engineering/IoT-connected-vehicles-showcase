@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class IoTConnectedVehicleStreamingGeodeSinkApplication
+class VehicleStreamingGeodeSinkApplication
 
 fun main(args: Array<String>) {
-	runApplication<IoTConnectedVehicleStreamingGeodeSinkApplication>(*args)
+	runApplication<VehicleStreamingGeodeSinkApplication>(*args)
 }
