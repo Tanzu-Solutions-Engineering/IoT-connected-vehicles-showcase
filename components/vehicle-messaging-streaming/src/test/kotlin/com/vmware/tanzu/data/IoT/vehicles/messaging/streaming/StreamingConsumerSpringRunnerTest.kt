@@ -5,7 +5,7 @@ import com.rabbitmq.stream.ConsumerBuilder
 import com.rabbitmq.stream.Environment
 import com.rabbitmq.stream.MessageHandler
 import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.StreamSetup
-import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.runner.StreamingConsumerSpringRunner
+import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.consumer.StreamingConsumerSpringRunner
 import nyla.solutions.core.patterns.creational.Creator
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName

@@ -3,8 +3,7 @@ package com.vmware.tanzu.data.IoT.vehicles.streaming.jdbc.sink
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.consumer.BytesToVehicle
 import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.consumer.RabbitStreamingConsumerHandler
 import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.RabbitStreamEnvironmentCreator
-import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.runner.StreamingConsumerSpringRunner
-import com.vmware.tanzu.data.IoT.vehicles.sink.telemetry.VehicleTelemetryRepositorySink
+import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.consumer.StreamingConsumerSpringRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration

@@ -17,6 +17,11 @@ class RabbitStreamingConsumerHandler(
     private val converter: Function<ByteArray, Vehicle>) :
     MessageHandler
 {
+    /**
+     * Processing a messaging handling
+     * @param context the message context
+     * @param message  the message
+     */
     override fun handle(context: MessageHandler.Context?, message: Message?) {
         if (message == null)
             return;
