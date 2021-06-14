@@ -42,13 +42,13 @@ class StreamingConsumerSpringRunner(
         if (replay) {
             println("=========== REPLAYING ALL STREAM  MESSAGES ======================");
 
-            var consumer = environment.consumerBuilder()
+            environment.consumerBuilder()
                 .stream(streamName)
                 .offset(OffsetSpecification.offset(offset))
                 .messageHandler(messageHandler)
                 .build();
         } else {
-            var consumer = environment.consumerBuilder()
+            environment.consumerBuilder()
                 .stream(streamName)
                 .name(applicationName).autoCommitStrategy()
                 .messageCountBeforeCommit(50_000)

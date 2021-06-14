@@ -29,7 +29,7 @@ class RabbitStreamingRoutingFunctionHandler(
     private val applicationName: String,
     @Value("\${rabbitmq.streaming.routing.input.replay.offset}")
     private val offset: Long = 0,
-    @Value("\${rabbitmq.streaming.routing.input.replay}")
+    @Value("\${rabbitmq.streaming.routing.input.replay.bool}")
     private val replay: Boolean = false,
     private val handler : ConfirmationHandler = ConfirmationHandler{ status -> if(!status.isConfirmed)
         println("ERROR: $status.code NOT confirmed}")

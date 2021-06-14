@@ -35,6 +35,7 @@ dependencies {
     implementation(project(":components:iot-connected-vehicles-repository"))
     implementation(project(":components:iot-connected-vehicles-repository-sink"))
     implementation(project(":components:vehicle-messaging"))
+    implementation(project(":components:messaging-streaming"))
     implementation(project(":components:vehicle-messaging-streaming"))
     implementation("com.rabbitmq:stream-client:0.1.0-SNAPSHOT")
     implementation("org.apache.qpid:proton-j:0.33.8")

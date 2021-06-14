@@ -1,11 +1,12 @@
-package com.vmware.tanzu.data.IoT.vehicles.generator.streaming
+package com.vmware.tanzu.data.IoT.streaming.shovel
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class VehicleStreamingGeneratorApp
+class ShovelStreamingApp
+
 
 fun main(args: Array<String>) {
-	runApplication<VehicleStreamingGeneratorApp>(*args)
+	runApplication<ShovelStreamingApp>(*args)
 }
