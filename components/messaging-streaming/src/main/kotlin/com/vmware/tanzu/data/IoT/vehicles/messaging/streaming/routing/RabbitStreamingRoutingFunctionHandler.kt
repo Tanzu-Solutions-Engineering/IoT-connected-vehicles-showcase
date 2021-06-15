@@ -62,6 +62,8 @@ class RabbitStreamingRoutingFunctionHandler(
                 .build();
         }
 
+        Thread.sleep(1000);
+
         producer = outputEnvCreator.create().producerBuilder().stream(outputStreamName).build()
     }
     /**

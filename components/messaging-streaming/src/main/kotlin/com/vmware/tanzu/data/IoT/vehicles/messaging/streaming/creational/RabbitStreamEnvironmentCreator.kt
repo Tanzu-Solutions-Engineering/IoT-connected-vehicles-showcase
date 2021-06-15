@@ -13,16 +13,14 @@ import org.springframework.stereotype.Component
  */
 @Component
 class RabbitStreamEnvironmentCreator(
-    @Value("\${rabbitmq.streaming.host}")
-    private val host: String,
-    @Value("\${rabbitmq.streaming.port}")
-    private val port: Int,
+    @Value("\${rabbitmq.streaming.uris}")
+    private val uris: String,
     private val environmentBuilder: EnvironmentBuilder = Environment.builder()) : Creator<Environment> {
     /**
      *
      * @return the create object
      */
     override fun create(): Environment {
-        return environmentBuilder.host(host).port(port).build();
+        return environmentBuilder.uris(uris.split(",")).build();
     }
 }
