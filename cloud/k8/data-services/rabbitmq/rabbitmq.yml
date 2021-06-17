@@ -5,10 +5,3 @@ metadata:
 spec:
   replicas: 3
   image: pivotalrabbitmq/rabbitmq-stream
-  resources:
-    requests:
-      cpu: 300m
-      memory: 700Mi
-    limits:
-      cpu: 300m
-      memory: 700Mi

@@ -9,10 +9,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
-import org.mockito.kotlin.any
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
+import org.mockito.kotlin.*
 
 /**
  * Test for RabbitStreamEnvironmentCreator
@@ -47,4 +44,9 @@ internal class RabbitStreamEnvironmentCreatorTest {
 
     }
 
+    @Test
+    internal fun create_impotent() {
+        assertSame(subject.create(),subject.create());
+        verify(environmentBuilder, times(1)).build()
+    }
 }

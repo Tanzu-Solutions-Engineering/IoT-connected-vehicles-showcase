@@ -16,11 +16,13 @@ class RabbitStreamEnvironmentCreator(
     @Value("\${rabbitmq.streaming.uris}")
     private val uris: String,
     private val environmentBuilder: EnvironmentBuilder = Environment.builder()) : Creator<Environment> {
+    private val environment : Environment = environmentBuilder.uris(uris.split(",")).build();
+
     /**
      *
      * @return the create object
      */
     override fun create(): Environment {
-        return environmentBuilder.uris(uris.split(",")).build();
+        return  environment;
     }
 }

@@ -85,6 +85,10 @@ echo "PASWORD:" $rpwd
 ```
 
 
+Add new users
+
+
+
 ```shell script
 kubectl port-forward rabbitmq-server-0 15672:15672
 ```
