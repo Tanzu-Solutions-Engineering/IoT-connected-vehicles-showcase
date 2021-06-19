@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run:  vehicle-streaming-geode-sink
+  name:  vehicle-streaming-geode-sink
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name:  vehicle-streaming-geode-sink
+  template:
+    metadata:
+      labels:
+        name:  vehicle-streaming-geode-sink
+    spec:
+      serviceAccountName: rabbitmq-server
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: spring.cloud.stream.bindings.vehicleGemFireSink-in-0.consumer.concurrency
+              value: "5"
+            - name: rabbitmq_streaming_uris
+              value: rabbitmq-stream://vehicle:security@rabbitmq:5552
+            - name: spring.rabbitmq.host
+              value: rabbitmq
+            - name: spring_rabbitmq_username
+              valueFrom:
+                secretKeyRef:
+                  name: vehicle-secrets
+                  key: spring_rabbitmq_username
+            - name: spring.rabbitmq.password
+              valueFrom:
+                secretKeyRef:
+                  name: vehicle-secrets
+                  key: spring_rabbitmq_password
+            - name: spring.data.gemfire.pool.locators
+              valueFrom:
+                configMapKeyRef:
+                  name: vehicle-configmap
+                  key: spring.data.gemfire.pool.locators
+          image: nyla/vehicle-streaming-geode-sink:0.0.1-SNAPSHOT
+          name: vehicle-streaming-geode-sink

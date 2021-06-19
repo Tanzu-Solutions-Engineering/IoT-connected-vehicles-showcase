@@ -32,7 +32,7 @@ internal class StreamingConsumerSpringRunnerTest {
     private lateinit var environmentCreator : Creator<Environment>;
 
     private lateinit var strategyConsumerBuilder : ConsumerBuilder;
-    private lateinit var autoCommitStrategy : ConsumerBuilder.AutoCommitStrategy;
+    private lateinit var autoTrackingStrategy : ConsumerBuilder.AutoTrackingStrategy;
 
     private var applicationName: String = "myapp";
     private var offset: Long = 23;
@@ -52,8 +52,8 @@ internal class StreamingConsumerSpringRunnerTest {
         }
 
 
-        autoCommitStrategy = mock<ConsumerBuilder.AutoCommitStrategy>{
-            on { messageCountBeforeCommit(any())} doReturn it;
+        autoTrackingStrategy = mock<ConsumerBuilder.AutoTrackingStrategy>{
+            on { messageCountBeforeStorage(any())} doReturn it;
             on { flushInterval(any())} doReturn it;
 
             on{ builder()} doReturn strategyConsumerBuilder;
@@ -67,7 +67,7 @@ internal class StreamingConsumerSpringRunnerTest {
             on{ messageHandler(any())} doReturn it;
             on{ build()} doReturn consumer;
             on{ name(anyString())} doReturn it;
-            on { autoCommitStrategy()} doReturn autoCommitStrategy;
+            on { autoTrackingStrategy()} doReturn autoTrackingStrategy;
         }
 
         environment = mock<Environment>{
@@ -89,8 +89,8 @@ internal class StreamingConsumerSpringRunnerTest {
             replay,
             streamName,
             applicationName,
-            envCreator = environmentCreator,
             messageHandler = messageHandler,
+            envCreator = environmentCreator,
             streamSetup = streamSetup,
             offset = offset
         );
@@ -111,8 +111,8 @@ internal class StreamingConsumerSpringRunnerTest {
             replay,
             streamName,
             applicationName,
-            envCreator= environmentCreator,
             messageHandler = messageHandler,
+            envCreator= environmentCreator,
             streamSetup = streamSetup,
             offset = offset
         );
@@ -121,9 +121,9 @@ internal class StreamingConsumerSpringRunnerTest {
         verify(consumerBuilder, never()).offset(any());
         verify(consumerBuilder).stream(any());
         verify(consumerBuilder).name(any());
-        verify(consumerBuilder).autoCommitStrategy();
-        verify(autoCommitStrategy).messageCountBeforeCommit(any());
-        verify(autoCommitStrategy).builder();
+        verify(consumerBuilder).autoTrackingStrategy();
+        verify(autoTrackingStrategy).messageCountBeforeStorage(any());
+        verify(autoTrackingStrategy).builder();
         verify(strategyConsumerBuilder).messageHandler(any());
         verify(strategyConsumerBuilder).build();
     }

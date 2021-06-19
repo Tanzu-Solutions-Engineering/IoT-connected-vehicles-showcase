@@ -9,7 +9,6 @@ import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.routing.ShovelFunc
 import nyla.solutions.core.patterns.creational.Creator
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import java.util.function.Function
 
@@ -43,13 +42,15 @@ class StreamShovelConfig {
         var inputStreamSetup: StreamSetup = RabbitStreamSetup(inputEnvCreator,maxAgeHours = 1,maxLengthGb = 1,maxSegmentSizeMb = 20);
         var outputEnvCreator: Creator<Environment> = RabbitStreamEnvironmentCreator(outputUris);
         var outputStreamSetup: StreamSetup = RabbitStreamSetup(outputEnvCreator,maxAgeHours = 1,maxLengthGb = 1,maxSegmentSizeMb = 20);
-        return RabbitStreamingRoutingFunctionHandler(routingFunction = routingFunction,
-        inputEnvCreator = inputEnvCreator,
-        inputStreamSetup = inputStreamSetup,
-        outputEnvCreator = outputEnvCreator,
-        outputStreamSetup = outputStreamSetup,
+        return RabbitStreamingRoutingFunctionHandler(
+            inputStreamName = inputStreamName,
+            inputStreamSetup = inputStreamSetup,
+            inputEnvCreator = inputEnvCreator,
+            outputStreamName = outputStreamName,
+            outputEnvCreator = outputEnvCreator,
+            outputStreamSetup = outputStreamSetup,
+            routingFunction = routingFunction,
             applicationName = applicationName,
-        inputStreamName = inputStreamName,
-        outputStreamName = outputStreamName);
+        );
     }
 }

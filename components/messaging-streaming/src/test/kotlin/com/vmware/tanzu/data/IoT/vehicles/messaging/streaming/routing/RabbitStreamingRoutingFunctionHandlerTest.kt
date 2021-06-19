@@ -26,7 +26,7 @@ internal class RabbitStreamingRoutingFunctionHandlerTest{
     private lateinit var messageBuilder: MessageBuilder
     private lateinit var message: Message;
     private lateinit var autoConsumerBuilder: ConsumerBuilder;
-    private lateinit var autoCommitStrategy: ConsumerBuilder.AutoCommitStrategy;
+    private lateinit var autoTrackingStrategy: ConsumerBuilder.AutoTrackingStrategy;
     private lateinit var consumer: Consumer;
     private lateinit var consumerBuilder: ConsumerBuilder;
     private lateinit var producerBuilder : ProducerBuilder;
@@ -59,8 +59,8 @@ internal class RabbitStreamingRoutingFunctionHandlerTest{
             on{ messageHandler(any())} doReturn it;
             on{ build()} doReturn consumer;
         }
-        autoCommitStrategy = mock<ConsumerBuilder.AutoCommitStrategy>(){
-            on{ messageCountBeforeCommit(any())} doReturn it;
+        autoTrackingStrategy = mock<ConsumerBuilder.AutoTrackingStrategy>(){
+            on{ messageCountBeforeStorage(any())} doReturn it;
             on{ flushInterval(any())} doReturn it;
             on{ builder()} doReturn autoConsumerBuilder;
         }
@@ -73,7 +73,7 @@ internal class RabbitStreamingRoutingFunctionHandlerTest{
             on { name(anyString()) } doReturn it;
             on{ offset(any())} doReturn it;
             on{ messageHandler(any())} doReturn it;
-            on { autoCommitStrategy()} doReturn autoCommitStrategy;
+            on { autoTrackingStrategy()} doReturn autoTrackingStrategy;
             on{ build()} doReturn consumer;
 
         }
@@ -107,7 +107,7 @@ internal class RabbitStreamingRoutingFunctionHandlerTest{
             mockFunction,
             applicationName,
             offset,
-            replay
+            replay,
         );
 
     }
@@ -145,10 +145,10 @@ internal class RabbitStreamingRoutingFunctionHandlerTest{
         verify(inEnvironment).consumerBuilder();
         verify(consumerBuilder).stream(anyString());
         verify(consumerBuilder).name(anyString());
-        verify(consumerBuilder).autoCommitStrategy();
-        verify(autoCommitStrategy).messageCountBeforeCommit(any());
-        verify(autoCommitStrategy).flushInterval(any());
-        verify(autoCommitStrategy).builder();
+        verify(consumerBuilder).autoTrackingStrategy();
+        verify(autoTrackingStrategy).messageCountBeforeStorage(any());
+        verify(autoTrackingStrategy).flushInterval(any());
+        verify(autoTrackingStrategy).builder();
         verify(autoConsumerBuilder).messageHandler(any())
         verify(autoConsumerBuilder).build();
     }

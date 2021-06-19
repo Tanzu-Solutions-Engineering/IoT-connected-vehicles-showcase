@@ -31,9 +31,16 @@ class RabbitStreamingRoutingFunctionHandler(
     private val offset: Long = 0,
     @Value("\${rabbitmq.streaming.routing.input.replay.bool}")
     private val replay: Boolean = false,
-    private val handler : ConfirmationHandler = ConfirmationHandler{ status -> if(!status.isConfirmed)
-        println("ERROR: $status.code NOT confirmed}")
-    }) : MessageHandler, AutoCloseable {
+    private val handler: ConfirmationHandler = ConfirmationHandler { status ->
+        if (!status.isConfirmed)
+            println("ERROR: $status.code NOT confirmed}")
+    },
+    @Value("\${rabbitmq.streaming.routing.input.messageCountBeforeStorage:50000}")
+    private var messageCountBeforeStorage: Int = 50_000,
+    @Value("\${rabbitmq.streaming.routing.input.flushIntervalDurationSecs:10}")
+    private var flushIntervalDurationSecs: Long = 10
+) : MessageHandler, AutoCloseable {
+
 
     private var consumer: Consumer;
     private var producer: Producer;
@@ -54,9 +61,9 @@ class RabbitStreamingRoutingFunctionHandler(
         } else {
             consumer = inEnv.consumerBuilder()
                 .stream(inputStreamName)
-                .name(applicationName).autoCommitStrategy()
-                .messageCountBeforeCommit(50_000)
-                .flushInterval(Duration.ofSeconds(10))
+                .name(applicationName).autoTrackingStrategy()
+                .messageCountBeforeStorage(messageCountBeforeStorage)
+                .flushInterval(Duration.ofSeconds(flushIntervalDurationSecs))
                 .builder()
                 .messageHandler(this)
                 .build();

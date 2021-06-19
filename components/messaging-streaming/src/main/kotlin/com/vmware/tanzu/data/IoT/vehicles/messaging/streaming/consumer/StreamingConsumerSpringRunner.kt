@@ -24,10 +24,18 @@ class StreamingConsumerSpringRunner(
     @Value("\${spring.application.name}")
     private val applicationName: String,
     private val messageHandler: MessageHandler,
-    private val envCreator : Creator<Environment>,
+    private val envCreator: Creator<Environment>,
     private val streamSetup: StreamSetup,
-    private val offset: Long = 0
-) : CommandLineRunner {
+    private val offset: Long = 0,
+    @Value("\${rabbitmq.streaming.messageCountBeforeStorage:50000}")
+    private var messageCountBeforeStorage: Int = 50_000,
+    @Value("\${rabbitmq.streaming.flushIntervalDurationSecs:10}")
+    private var  flushIntervalDurationSecs: Long = 10,
+
+    ) : CommandLineRunner {
+
+
+
 
     /**
      * Callback used to run the bean.
@@ -50,9 +58,11 @@ class StreamingConsumerSpringRunner(
         } else {
             var consumer = environment.consumerBuilder()
                 .stream(streamName)
-                .name(applicationName).autoCommitStrategy()
-                .messageCountBeforeCommit(50_000)
-                .flushInterval(Duration.ofSeconds(10))
+                .name(applicationName).autoTrackingStrategy()
+                .messageCountBeforeStorage(messageCountBeforeStorage)
+                .flushInterval(Duration.ofSeconds(flushIntervalDurationSecs))
+                //.messageCountBeforeCommit(50_000)
+                //.flushInterval(Duration.ofSeconds(10))
                 .builder()
                 .messageHandler(messageHandler)
                 .build();

@@ -1,1 +1,0 @@
-k apply -f cloud/GKE/k8/vehicle-generator-app
