@@ -19,7 +19,7 @@ internal class RabbitStreamEnvironmentCreatorTest {
 
     private lateinit var mockEnvironment: Environment;
     private lateinit var environmentBuilder: EnvironmentBuilder;
-    private val uris = "rabbitmq-stream://guest:guest@localhost:5552/,rabbitmq-stream://guest:guest@localhost:5552/";
+    private val uris = "rabbitmq-stream://guest:guest@localhost:5552,rabbitmq-stream://guest:guest@localhost:5552";
     private lateinit var subject : RabbitStreamEnvironmentCreator;
 
     @BeforeEach

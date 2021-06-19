@@ -6,5 +6,19 @@ spec:
   image: registry.pivotal.io/tanzu-gemfire-for-kubernetes/gemfire-k8s:1.0.0
   locators:
     replicas: 2
+    resources:
+      requests:
+        memory: 2Gi
+        cpu: 2000m
+      limits:
+        memory: 2Gi
+        cpu: 2000m
   servers:
-    replicas: 3
+    replicas: 6
+    resources:
+      requests:
+        memory: 8Gi
+        cpu: 3000m
+      limits:
+        memory: 8Gi
+        cpu: 3000m
