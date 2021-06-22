@@ -5,7 +5,7 @@ metadata:
     run:  vehicle-streaming-geode-sink
   name:  vehicle-streaming-geode-sink
 spec:
-  replicas: 2
+  replicas: 10
   selector:
     matchLabels:
       name:  vehicle-streaming-geode-sink
@@ -24,6 +24,8 @@ spec:
               value: rabbitmq-stream://vehicle:security@rabbitmq:5552
             - name: spring.rabbitmq.host
               value: rabbitmq
+            - name: rabbitmq_streaming_stream_maxLengthGb
+              value: "3"
             - name: spring_rabbitmq_username
               valueFrom:
                 secretKeyRef:

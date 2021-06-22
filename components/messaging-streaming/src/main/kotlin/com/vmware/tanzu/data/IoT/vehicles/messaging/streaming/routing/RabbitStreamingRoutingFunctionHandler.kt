@@ -59,14 +59,15 @@ class RabbitStreamingRoutingFunctionHandler(
                 .messageHandler(this)
                 .build();
         } else {
-            consumer = inEnv.consumerBuilder()
+            var builder = inEnv.consumerBuilder()
                 .stream(inputStreamName)
                 .name(applicationName).autoTrackingStrategy()
                 .messageCountBeforeStorage(messageCountBeforeStorage)
                 .flushInterval(Duration.ofSeconds(flushIntervalDurationSecs))
                 .builder()
-                .messageHandler(this)
-                .build();
+                .messageHandler(this);
+
+            consumer = builder.build();
         }
 
         Thread.sleep(1000);

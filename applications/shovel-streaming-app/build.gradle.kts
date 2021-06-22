@@ -20,26 +20,22 @@ repositories {
 }
 
 extra["springCloudVersion"] = "2020.0.1"
-extra["springGeodeVersion"] = "1.4.3"
 
 
 
 dependencies {
-    implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
+//    implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
     implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.3")
     implementation(project(":components:IoT-connected-vehicles-domains"))
-    implementation(project(":components:vehicle-generate-simulator"))
     implementation(project(":components:vehicle-messaging"))
     implementation(project(":components:messaging-streaming"))
     implementation(project(":components:vehicle-messaging-streaming"))
-    implementation("org.springframework.boot:spring-boot-starter-amqp")
-    implementation("org.springframework.geode:spring-geode-starter")
+//    implementation("org.springframework.boot:spring-boot-starter-amqp")
     implementation("com.rabbitmq:stream-client:0.1.0-SNAPSHOT")
     implementation("org.apache.qpid:proton-j:0.33.8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.geode:spring-geode-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
@@ -47,10 +43,6 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
-    }
-
-    imports {
-        mavenBom("org.springframework.geode:spring-geode-bom:${property("springGeodeVersion")}")
     }
 }
 

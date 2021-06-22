@@ -58,7 +58,7 @@ class RabbitmqMqttSenderConfig {
     @Bean
     fun streamTask(sender: VehicleSender): VehicleLoadSimulator
     {
-        return VehicleLoadSimulator(sender,vehicleCount,messageCount,distanceIncrements,delayMs);
+        return VehicleLoadSimulator(sender, vehicleCount, messageCount, distanceIncrements, delayMs, "G");
     }
 
 }

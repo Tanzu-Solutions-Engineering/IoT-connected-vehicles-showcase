@@ -26,12 +26,12 @@ internal class RabbitTemplateVehicleSenderTest{
         vehicle = JavaBeanGeneratorCreator
                     .of(Vehicle::class.java).create();
 
-        subject = RabbitTemplateVehicleSender(mockTemplate,exchange);
+        subject = RabbitTemplateVehicleSender(mockTemplate, exchange,);
     }
 
     @Test
     internal fun send() {
         subject.send(vehicle);
-        verify(mockTemplate).convertAndSend(exchange,vehicle);
+        verify(mockTemplate).convertAndSend(exchange,routingKey,vehicle);
     }
 }

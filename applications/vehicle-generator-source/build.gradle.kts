@@ -13,31 +13,26 @@ version = "0.0.2-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
-    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
-    maven { url = uri("https://packagecloud.io/rabbitmq/maven-milestones/maven2") }
     mavenCentral()
     mavenLocal()
 }
 
 extra["springCloudVersion"] = "2020.0.1"
 
-
-
 dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
     implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.3")
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation(project(":components:vehicle-messaging"))
-    implementation(project(":components:messaging-streaming"))
-    implementation(project(":components:vehicle-messaging-streaming"))
     implementation("org.springframework.boot:spring-boot-starter-amqp")
-    implementation("com.rabbitmq:stream-client:0.1.0-SNAPSHOT")
-    implementation("org.apache.qpid:proton-j:0.33.8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.springframework.cloud:spring-cloud-stream")
+    implementation("org.springframework.cloud:spring-cloud-stream-binder-rabbit")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.amqp:spring-rabbit-test")
 }
 
 dependencyManagement {
@@ -45,7 +40,6 @@ dependencyManagement {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
     }
 }
-
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {

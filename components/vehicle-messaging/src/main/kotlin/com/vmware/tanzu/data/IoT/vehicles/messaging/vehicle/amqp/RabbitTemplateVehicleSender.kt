@@ -3,11 +3,17 @@ package com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.amqp
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
 import org.springframework.amqp.rabbit.core.RabbitTemplate
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Component
 
+@Component
 class RabbitTemplateVehicleSender(
     private val rabbitTemplate: RabbitTemplate,
-    private val exchange: String) : VehicleSender {
+    @Value("\${spring.cloud.stream.bindings.generateVehicles-out-0.destination}")
+    private val exchange: String,
+    private val routingKey: String = ""
+) : VehicleSender {
     override fun send(vehicle: Vehicle) {
-        rabbitTemplate.convertAndSend(exchange,vehicle)
+        rabbitTemplate.convertAndSend(exchange,routingKey,vehicle)
     }
 }
