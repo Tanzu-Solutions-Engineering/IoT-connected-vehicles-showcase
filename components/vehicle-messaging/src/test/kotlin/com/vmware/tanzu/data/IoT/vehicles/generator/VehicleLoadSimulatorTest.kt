@@ -24,7 +24,7 @@ class VehicleLoadSimulatorTest {
     @BeforeEach
     internal fun setUp() {
         sender = mock<VehicleSender>{};
-        subject = VehicleLoadSimulator(sender, vehicleCount, messageCount, distanceIncrements, delayMs);
+        subject = VehicleLoadSimulator(sender, vehicleCount, messageCount, distanceIncrements, delayMs,);
     }
 
     @Test
@@ -46,7 +46,7 @@ class VehicleLoadSimulatorTest {
 
     @Test
     internal fun toVin_WithPrefix() {
-        subject = VehicleLoadSimulator(sender, vehicleCount, messageCount, distanceIncrements, delayMs,"G");
+        subject = VehicleLoadSimulator(sender, vehicleCount, messageCount, distanceIncrements, delayMs, "G",);
         assertEquals("G2",subject.toVin(2))
 
     }

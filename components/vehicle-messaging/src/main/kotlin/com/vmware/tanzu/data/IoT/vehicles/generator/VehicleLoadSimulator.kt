@@ -24,7 +24,6 @@ class VehicleLoadSimulator(
     private val vinPrefix: String = "V"
 ) : CommandLineRunner {
 
-    private val pool = Executors.newCachedThreadPool();
 
     /**
      * Start multi-threading send generated vehicle information
@@ -34,7 +33,6 @@ class VehicleLoadSimulator(
 
         for (vinNumber in 1 .. vehicleCount)
         {
-            pool.submit {
                 val generator = VehicleGenerator(
                     distanceIncrements = distanceIncrements,
                     vin = toVin(vinNumber)
@@ -58,7 +56,6 @@ class VehicleLoadSimulator(
                     exception.printStackTrace();
                 }
 
-            };
         }
 
     }

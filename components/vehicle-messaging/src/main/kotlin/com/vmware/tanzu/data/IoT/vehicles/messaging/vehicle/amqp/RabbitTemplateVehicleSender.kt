@@ -4,6 +4,7 @@ import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 
 @Component
@@ -13,6 +14,8 @@ class RabbitTemplateVehicleSender(
     private val exchange: String,
     private val routingKey: String = ""
 ) : VehicleSender {
+
+    @Async
     override fun send(vehicle: Vehicle) {
         rabbitTemplate.convertAndSend(exchange,routingKey,vehicle)
     }

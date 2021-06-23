@@ -8,6 +8,7 @@ import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.StreamS
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
 import nyla.solutions.core.patterns.creational.Creator
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 import java.util.function.Function
 
@@ -39,6 +40,7 @@ class RabbitStreamingVehicleSender(
      * Send the vehicle using streaming
      * @param vehicle the vehicle data
      */
+    @Async
     override fun send(vehicle: Vehicle)
     {
         val msg = producer.messageBuilder()

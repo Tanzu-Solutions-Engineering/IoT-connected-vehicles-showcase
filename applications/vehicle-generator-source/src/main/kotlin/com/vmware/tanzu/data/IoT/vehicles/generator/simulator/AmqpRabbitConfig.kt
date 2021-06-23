@@ -6,11 +6,15 @@ import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleLoadSimulator
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.amqp.RabbitTemplateVehicleSender
 import nyla.solutions.core.data.collections.QueueSupplier
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory
+import org.springframework.amqp.rabbit.connection.ConnectionFactory
+import org.springframework.amqp.rabbit.connection.RabbitConnectionFactoryBean
+import org.springframework.amqp.rabbit.connection.ThreadChannelConnectionFactory
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter
 import org.springframework.amqp.support.converter.MessageConverter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
+import org.springframework.scheduling.annotation.EnableAsync
 
 
 /**
@@ -31,11 +35,18 @@ spring.rabbitmq.username=vmware
  */
 @Configuration
 @ComponentScan(basePackageClasses = [RabbitTemplateVehicleSender::class, VehicleLoadSimulator::class, VehicleGenerator::class])
+@EnableAsync
 class AmqpRabbitConfig {
     @Bean
     fun generateVehicles()  :QueueSupplier<Vehicle>
     {
         return QueueSupplier<Vehicle>();
+    }
+
+    @Bean
+    fun connectionFactory( ) : ConnectionFactory
+    {
+        return ThreadChannelConnectionFactory(RabbitConnectionFactoryBean().rabbitConnectionFactory);
     }
 
     @Bean
