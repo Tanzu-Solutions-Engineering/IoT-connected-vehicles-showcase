@@ -7,10 +7,12 @@ import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.amqp.RabbitTemplateV
 import nyla.solutions.core.data.collections.QueueSupplier
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory
 import org.springframework.amqp.rabbit.connection.ConnectionFactory
+import org.springframework.amqp.rabbit.connection.ConnectionNameStrategy
 import org.springframework.amqp.rabbit.connection.RabbitConnectionFactoryBean
 import org.springframework.amqp.rabbit.connection.ThreadChannelConnectionFactory
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter
 import org.springframework.amqp.support.converter.MessageConverter
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
@@ -37,6 +39,24 @@ spring.rabbitmq.username=vmware
 @ComponentScan(basePackageClasses = [RabbitTemplateVehicleSender::class, VehicleLoadSimulator::class, VehicleGenerator::class])
 @EnableAsync
 class AmqpRabbitConfig {
+
+    @Value("\${spring.rabbitmq.username:guest}")
+    private var username: String = "guest";
+
+    @Value("\${spring.rabbitmq.password:guest}")
+    private var password:  String = "guest";
+
+    @Value("\${spring.rabbitmq.host:localhost}")
+    private var hostname: String = "localhost";
+
+    @Value("\${spring.application.name}")
+    private var applicationName: String? = null
+
+    @Bean
+    fun connectionNameStrategy(): ConnectionNameStrategy? {
+        return ConnectionNameStrategy { connection: ConnectionFactory? -> applicationName!! }
+    }
+
     @Bean
     fun generateVehicles()  :QueueSupplier<Vehicle>
     {
@@ -46,7 +66,12 @@ class AmqpRabbitConfig {
     @Bean
     fun connectionFactory( ) : ConnectionFactory
     {
-        return ThreadChannelConnectionFactory(RabbitConnectionFactoryBean().rabbitConnectionFactory);
+        var factory = RabbitConnectionFactoryBean();
+        factory.setHost(hostname);
+        factory.setUsername(username);
+        factory.setPassword(password);
+
+        return ThreadChannelConnectionFactory(factory.rabbitConnectionFactory);
     }
 
     @Bean
