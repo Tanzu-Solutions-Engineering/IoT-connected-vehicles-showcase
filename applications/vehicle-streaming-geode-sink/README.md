@@ -9,10 +9,10 @@ gradle :applications:vehicle-streaming-geode-sink:bootBuildImage
 
 
 ```shell script
-docker tag vehicle-streaming-geode-sink:0.0.1-SNAPSHOT nyla/vehicle-streaming-geode-sink:0.0.1-SNAPSHOT 
+docker tag vehicle-streaming-geode-sink:0.0.2-SNAPSHOT nyla/vehicle-streaming-geode-sink:0.0.2-SNAPSHOT 
 
 docker login
-docker push nyla/vehicle-streaming-geode-sink:0.0.1-SNAPSHOT
+docker push nyla/vehicle-streaming-geode-sink:0.0.2-SNAPSHOT
 ```
 
 

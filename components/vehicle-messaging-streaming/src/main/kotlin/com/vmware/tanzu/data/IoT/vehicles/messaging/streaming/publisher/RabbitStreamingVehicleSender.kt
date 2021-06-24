@@ -28,14 +28,29 @@ class RabbitStreamingVehicleSender(
     private val streamName: String,
     private val streamSetup: StreamSetup,
     @Value("\${spring.application.name}")
-    private val producerName: String
+    private val producerName: String,
+    @Value("\${batchSize:50000}")
+    private val batchSize: Int = 5_0000,
+    @Value("\${subEntrySize:1000}")
+    private val subEntrySize: Int = 1000,
+    @Value("\${maxUnconfirmedMessages:20000}")
+    private val maxUnconfirmedMessages: Int = 20_000,
+    private var handler : ConfirmationHandler = ConfirmationHandler{status -> if(!status.isConfirmed)
+        println("ERROR: $status.code NOT confirmed MESSAGE:${status.message} batchSize:$batchSize subEntrySize:$subEntrySize maxUnconfirmedMessages:$maxUnconfirmedMessages")}
+
 ) : VehicleSender
 {
     private val producer : Producer;
 
     init {
         streamSetup.initialize(streamName);
-        producer = envCreator.create().producerBuilder().name(producerName).stream(streamName).build()
+        producer = envCreator.create()
+            .producerBuilder()
+            .name(producerName)
+            .batchSize(batchSize)
+            .subEntrySize(subEntrySize)
+            .maxUnconfirmedMessages(maxUnconfirmedMessages)
+            .stream(streamName).build()
     }
 
     /**
@@ -47,9 +62,6 @@ class RabbitStreamingVehicleSender(
     {
         val msg = producer.messageBuilder()
                         .addData(converter.apply(vehicle)).build();
-        var handler : ConfirmationHandler = ConfirmationHandler{status -> if(!status.isConfirmed)
-            println("ERROR: $status.code NOT confirmed}")}
-
         producer.send(msg, handler );
     }
 }

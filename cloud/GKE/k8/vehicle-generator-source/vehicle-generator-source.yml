@@ -8,10 +8,15 @@ spec:
   containers:
     - name: vehicle-generator-source
       image: nyla/vehicle-generator-source:0.0.3-SNAPSHOT
+      resources:
+        requests:
+          memory: "5Gi"
       imagePullPolicy: Always
       env:
+        - name: "JVM_ARGS"
+          value: "-Xms4g -Xmx4g"
         - name: vehicleCount
-          value: "5"
+          value: "25"
         - name: messageCount
           value: "100000"
         - name: distanceIncrements

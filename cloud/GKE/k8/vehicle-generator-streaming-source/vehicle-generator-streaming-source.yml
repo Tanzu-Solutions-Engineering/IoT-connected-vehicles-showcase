@@ -8,8 +8,13 @@ spec:
   containers:
     - name: vehicle-generator-streaming-source-vi
       image: nyla/vehicle-generator-streaming-source:0.0.3-SNAPSHOT
+      resources:
+        requests:
+          memory: "5Gi"
       imagePullPolicy: Always
       env:
+        - name: "JVM_ARGS"
+          value: "-Xms4g -Xmx4g"
         - name: vehicleCount
           value: "25"
         - name: vinPrefix

@@ -8,6 +8,7 @@ import nyla.solutions.core.patterns.creational.Creator
 import nyla.solutions.core.patterns.creational.generator.JavaBeanGeneratorCreator
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.kotlin.*
 import java.util.function.Function
@@ -58,6 +59,9 @@ internal class RabbitStreamingVehicleSenderTest {
          */
         producerBuilder = mock<ProducerBuilder>{
             on{ name(anyString())} doReturn it;
+            on{ batchSize(anyInt())} doReturn it;
+            on{ subEntrySize(anyInt())} doReturn it;
+            on{ maxUnconfirmedMessages(anyInt())} doReturn it;
             on{ stream(anyString())} doReturn it;
             on{ build()} doReturn producer;
         }
@@ -71,9 +75,16 @@ internal class RabbitStreamingVehicleSenderTest {
         }
 
 
-        subject = RabbitStreamingVehicleSender(envCreator, function,streamName,streamSetup,producerName);
+        subject = RabbitStreamingVehicleSender(envCreator, function, streamName, streamSetup, producerName,);
     }
+    @Test
+    internal fun batchSize() {
+        verify(producerBuilder)!!.batchSize(anyInt());
+        verify(producerBuilder)!!.subEntrySize(anyInt());
+        verify(producerBuilder)!!.maxUnconfirmedMessages(anyInt());
+        verify(producerBuilder)!!.batchSize(anyInt());
 
+    }
     @Test
     internal fun initName() {
         verify(producerBuilder)!!.name(producerName);

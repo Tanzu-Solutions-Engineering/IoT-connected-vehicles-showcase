@@ -36,6 +36,7 @@ class RabbitStreamingConsumerHandler(
         {
             var stackTrace = Debugger.stackTrace(e);
             println("ERROR: publishingId: $message.publishingId properties: ${message.properties} STACKTRACE:${stackTrace}")
+            throw e;
         }
     }
 }
