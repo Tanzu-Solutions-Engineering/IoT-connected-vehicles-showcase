@@ -18,6 +18,7 @@ import java.util.function.Function
  */
 internal class RabbitStreamingVehicleSenderTest {
 
+    private val producerName: String = "mockProducer"
     private val streamName = "myStream";
     private  var producerBuilder: ProducerBuilder? = null;
     private lateinit var environment : Environment;
@@ -70,7 +71,13 @@ internal class RabbitStreamingVehicleSenderTest {
         }
 
 
-        subject = RabbitStreamingVehicleSender(envCreator, function,streamName,streamSetup);
+        subject = RabbitStreamingVehicleSender(envCreator, function,streamName,streamSetup,producerName);
+    }
+
+    @Test
+    internal fun initName() {
+        verify(producerBuilder)!!.name(producerName);
+
     }
 
     @Test
@@ -78,6 +85,7 @@ internal class RabbitStreamingVehicleSenderTest {
         verify(streamSetup).initialize(streamName);
 
         subject.send(vehicle);
+
         verify(producer).send(any(),any());
         verify(function).apply(vehicle);
     }

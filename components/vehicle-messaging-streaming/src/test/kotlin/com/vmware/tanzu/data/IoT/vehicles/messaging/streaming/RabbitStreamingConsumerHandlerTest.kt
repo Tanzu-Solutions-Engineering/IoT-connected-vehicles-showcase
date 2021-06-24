@@ -30,7 +30,6 @@ internal class RabbitStreamingConsumerHandlerTest{
     internal fun handle_nullMessages() {
         var subject = RabbitStreamingConsumerHandler(consumer,mockFunction);
         subject.handle(mockContext,message);
-//        verify(mockContext, never())?.commit();
         verify(consumer, never()).accept(any());
         verify(mockFunction,never()).apply(any());
     }
@@ -40,8 +39,9 @@ internal class RabbitStreamingConsumerHandlerTest{
         message =  mock<Message>();
         var subject = RabbitStreamingConsumerHandler(consumer,mockFunction);
         subject.handle(mockContext,message);
-//        verify(mockContext, atLeastOnce())?.commit();
         verify(mockFunction).apply(anyOrNull());
         verify(consumer).accept(anyOrNull());
     }
+
+
 }

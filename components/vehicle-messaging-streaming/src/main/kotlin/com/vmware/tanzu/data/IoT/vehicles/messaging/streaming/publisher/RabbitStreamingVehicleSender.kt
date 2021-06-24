@@ -26,14 +26,16 @@ class RabbitStreamingVehicleSender(
     private val converter: Function<Vehicle, ByteArray>,
     @Value("\${streamName}")
     private val streamName: String,
-    private val streamSetup: StreamSetup
+    private val streamSetup: StreamSetup,
+    @Value("\${spring.application.name}")
+    private val producerName: String
 ) : VehicleSender
 {
     private val producer : Producer;
 
     init {
         streamSetup.initialize(streamName);
-        producer = envCreator.create().producerBuilder().stream(streamName).build()
+        producer = envCreator.create().producerBuilder().name(producerName).stream(streamName).build()
     }
 
     /**

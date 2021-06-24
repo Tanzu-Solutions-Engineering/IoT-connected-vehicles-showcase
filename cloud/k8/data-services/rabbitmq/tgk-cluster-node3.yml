@@ -12,6 +12,8 @@ spec:
     limits:
       cpu: 3000m
       memory: 18Gi
+  persistence:
+    storage: 100Gi
   rabbitmq:
     additionalPlugins:
       - rabbitmq_mqtt

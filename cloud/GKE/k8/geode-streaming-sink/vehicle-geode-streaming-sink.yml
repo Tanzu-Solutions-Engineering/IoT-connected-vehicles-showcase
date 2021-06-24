@@ -25,7 +25,10 @@ spec:
             - name: spring.rabbitmq.host
               value: rabbitmq
             - name: rabbitmq_streaming_stream_maxLengthGb
-              value: "3"
+              valueFrom:
+                configMapKeyRef:
+                  name: vehicle-configmap
+                  key: rabbitmq_streaming_stream_maxLengthGb
             - name: spring_rabbitmq_username
               valueFrom:
                 secretKeyRef:

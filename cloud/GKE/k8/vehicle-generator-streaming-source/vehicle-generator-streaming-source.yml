@@ -15,7 +15,10 @@ spec:
         - name: vinPrefix
           value: "vi"
         - name: rabbitmq_streaming_stream_maxLengthGb
-          value: 3
+          valueFrom:
+            configMapKeyRef:
+              name: vehicle-configmap
+              key: rabbitmq_streaming_stream_maxLengthGb
         - name: messageCount
           value: "100000"
         - name: distanceIncrements

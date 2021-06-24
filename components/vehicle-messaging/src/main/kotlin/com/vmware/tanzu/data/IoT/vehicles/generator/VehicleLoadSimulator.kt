@@ -31,6 +31,7 @@ class VehicleLoadSimulator(
      */
     fun process(vararg args: String?) {
 
+        println("Processing  vinPrefix:${vinPrefix} vehicleCount:${vehicleCount} messageCount:${messageCount}")
         for (vinNumber in 1 .. vehicleCount)
         {
                 val generator = VehicleGenerator(
@@ -39,16 +40,16 @@ class VehicleLoadSimulator(
                 );
 
                 var vehicle = generator.create();
-                println("publishing vehicle:$vehicle")
-
                 try {
                     this.sender.send(vehicle);
 
                     for (i in 0 until messageCount) {
                         vehicle = generator.move(vehicle, distanceIncrements);
-                        println("publishing vehicle:$vehicle")
+
                         this.sender.send(vehicle);
-                        Thread.sleep(delayMs);
+
+                        if(delayMs >0 )
+                            Thread.sleep(delayMs);
                     }
                 }
                 catch(exception : RuntimeException)

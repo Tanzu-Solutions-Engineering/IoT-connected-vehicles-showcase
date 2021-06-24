@@ -3,6 +3,7 @@ package com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.consumer
 import com.rabbitmq.stream.Message
 import com.rabbitmq.stream.MessageHandler
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
+import nyla.solutions.core.util.Debugger
 import org.springframework.stereotype.Component
 import java.util.function.Consumer
 import java.util.function.Function
@@ -26,10 +27,15 @@ class RabbitStreamingConsumerHandler(
         if (message == null)
             return;
 
-        consumer.accept(
-            converter.apply(message.bodyAsBinary)
-        );
-
-        println("CONSUMED: publishingId: $message.publishingId properties: ${message.properties}")
+        try{
+            consumer.accept(
+                converter.apply(message.bodyAsBinary)
+            );
+        }
+        catch(e : Exception)
+        {
+            var stackTrace = Debugger.stackTrace(e);
+            println("ERROR: publishingId: $message.publishingId properties: ${message.properties} STACKTRACE:${stackTrace}")
+        }
     }
 }

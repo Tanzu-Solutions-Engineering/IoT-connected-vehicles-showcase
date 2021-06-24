@@ -2,8 +2,10 @@ package com.vmware.tanzu.data.IoT.vehicles.sink.vehicle
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.repositories.VehicleRepository
+import nyla.solutions.core.util.Debugger
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
+import java.lang.RuntimeException
 import java.util.function.Consumer
 
 
@@ -16,6 +18,14 @@ class VehicleRepositorySink(
 ) : Consumer<Vehicle> {
     @Async
     override fun accept(vehicleData: Vehicle) {
-          vehicleRepository.save(vehicleData);
+        try {
+            vehicleRepository.save(vehicleData);
+        }
+        catch (e : RuntimeException)
+        {
+            println("ERROR: Exception $e Vehicle: $vehicleData TRACK: ${Debugger.stackTrace(e)}")
+            throw e;
+        }
+
     }
 }

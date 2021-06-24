@@ -186,6 +186,12 @@ origin	https://github.com/rabbitmq/rabbitmq-stream-java-client.git (push)
 
 - Do not set resource limits, or set them to higher numbers
 
+-   Normal   Started              3h35m (x2 over 3h45m)  kubelet, tkc-1-workers-2klw8-f4dbb4875-s6t69  Started container vehicle-streaming-geode-sink
+    Warning  NodeNotReady         3h30m                  node-controller                               Node is not ready
+    Warning  Evicted              3h25m                  kubelet, tkc-1-workers-2klw8-f4dbb4875-s6t69  The node was low on resource: ephemeral-storage. Container vehicle-streaming-geode-sink was using 1586092Ki, which exceeds its request of 0.
+    Normal   Killing              3h25m                  kubelet, tkc-1-workers-2klw8-f4dbb4875-s6t69  Stopping container vehicle-streaming-geode-sink
+    Warning  ExceededGracePeriod  3h24m                  kubelet, tkc-1-workers-2klw8-f4dbb4875-s6t69  Container runtime did not kill the pod within specified grace period.
+    
 **RabbitMQ**
 
 - Review logs of across the RabbitMQ nodes to observe errors/warnings
