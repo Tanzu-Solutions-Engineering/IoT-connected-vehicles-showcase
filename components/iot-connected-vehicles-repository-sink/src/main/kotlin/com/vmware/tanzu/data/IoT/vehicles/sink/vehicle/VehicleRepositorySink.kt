@@ -16,7 +16,6 @@ import java.util.function.Consumer
 class VehicleRepositorySink(
     private val vehicleRepository: VehicleRepository
 ) : Consumer<Vehicle> {
-    @Async
     override fun accept(vehicleData: Vehicle) {
         try {
             vehicleRepository.save(vehicleData);

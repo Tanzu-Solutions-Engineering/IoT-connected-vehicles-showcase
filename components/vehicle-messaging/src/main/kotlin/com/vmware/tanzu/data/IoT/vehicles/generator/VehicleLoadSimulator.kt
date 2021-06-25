@@ -1,10 +1,10 @@
 package com.vmware.tanzu.data.IoT.vehicles.generator
 
+import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
-import java.util.concurrent.Executors
 
 /**
  * @author Gregory Green
@@ -21,49 +21,32 @@ class VehicleLoadSimulator(
     @Value("\${delayMs}")
     private val delayMs: Long,
     @Value("\${vinPrefix}")
-    private val vinPrefix: String = "V"
+    private val vinPrefix: String = "V",
+    private val generator: VehicleGenerator = VehicleGenerator(
+        distanceIncrements = distanceIncrements
+    ),
+    private val vehicleRider: VehicleRider
 ) : CommandLineRunner {
 
 
     /**
      * Start multi-threading send generated vehicle information
-     * @param args the input arguments
+     * @param vehicles the input arguments
      */
-    fun process(vararg args: String?) {
+    fun process(vehicles: Array<Vehicle>) {
 
         println("Processing  vinPrefix:${vinPrefix} vehicleCount:${vehicleCount} messageCount:${messageCount}")
-        for (vinNumber in 1 .. vehicleCount)
-        {
-                val generator = VehicleGenerator(
-                    distanceIncrements = distanceIncrements,
-                    vin = toVin(vinNumber)
-                );
 
-                var vehicle = generator.create();
-                try {
-                    this.sender.send(vehicle);
-
-                    for (i in 0 until messageCount) {
-                        vehicle = generator.move(vehicle, distanceIncrements);
-
-                        this.sender.send(vehicle);
-
-                        if(delayMs >0 )
-                            Thread.sleep(delayMs);
-                    }
-                }
-                catch(exception : RuntimeException)
-                {
-                    exception.printStackTrace();
-                }
-
+        for (vehicle in vehicles) {
+            vehicleRider.ride(vehicle,messageCount,sender,generator,distanceIncrements,delayMs);
         }
-
     }
 
+    /**
+     * Generate VIN number
+     */
     fun toVin(vinNumber: Int): String {
         return "${vinPrefix}${vinNumber}";
-
     }
 
     /**
@@ -72,9 +55,14 @@ class VehicleLoadSimulator(
      * @throws Exception on error
      */
     override fun run(vararg args: String?) {
-        while(true)
-        {
-            process(*args);
-        }
+        val vehicles = constructVehicles();
+        process(vehicles);
+    }
+
+    fun constructVehicles(): Array<Vehicle> {
+        var vehicles =
+            Array<Vehicle>(vehicleCount) { vinNumber -> generator.vin = this.toVin(vinNumber); generator.create(); };
+
+        return vehicles;
     }
 }

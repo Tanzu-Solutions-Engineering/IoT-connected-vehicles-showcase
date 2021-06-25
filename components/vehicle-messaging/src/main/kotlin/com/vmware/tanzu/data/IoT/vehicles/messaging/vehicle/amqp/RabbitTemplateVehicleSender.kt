@@ -15,8 +15,8 @@ class RabbitTemplateVehicleSender(
     private val routingKey: String = ""
 ) : VehicleSender {
 
-    @Async
     override fun send(vehicle: Vehicle) {
+      //  println("SENDING $vehicle")
         rabbitTemplate.convertAndSend(exchange,routingKey,vehicle)
     }
 }

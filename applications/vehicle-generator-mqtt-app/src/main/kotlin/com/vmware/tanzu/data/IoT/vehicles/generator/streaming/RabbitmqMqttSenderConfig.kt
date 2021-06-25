@@ -55,10 +55,10 @@ class RabbitmqMqttSenderConfig {
         return MqttVehicleSender(topic,publisher, VehicleToBytes());
     }
 
-    @Bean
-    fun streamTask(sender: VehicleSender): VehicleLoadSimulator
-    {
-        return VehicleLoadSimulator(sender, vehicleCount, messageCount, distanceIncrements, delayMs, "G",);
-    }
+//    @Bean
+//    fun streamTask(sender: VehicleSender): VehicleLoadSimulator
+//    {
+//        return VehicleLoadSimulator(sender, vehicleCount, messageCount, distanceIncrements, delayMs, "G", rider = rider,);
+//    }
 
 }

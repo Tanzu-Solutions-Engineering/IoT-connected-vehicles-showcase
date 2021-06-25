@@ -211,7 +211,10 @@ origin	https://github.com/rabbitmq/rabbitmq-stream-java-client.git (push)
   - Uses an @Async to limit and uses long-lived threads
     - Set max threads spring.
       task.execution.pool.max-size: 8
-
+- This error means stream exist with differenct properties
+   - .publisher.RabbitStreamingVehicleSender]: Constructor threw exception; nested exception is com.rabbitmq.stream.StreamException: Error while creating stream 'VehicleStream' (17 (PRECONDITION_FAILED))
+- Streaming
+  - No no pause - Garabage collection was not starting
 
 **GemFire**
 
@@ -226,7 +229,20 @@ Issues
 
 - Pods get Evicted status o
 - AMPQ 1 instance 25 vehicles 8 threads 15K GemFire write per second
-- NO LOGGING: 1 instance 25 8 htrewads 25K GemFire writes per second
+- NO LOGGING: 1 instance 25 8 htreads 25K GemFire writes per second
+- STREAMING 1  instance 25 vehicles 8 threads = 65K writes per second
+- Observer memory usages using jconsole locally 
+- GemFire
+    - Use k9s to connect to a locator
+        - gfsh
+        - connect
+        - describe config --member=<cacheserver>
+    - Garbage Collection
+      - on the cache server tail -f /data/logsAndStats/gemfire*-server-gc.txt
+    - When overriding JVM  these are not need
+       -      "-Dgemfire.default.locators=gemfire1-locator-0.gemfire1-locator[10334]"
+           - "-Dgemfire.statistic-archive-file=/data/logsAndStats/gemfire1-server.gfs"
+    
 
 Breaking point
 

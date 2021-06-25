@@ -2,6 +2,7 @@ package com.vmware.tanzu.data.IoT.vehicles.generator
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
+import nyla.solutions.core.patterns.creational.generator.JavaBeanGeneratorCreator
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -11,6 +12,8 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
 /**
+ *
+ * Test for VehicleLoadSimulator
  * @author Gregory Green
  */
 class VehicleLoadSimulatorTest {
@@ -20,23 +23,37 @@ class VehicleLoadSimulatorTest {
     private val vehicleCount = 1;
     private val messageCount = 10;
     private lateinit var sender : VehicleSender;
+    private lateinit var vehicleRider : VehicleRider;
 
     @BeforeEach
     internal fun setUp() {
         sender = mock<VehicleSender>{};
-        subject = VehicleLoadSimulator(sender, vehicleCount, messageCount, distanceIncrements, delayMs,);
+        vehicleRider = mock<VehicleRider>{};
+        subject = VehicleLoadSimulator(sender, vehicleCount, messageCount, distanceIncrements, delayMs,vehicleRider =vehicleRider);
+    }
+
+    @Test
+    internal fun constructVehicles() {
+        var vehicles : Array<Vehicle> = subject.constructVehicles();
+        assertEquals(vehicleCount,vehicles.size);
+        for (i in vehicles.indices)
+        {
+            assertEquals("V$i",vehicles[i].vin)
+        }
     }
 
     @Test
     internal fun process() {
 
+        val vehicle = JavaBeanGeneratorCreator.of(Vehicle::class.java).create();
 
+        val vehicles : Array<Vehicle> = arrayOf(vehicle);
 
-        val args = "";
-        subject.process(args);
+        subject.process(vehicles);
         Thread.sleep(400);
-        verify(sender, atLeastOnce())
-            .send(any<Vehicle>());
+        verify(vehicleRider, atLeastOnce())
+            .ride(any(),any(), any(),any<VehicleGenerator>(), any(), any());
+
     }
 
     @Test
@@ -46,7 +63,14 @@ class VehicleLoadSimulatorTest {
 
     @Test
     internal fun toVin_WithPrefix() {
-        subject = VehicleLoadSimulator(sender, vehicleCount, messageCount, distanceIncrements, delayMs, "G",);
+        subject = VehicleLoadSimulator(
+            sender,
+            vehicleCount,
+            messageCount,
+            distanceIncrements,
+            delayMs,
+            "G",
+            vehicleRider = vehicleRider);
         assertEquals("G2",subject.toVin(2))
 
     }

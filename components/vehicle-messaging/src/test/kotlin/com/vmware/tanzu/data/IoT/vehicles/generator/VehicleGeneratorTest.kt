@@ -18,6 +18,25 @@ internal class VehicleGeneratorTest{
             vin= vin);
     }
 
+
+    @Test
+    internal fun constructNoVin() {
+        assertTrue(VehicleGenerator(
+            distanceIncrements= distanceIncrements).vin.isEmpty());
+    }
+
+    @Test
+    internal fun vin() {
+
+        subject = VehicleGenerator(
+            distanceIncrements= distanceIncrements);
+
+        val excepted = "hello"
+        subject.vin = excepted;
+
+        assertEquals(excepted,subject.vin);
+    }
+
     @Test
     internal fun generate() {
 

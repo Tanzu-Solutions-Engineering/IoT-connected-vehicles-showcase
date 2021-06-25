@@ -10,11 +10,14 @@ spec:
       image: nyla/vehicle-generator-streaming-source:0.0.3-SNAPSHOT
       resources:
         requests:
+          cpu: "2000m"
           memory: "5Gi"
       imagePullPolicy: Always
       env:
         - name: "JVM_ARGS"
           value: "-Xms4g -Xmx4g"
+        - name: "spring.application.name"
+          value: "vehicle-generator-streaming-source-vi"
         - name: vehicleCount
           value: "25"
         - name: vinPrefix
@@ -25,7 +28,13 @@ spec:
               name: vehicle-configmap
               key: rabbitmq_streaming_stream_maxLengthGb
         - name: messageCount
-          value: "100000"
+          value: "10000"
+        - name: batchSize
+          value: "10000"
+        - name: subEntrySize
+          value: "1000"
+        - name: maxUnconfirmedMessages
+          value: "20000"
         - name: distanceIncrements
           value: "1"
         - name: delayMs

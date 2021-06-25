@@ -12,26 +12,23 @@ import kotlin.random.Random
  */
 class VehicleGenerator(
     private var distanceIncrements: Double,
-    private val vin: String,
+    var vin: String = "",
     )
 {
+
     /**
      * Constants
      */
     companion object {
         const val maxLatitude: Double = 40.0;
         const val maxLongitude: Double = -87.0;
-
         const val minLatitude: Double = 32.0;
         const val minLongitude: Double = -89.470;
-
     }
 
     private val odometer: Long = Random.nextLong(15000,500000);
     // United States are in range: Latitude from 19.50139 to 64.85694 and longitude from -161.75583 to -68.01197.
-    private val latitude: Double = Random.nextDouble(Companion.minLatitude, Companion.maxLatitude);
-    private val longitude: Double = Random.nextDouble(Companion.minLongitude, Companion.maxLongitude)
-    private val angle: Double = Random.nextDouble(1.0,179.0);
+     private val angle: Double = Random.nextDouble(1.0,179.0);
     private val radius = 6378137; // Radius of the earth in km
 
     private fun deg2rad(deg : Double) : Double { return deg * (Math.PI / 180.0) }
@@ -60,6 +57,9 @@ class VehicleGenerator(
      */
     fun create(): Vehicle {
 
+        val latitude: Double = Random.nextDouble(Companion.minLatitude, Companion.maxLatitude);
+        val longitude: Double = Random.nextDouble(Companion.minLongitude, Companion.maxLongitude)
+
         val latLong = getFinalLatLong(latitude,longitude, distanceIncrements);
 
 //        distanceIncrements += distanceIncrements;
@@ -73,12 +73,19 @@ class VehicleGenerator(
 
     fun move(vehicle: Vehicle, distanceIncrements: Double) : Vehicle{
         val latLong = getFinalLatLong(vehicle.gpsLocation!!.latitude,vehicle.gpsLocation!!.longitude, distanceIncrements);
-        val newGps = GpsLocation(latLong[0], latLong[1]);
         val newOdometer = vehicle.odometer + distanceIncrements.toLong();
 
         vehicle.speed = Random.nextInt(15, 100)
         vehicle.odometer = newOdometer;
-        vehicle.gpsLocation = newGps;
+        if(vehicle.gpsLocation == null)
+        {
+            vehicle.gpsLocation = GpsLocation(latLong[0], latLong[1]);
+        }
+        else
+        {
+            vehicle.gpsLocation!!.latitude = latLong[0]
+            vehicle.gpsLocation!!.longitude = latLong[1]
+        }
 
         return vehicle;
     }

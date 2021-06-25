@@ -7,6 +7,7 @@ import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.StreamSetup
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
 import nyla.solutions.core.patterns.creational.Creator
+import nyla.solutions.core.util.Debugger
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
@@ -29,14 +30,14 @@ class RabbitStreamingVehicleSender(
     private val streamSetup: StreamSetup,
     @Value("\${spring.application.name}")
     private val producerName: String,
-    @Value("\${batchSize:50000}")
-    private val batchSize: Int = 5_0000,
-    @Value("\${subEntrySize:1000}")
-    private val subEntrySize: Int = 1000,
-    @Value("\${maxUnconfirmedMessages:20000}")
-    private val maxUnconfirmedMessages: Int = 20_000,
+    @Value("\${batchSize:500}")
+    private val batchSize: Int = 500,
+    @Value("\${subEntrySize:100}")
+    private val subEntrySize: Int = 100,
+    @Value("\${maxUnconfirmedMessages:1000}")
+    private val maxUnconfirmedMessages: Int = 1000,
     private var handler : ConfirmationHandler = ConfirmationHandler{status -> if(!status.isConfirmed)
-        println("ERROR: $status.code NOT confirmed MESSAGE:${status.message} batchSize:$batchSize subEntrySize:$subEntrySize maxUnconfirmedMessages:$maxUnconfirmedMessages")}
+        println("ERROR: code:${status.code} NOT confirmed MESSAGE.debug:${Debugger.toString(status.message)} batchSize:$batchSize subEntrySize:$subEntrySize maxUnconfirmedMessages:$maxUnconfirmedMessages")}
 
 ) : VehicleSender
 {
@@ -57,7 +58,6 @@ class RabbitStreamingVehicleSender(
      * Send the vehicle using streaming
      * @param vehicle the vehicle data
      */
-    @Async
     override fun send(vehicle: Vehicle)
     {
         val msg = producer.messageBuilder()
