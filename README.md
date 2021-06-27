@@ -220,7 +220,8 @@ origin	https://github.com/rabbitmq/rabbitmq-stream-java-client.git (push)
 
 - GemFire pulse uses to get writes per seconds
 - Manually delete Persistence Volume claims after delete the service
-
+- Increase young generation [105644.612s][info][gc] GC(80) Pause Young (Allocation Failure) 1876M->27M(6323M) 11.950ms
+  [105726.114s][info][gc] GC(81) Pause Young (Allocation Failure) 1875M->27M(6323M) 10.570ms
 Issues
 
 - 2021-06-23 10:34:21.724  WARN 1 --- [skStoreMonitor1] o.a.g.internal.cache.DiskStoreMonitor    : The disk volume /workspace/. for log files has exceeded the warning usage threshold and is 99.7% full.
@@ -407,3 +408,89 @@ ResourceExhausted! (1/0)
 | 475            | 11400       | Ljava/util/Arrays$ArrayList;                                                                                     |
 | 345            | 11040       | Ljava/lang/ref/WeakReference;                                                                                    |
 | 211            | 10968       | [Ljava/lang/invoke/LambdaForm$Name;
+
+
+
+*RabbitMQ Streaming consumers*
+
+- there a at 50000 message batch size
+
+
+
+2021-06-25 18:45:58.053  WARN 1 --- [ntLoopGroup-2-5] com.rabbitmq.stream.impl.Client          : Error in stream handler
+
+java.lang.OutOfMemoryError: Direct buffer memory
+at java.base/java.nio.Bits.reserveMemory(Unknown Source) ~[na:na]
+at java.base/java.nio.DirectByteBuffer.<init>(Unknown Source) ~[na:na]
+at java.base/java.nio.ByteBuffer.allocateDirect(Unknown Source) ~[na:na]
+at io.netty.buffer.UnpooledDirectByteBuf.allocateDirect(UnpooledDirectByteBuf.java:104) ~[netty-buffer-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.buffer.UnpooledDirectByteBuf.capacity(UnpooledDirectByteBuf.java:156) ~[netty-buffer-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.buffer.AbstractByteBuf.ensureWritable0(AbstractByteBuf.java:307) ~[netty-buffer-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.buffer.AbstractByteBuf.ensureWritable(AbstractByteBuf.java:282) ~[netty-buffer-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1105) ~[netty-buffer-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.handler.codec.ByteToMessageDecoder$1.cumulate(ByteToMessageDecoder.java:99) ~[netty-codec-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:274) ~[netty-codec-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286) ~[netty-handler-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.handler.flush.FlushConsolidationHandler.channelRead(FlushConsolidationHandler.java:152) ~[netty-handler-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:719) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:655) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:581) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) ~[netty-common-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.59.Final.jar:4.1.59.Final]
+at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
+
+2021-06-25 18:46:11.983  WARN 1 --- [ntLoopGroup-2-6] com.rabbitmq.stream.impl.Client          : Error in stream handler
+
+java.lang.OutOfMemoryError: Direct buffer memory
+at java.base/java.nio.Bits.reserveMemory(Unknown Source) ~[na:na]
+at java.base/java.nio.DirectByteBuffer.<init>(Unknown Source) ~[na:na]
+at java.base/java.nio.ByteBuffer.allocateDirect(Unknown Source) ~[na:na]
+at io.netty.buffer.UnpooledDirectByteBuf.allocateDirect(UnpooledDirectByteBuf.java:104) ~[netty-buffer-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.buffer.UnpooledDirectByteBuf.capacity(UnpooledDirectByteBuf.java:156) ~[netty-buffer-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.buffer.AbstractByteBuf.ensureWritable0(AbstractByteBuf.java:307) ~[netty-buffer-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.buffer.AbstractByteBuf.ensureWritable(AbstractByteBuf.java:282) ~[netty-buffer-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1105) ~[netty-buffer-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.handler.codec.ByteToMessageDecoder$1.cumulate(ByteToMessageDecoder.java:99) ~[netty-codec-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:274) ~[netty-codec-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:286) ~[netty-handler-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.handler.flush.FlushConsolidationHandler.channelRead(FlushConsolidationHandler.java:152) ~[netty-handler-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:719) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:655) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:581) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493) ~[netty-transport-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) ~[netty-common-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.59.Final.jar:4.1.59.Final]
+at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.59.Final.jar:4.1.59.Final]
+at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
+
+2021-06-25 18:46:26.375  WARN 1 --- [ntLoopGroup-2-7] com.rabbitmq.stream.impl.Client          : Error in stream handler

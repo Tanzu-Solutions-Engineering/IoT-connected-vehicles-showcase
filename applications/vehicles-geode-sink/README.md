@@ -9,10 +9,10 @@ gradle :applications:vehicles-geode-sink:bootBuildImage
 
 
 ```shell script
-docker tag vehicles-geode-sink:0.0.1-SNAPSHOT nyla/vehicles-geode-sink:0.0.1-SNAPSHOT 
+docker tag vehicles-geode-sink:0.0.4-SNAPSHOT nyla/vehicles-geode-sink:0.0.4-SNAPSHOT 
 
 docker login
-docker push nyla/vehicles-geode-sink:0.0.1-SNAPSHOT
+docker push nyla/vehicles-geode-sink:0.0.4-SNAPSHOT
 ```
 
 

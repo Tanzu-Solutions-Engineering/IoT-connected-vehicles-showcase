@@ -8,8 +8,8 @@ gradle :applications:vehicle-generator-source:bootBuildImage
 ```
 
 ```shell script
-docker tag vehicle-generator-source:0.0.3-SNAPSHOT nyla/vehicle-generator-source:0.0.3-SNAPSHOT 
-docker push nyla/vehicle-generator-source:0.0.3-SNAPSHOT
+docker tag vehicle-generator-source:0.0.4-SNAPSHOT nyla/vehicle-generator-source:0.0.4-SNAPSHOT 
+docker push nyla/vehicle-generator-source:0.0.4-SNAPSHOT
 ```
 
 

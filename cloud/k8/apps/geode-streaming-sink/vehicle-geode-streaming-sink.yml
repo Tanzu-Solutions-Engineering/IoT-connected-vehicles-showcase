@@ -44,5 +44,5 @@ spec:
                 configMapKeyRef:
                   name: vehicle-configmap
                   key: spring.data.gemfire.pool.locators
-          image: nyla/vehicle-streaming-geode-sink:0.0.2-SNAPSHOT
+          image: nyla/vehicle-streaming-geode-sink:0.0.4-SNAPSHOT
           name: vehicle-streaming-geode-sink
