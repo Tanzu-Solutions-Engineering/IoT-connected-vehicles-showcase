@@ -5,7 +5,7 @@ metadata:
     run:  vehicles-geode-sink
   name:  vehicles-geode-sink
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       name:  vehicles-geode-sink
