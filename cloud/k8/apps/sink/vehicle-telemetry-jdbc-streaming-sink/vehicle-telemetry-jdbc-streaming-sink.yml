@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run:  vehicle-telemetry-jdbc-streaming-sink
+  name:  vehicle-telemetry-jdbc-streaming-sink
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name:  vehicle-telemetry-jdbc-streaming-sink
+  template:
+    metadata:
+      labels:
+        name:  vehicle-telemetry-jdbc-streaming-sink
+    spec:
+      serviceAccountName: rabbitmq-server
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: spring.cloud.stream.bindings.vehicleGemFireSink-in-0.consumer.concurrency
+              value: "5"
+            - name: rabbitmq_streaming_uris
+              value: rabbitmq-stream://vehicle:security@rabbitmq:5552
+            - name: spring.rabbitmq.host
+              value: rabbitmq
+            - name: spring.flyway.url
+              value: jdbc:postgresql://postgres:5432/postgres
+            - name: spring.flyway.user
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-db-secret
+                  key: username
+            - name: spring.flyway.password
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-db-secret
+                  key: password
+            - name: spring.datasource.url
+              value: jdbc:postgresql://postgres:5432/postgres
+            - name: spring.datasource.username
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-db-secret
+                  key: username
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-db-secret
+                  key: password
+            - name: rabbitmq_streaming_stream_maxLengthGb
+              valueFrom:
+                configMapKeyRef:
+                  name: vehicle-configmap
+                  key: rabbitmq_streaming_stream_maxLengthGb
+            - name: spring_rabbitmq_username
+              valueFrom:
+                secretKeyRef:
+                  name: vehicle-secrets
+                  key: spring_rabbitmq_username
+            - name: spring.rabbitmq.password
+              valueFrom:
+                secretKeyRef:
+                  name: vehicle-secrets
+                  key: spring_rabbitmq_password
+          image: nyla/vehicle-telemetry-jdbc-streaming-sink:0.0.1-SNAPSHOT
+          name: vehicle-telemetry-jdbc-streaming-sink

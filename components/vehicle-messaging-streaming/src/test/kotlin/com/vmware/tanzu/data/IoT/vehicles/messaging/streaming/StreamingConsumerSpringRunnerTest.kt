@@ -118,7 +118,7 @@ internal class StreamingConsumerSpringRunnerTest {
         );
         subject.run("");
         verify(streamSetup).initialize(streamName);
-        verify(consumerBuilder, never()).offset(any());
+//        verify(consumerBuilder, never()).offset(any());
         verify(consumerBuilder).stream(any());
         verify(consumerBuilder).name(any());
         verify(consumerBuilder).autoTrackingStrategy();

@@ -5,6 +5,8 @@ import com.rabbitmq.stream.MessageHandler
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import nyla.solutions.core.util.Debugger
 import org.springframework.stereotype.Component
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 import java.util.function.Consumer
 import java.util.function.Function
 
@@ -15,7 +17,10 @@ import java.util.function.Function
 @Component
 class RabbitStreamingConsumerHandler(
     private val consumer: Consumer<Vehicle>,
-    private val converter: Function<ByteArray, Vehicle>) :
+    private val converter: Function<ByteArray, Vehicle>,
+    private val executor : ExecutorService = Executors.newFixedThreadPool(Runtime
+        .getRuntime()
+        .availableProcessors())) :
     MessageHandler
 {
     /**
@@ -26,17 +31,20 @@ class RabbitStreamingConsumerHandler(
     override fun handle(context: MessageHandler.Context?, message: Message?) {
         if (message == null)
             return;
+        var runnable = Runnable {
+            try{
+                consumer.accept(
+                    converter.apply(message.bodyAsBinary)
+                );
+            }
+            catch(e : Exception)
+            {
+                var stackTrace = Debugger.stackTrace(e);
+                println("ERROR: publishingId: $message.publishingId properties: ${message.properties} STACKTRACE:${stackTrace}")
+                throw e;
+            }
+        }
 
-        try{
-            consumer.accept(
-                converter.apply(message.bodyAsBinary)
-            );
-        }
-        catch(e : Exception)
-        {
-            var stackTrace = Debugger.stackTrace(e);
-            println("ERROR: publishingId: $message.publishingId properties: ${message.properties} STACKTRACE:${stackTrace}")
-            throw e;
-        }
+        executor.submit(runnable);
     }
 }

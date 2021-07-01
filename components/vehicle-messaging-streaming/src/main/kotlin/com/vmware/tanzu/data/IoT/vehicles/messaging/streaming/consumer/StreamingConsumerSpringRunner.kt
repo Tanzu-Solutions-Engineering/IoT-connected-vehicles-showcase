@@ -54,6 +54,7 @@ class StreamingConsumerSpringRunner(
         } else {
             environment.consumerBuilder()
                 .stream(streamName)
+                .offset(OffsetSpecification.last())
                 .name(applicationName).autoTrackingStrategy()
                 .messageCountBeforeStorage(messageCountBeforeStorage)
                 .flushInterval(Duration.ofSeconds(flushIntervalDurationSecs))

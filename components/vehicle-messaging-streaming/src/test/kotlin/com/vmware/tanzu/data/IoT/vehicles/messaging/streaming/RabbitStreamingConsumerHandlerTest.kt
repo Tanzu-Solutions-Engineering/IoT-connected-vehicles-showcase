@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*
 import java.util.function.Consumer
 import java.util.function.Function
+import kotlin.concurrent.thread
 
 /**
  * @author Gregory Green
@@ -39,6 +40,8 @@ internal class RabbitStreamingConsumerHandlerTest{
         message =  mock<Message>();
         var subject = RabbitStreamingConsumerHandler(consumer,mockFunction);
         subject.handle(mockContext,message);
+
+        Thread.sleep(1000);
         verify(mockFunction).apply(anyOrNull());
         verify(consumer).accept(anyOrNull());
     }

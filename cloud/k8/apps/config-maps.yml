@@ -8,3 +8,4 @@ data:
   messageCount: "10000"
   distanceIncrements: "1"
   delayMs: "0"
+  rabbitmq_streaming_stream_maxLengthGb: "90"

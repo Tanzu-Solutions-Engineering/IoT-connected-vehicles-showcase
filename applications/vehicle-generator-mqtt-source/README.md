@@ -20,12 +20,12 @@ rabbitmqctl -n rabbit set_permissions mqtt ".*" ".*" ".*"
 Build docker image
 
 ```shell
-gradle :applications:vehicle-generator-source:bootBuildImage
+gradle :applications:vehicle-generator-mqtt-source:bootBuildImage
 ```
 
 ```shell script
-docker tag vehicle-generator-source:0.0.4-SNAPSHOT nyla/vehicle-generator-source:0.0.4-SNAPSHOT 
-docker push nyla/vehicle-generator-source:0.0.4-SNAPSHOT
+docker tag vehicle-generator-mqtt-source:0.0.1-SNAPSHOT nyla/vehicle-generator-mqtt-source:0.0.1-SNAPSHOT 
+docker push nyla/vehicle-generator-mqtt-source:0.0.1-SNAPSHOT
 ```
 
 

@@ -1,5 +1,6 @@
 package com.vmware.tanzu.data.IoT.vehicles.generator.streaming
 
+import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleGenerator
 import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleLoadSimulator
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.converter.VehicleToBytes
@@ -10,10 +11,12 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
 
 @Configuration
+@ComponentScan(basePackageClasses = [VehicleLoadSimulator::class, VehicleGenerator::class])
 class RabbitmqMqttSenderConfig {
 
     private val delayMs: Long = 1;
@@ -34,8 +37,8 @@ class RabbitmqMqttSenderConfig {
     @Value("\${mqtt.connectionUrl:tcp://localhost:1883}")
     private var connectionUrl: String = "tcp://localhost:1883";
 
-    @Value("\${mqtt.topic:vehicleSink.vehicleSink}")
-    private val topic: String = "vehicleSink.vehicleSink";
+    @Value("\${mqtt.topic:vehicleSink}")
+    private val topic: String = "vehicleSink";
 
 
     @Bean
@@ -54,11 +57,4 @@ class RabbitmqMqttSenderConfig {
 
         return MqttVehicleSender(topic,publisher, VehicleToBytes());
     }
-
-//    @Bean
-//    fun streamTask(sender: VehicleSender): VehicleLoadSimulator
-//    {
-//        return VehicleLoadSimulator(sender, vehicleCount, messageCount, distanceIncrements, delayMs, "G", rider = rider,);
-//    }
-
 }
