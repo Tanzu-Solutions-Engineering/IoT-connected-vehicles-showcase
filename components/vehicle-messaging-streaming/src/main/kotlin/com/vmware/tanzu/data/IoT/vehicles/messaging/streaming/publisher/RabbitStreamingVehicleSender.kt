@@ -16,7 +16,6 @@ import java.util.function.Function
 /**
  * This class is responsible for publish vehicle data using a given streaming
  * producer.
- * @param producer the stream producer
  * @param converter converts a given vehicle structure to a message  payload
  *
  * @author Gregory Green

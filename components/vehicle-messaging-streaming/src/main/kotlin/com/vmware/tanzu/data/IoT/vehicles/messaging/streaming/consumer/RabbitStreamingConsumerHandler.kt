@@ -4,6 +4,7 @@ import com.rabbitmq.stream.Message
 import com.rabbitmq.stream.MessageHandler
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import nyla.solutions.core.util.Debugger
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -18,9 +19,9 @@ import java.util.function.Function
 class RabbitStreamingConsumerHandler(
     private val consumer: Consumer<Vehicle>,
     private val converter: Function<ByteArray, Vehicle>,
-    private val executor : ExecutorService = Executors.newFixedThreadPool(Runtime
-        .getRuntime()
-        .availableProcessors())) :
+    @Value("\${spring.cloud.stream.bindings.vehicleGemFireSink-in-0.consumer.concurrency:5}")
+    private val threadCount :Int = Runtime.getRuntime().availableProcessors(),
+    private val executor : ExecutorService = Executors.newFixedThreadPool(threadCount)):
     MessageHandler
 {
     /**

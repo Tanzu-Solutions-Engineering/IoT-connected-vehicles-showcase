@@ -17,6 +17,7 @@ import org.mockito.kotlin.*
  */
 internal class RabbitStreamEnvironmentCreatorTest {
 
+    private val rpcTimeout: Long = 15;
     private lateinit var mockEnvironment: Environment;
     private lateinit var environmentBuilder: EnvironmentBuilder;
     private val uris = "rabbitmq-stream://guest:guest@localhost:5552,rabbitmq-stream://guest:guest@localhost:5552";
@@ -28,11 +29,12 @@ internal class RabbitStreamEnvironmentCreatorTest {
 
         environmentBuilder = mock<EnvironmentBuilder>{
             on{uris(any())} doReturn it;
+            on{rpcTimeout(any())} doReturn it;
             on{build();} doReturn mockEnvironment;
         };
 
 
-        subject = RabbitStreamEnvironmentCreator(uris,environmentBuilder);
+        subject = RabbitStreamEnvironmentCreator(uris,rpcTimeout,environmentBuilder);
     }
 
     @Test
@@ -41,6 +43,7 @@ internal class RabbitStreamEnvironmentCreatorTest {
         var actual = subject.create();
         assertNotNull(actual);
         verify(environmentBuilder).uris(any());
+        verify(environmentBuilder).rpcTimeout(any());
 
     }
 

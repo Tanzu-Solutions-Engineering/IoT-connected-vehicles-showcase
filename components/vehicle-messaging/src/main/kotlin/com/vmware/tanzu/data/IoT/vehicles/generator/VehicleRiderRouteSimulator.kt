@@ -2,7 +2,7 @@ package com.vmware.tanzu.data.IoT.vehicles.generator
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
-import org.springframework.scheduling.annotation.Async
+import org.apache.commons.logging.LogFactory
 import org.springframework.stereotype.Component
 
 /**
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component
 @Component
 class VehicleRiderRouteSimulator : VehicleRider
 {
+    private val logger = LogFactory.getLog(VehicleRiderRouteSimulator::class.java)
 
     /**
      * Start multi-threading send generated vehicle information
@@ -27,7 +28,7 @@ class VehicleRiderRouteSimulator : VehicleRider
             while(true)
             {
 
-                println("Processing  vehicle: ${vehicle.vin} messageCount:${messageCount}")
+                logger.info("START Processing  vehicle: ${vehicle.vin} messageCount:${messageCount}")
 
                 try {
                     sender.send(vehicle);
@@ -40,6 +41,8 @@ class VehicleRiderRouteSimulator : VehicleRider
                         if (delayMs > 0)
                             Thread.sleep(delayMs);
                     }
+                    logger.info("END Processing vehicle: ${vehicle.vin} messageCount:${messageCount}")
+
                 } catch (exception: RuntimeException) {
                     exception.printStackTrace();
                 }
