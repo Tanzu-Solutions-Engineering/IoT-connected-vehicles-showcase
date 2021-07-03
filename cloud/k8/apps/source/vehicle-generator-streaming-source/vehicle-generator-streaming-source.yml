@@ -40,7 +40,10 @@ spec:
         - name: delayMs
           value: "0"
         - name: rabbitmq_streaming_uris
-          value: rabbitmq-stream://vehicle:security@rabbitmq:5552
+          valueFrom:
+            secretKeyRef:
+              name: vehicle-secrets
+              key: rabbitmq-stream_uris
         - name: spring_rabbitmq_host
           value: rabbitmq
         - name: spring_rabbitmq_username

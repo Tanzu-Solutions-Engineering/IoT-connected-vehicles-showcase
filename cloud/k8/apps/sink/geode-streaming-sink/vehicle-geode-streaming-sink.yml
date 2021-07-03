@@ -5,7 +5,7 @@ metadata:
     run:  vehicle-streaming-geode-sink
   name:  vehicle-streaming-geode-sink
 spec:
-  replicas: 10
+  replicas: 16
   selector:
     matchLabels:
       name:  vehicle-streaming-geode-sink
@@ -18,10 +18,15 @@ spec:
       automountServiceAccountToken: false
       containers:
         - env:
+            - name: "JAVA_OPTS"
+              value: "-Xms2g -Xmx2g -XX:+UseG1GC -XX:+PrintGCDetails -XX:MaxGCPauseMillis=10"
             - name: spring.cloud.stream.bindings.vehicleGemFireSink-in-0.consumer.concurrency
-              value: "5"
+              value: "10"
             - name: rabbitmq_streaming_uris
-              value: rabbitmq-stream://vehicle:security@rabbitmq:5552
+              valueFrom:
+                secretKeyRef:
+                  name: vehicle-secrets
+                  key: rabbitmq-stream_uris
             - name: spring.rabbitmq.host
               value: rabbitmq
             - name: rabbitmq_streaming_stream_maxLengthGb
@@ -46,3 +51,6 @@ spec:
                   key: spring.data.gemfire.pool.locators
           image: nyla/vehicle-streaming-geode-sink:0.0.6-SNAPSHOT
           name: vehicle-streaming-geode-sink
+          resources:
+            requests:
+              memory: "3Gi"
