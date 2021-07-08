@@ -2,9 +2,12 @@ package com.vmware.tanzu.data.IoT.vehicles.messaging.streaming
 
 import com.rabbitmq.stream.Environment
 import com.rabbitmq.stream.StreamCreator
+import com.rabbitmq.stream.StreamException
 import com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.RabbitStreamSetup
 import nyla.solutions.core.patterns.creational.Creator
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.fail
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
@@ -19,6 +22,10 @@ internal class RabbitStreamSetupTest {
     private val maxSegmentSizeMb = 500L;
     private val maxLengthGb = 10L;
     private val maxAgeHours = 24*5L;
+
+    @BeforeEach
+    internal fun setUp() {
+    }
 
     @Test
     internal fun createStream() {
@@ -54,5 +61,10 @@ internal class RabbitStreamSetupTest {
         verify(environment).streamCreator();
         verify(streamCreator).stream(streamName);
         verify(streamCreator).create();
+    }
+
+    @Test
+    internal fun precondition() {
+//        fail("TODO");
     }
 }

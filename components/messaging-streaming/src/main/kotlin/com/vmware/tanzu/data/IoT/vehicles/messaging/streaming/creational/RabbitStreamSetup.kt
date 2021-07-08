@@ -42,7 +42,8 @@ class RabbitStreamSetup(
             if(e.message == null)
                 throw e;
 
-            if(!e.message!!.contains("STREAM_ALREADY_EXISTS"))
+            if(!e.message!!.contains("STREAM_ALREADY_EXISTS")
+                && !e.message!!.contains("PRECONDITION_FAILED"))
                 throw e;
         }
     }

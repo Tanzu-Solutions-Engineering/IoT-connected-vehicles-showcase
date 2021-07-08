@@ -5,7 +5,7 @@ metadata:
     run:  vehicle-telemetry-jdbc-streaming-sink
   name:  vehicle-telemetry-jdbc-streaming-sink
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       name:  vehicle-telemetry-jdbc-streaming-sink
