@@ -58,6 +58,8 @@ k port-forward iot-connected-vehicle-dashboard 7000:7000
 
 Edge running RabbitMq
 
+k port-forward rabbitmq-server-0 5672:5672
+
 docker run --network edge --name rabbitmqEdge --hostname localhost -it -p 5672:5672 -p 5552:5552 -p 15674:15672  -p  1883:1883 -e RABBITMQ_ENABLED_PLUGINS_FILE=/etc/rabbitmq/additional_plugins/enable_plugins -v  /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase/cloud/docker/rabbitmq/additional_plugins:/etc/rabbitmq/additional_plugins --rm pivotalrabbitmq/rabbitmq-stream 
 
 docker exec -it rabbitmqEdge bash
@@ -76,7 +78,34 @@ rabbitmqctl set_parameter shovel dc-shovel  '{"src-protocol": "amqp091", "src-ur
 java -jar applications/vehicle-generator-mqtt-source/build/libs/vehicle-generator-mqtt-source-0.0.1-SNAPSHOT.jar
 
 
+
+
+
+
+# Postgres
+
+k apply -f cloud/k8/data-services/edge/postgres.yml
+
+ALTER USER postgres PASSWORD '<PASSWORD>'
+
+
 k apply -f cloud/k8/apps/sink/vehicle-telemetry-jdbc-streaming-sink
+
+
+ALTER ROLE postgres SET search_path TO vehicle_iot;
+
+
+*Streaming Postgres*
+
+rabbitmqadmin declare queue name=VehicleStream queue_type=stream arguments='{"x-max-age":"3600s","x-stream-max-segment-size-bytes":500000000, "x-max-length-bytes" : 90000000000}'
+
+rabbitmqadmin declare binding source=amq.topic  destination=VehicleStream routing_key=#
+
+rabbitmqctl set_parameter shovel dc-streaming-shovel  '{"src-protocol": "amqp091", "src-uri": "amqp://", "src-queue": "VehicleStream", "dest-protocol": "amqp091", "dest-uri": "amqp://vehicle:security@host.docker.internal", "dest-queue": "VehicleStream"}'
+
+
+
+
 
 FAQ
 

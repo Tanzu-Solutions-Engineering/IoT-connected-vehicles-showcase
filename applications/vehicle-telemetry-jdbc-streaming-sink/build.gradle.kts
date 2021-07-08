@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.vmware.tanzu.data"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.2-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
@@ -20,7 +20,6 @@ repositories {
 }
 
 extra["springCloudVersion"] = "2020.0.1"
-extra["springGeodeVersion"] = "1.4.3"
 
 
 
@@ -41,13 +40,16 @@ dependencies {
     implementation(project(":components:vehicle-messaging-streaming"))
     implementation("com.rabbitmq:stream-client:0.1.0-SNAPSHOT")
     implementation("org.apache.qpid:proton-j:0.33.8")
+    implementation("org.xerial.snappy:snappy-java:1.1.8.4")
+    implementation("org.lz4:lz4-java:1.8.0")
+    implementation("com.github.luben:zstd-jni:1.5.0-2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.amqp:spring-rabbit-test")
+
 }
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.geode:spring-geode-bom:${property("springGeodeVersion")}")
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
     }
 }

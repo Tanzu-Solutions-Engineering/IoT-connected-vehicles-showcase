@@ -24,30 +24,32 @@ spec:
               value: rabbitmq-stream://vehicle:security@rabbitmq:5552
             - name: spring.rabbitmq.host
               value: rabbitmq
+            - name: spring.jpa.properties.hibernate.default_schema
+              value: "vehicle_iot"
             - name: spring.flyway.url
-              value: jdbc:postgresql://postgres:5432/postgres
+              value: "jdbc:postgresql://postgres:5432/postgres"
             - name: spring.flyway.user
               valueFrom:
                 secretKeyRef:
-                  name: postgres-db-secret
-                  key: username
+                  name: vehicle-secrets
+                  key: db-username
             - name: spring.flyway.password
               valueFrom:
                 secretKeyRef:
-                  name: postgres-db-secret
-                  key: password
+                  name: vehicle-secrets
+                  key: db-password
             - name: spring.datasource.url
-              value: jdbc:postgresql://postgres:5432/postgres
+              value: "jdbc:postgresql://postgres:5432/postgres"
             - name: spring.datasource.username
               valueFrom:
                 secretKeyRef:
-                  name: postgres-db-secret
-                  key: username
+                  name: vehicle-secrets
+                  key: db-username
             - name: spring.datasource.password
               valueFrom:
                 secretKeyRef:
-                  name: postgres-db-secret
-                  key: password
+                  name: vehicle-secrets
+                  key: db-password
             - name: rabbitmq_streaming_stream_maxLengthGb
               valueFrom:
                 configMapKeyRef:
@@ -63,5 +65,5 @@ spec:
                 secretKeyRef:
                   name: vehicle-secrets
                   key: spring_rabbitmq_password
-          image: nyla/vehicle-telemetry-jdbc-streaming-sink:0.0.1-SNAPSHOT
+          image: nyla/vehicle-telemetry-jdbc-streaming-sink:0.0.2-SNAPSHOT
           name: vehicle-telemetry-jdbc-streaming-sink

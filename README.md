@@ -494,3 +494,106 @@ at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.
 at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
 
 2021-06-25 18:46:26.375  WARN 1 --- [ntLoopGroup-2-7] com.rabbitmq.stream.impl.Client          : Error in stream handler
+
+
+
+
+transaction.jta.platform.internal.NoJtaPlatform]
+2021-07-07 12:40:41.416  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-07-07 12:40:42.086  WARN 1 --- [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'streamingConsumerSpringRunner' defined in URL [jar:file:/workspace/BOOT-INF/lib/vehicle-messaging-streaming-0.0.1-SNAPSHOT.jar!/com/vmware/tanzu/data/IoT/vehicles/messaging/streaming/consumer/StreamingConsumerSpringRunner.class]: Unsatisfied dependency expressed through constructor parameter 4; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'rabbitStreamEnvironmentCreator' defined in URL [jar:file:/workspace/BOOT-INF/lib/messaging-streaming-0.0.1-SNAPSHOT.jar!/com/vmware/tanzu/data/IoT/vehicles/messaging/streaming/creational/RabbitStreamEnvironmentCreator.class]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.RabbitStreamEnvironmentCreator]: Constructor threw exception; nested exception is java.lang.ExceptionInInitializerError
+2021-07-07 12:40:42.087  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-07-07 12:40:42.089  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-07-07 12:40:42.126  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-07-07 12:40:42.129  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-07-07 12:40:42.149  INFO 1 --- [           main] ConditionEvaluationReportLoggingListener :
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-07-07 12:40:42.179 ERROR 1 --- [           main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'streamingConsumerSpringRunner' defined in URL [jar:file:/workspace/BOOT-INF/lib/vehicle-messaging-streaming-0.0.1-SNAPSHOT.jar!/com/vmware/tanzu/data/IoT/vehicles/messaging/streaming/consumer/StreamingConsumerSpringRunner.class]: Unsatisfied dependency expressed through constructor parameter 4; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'rabbitStreamEnvironmentCreator' defined in URL [jar:file:/workspace/BOOT-INF/lib/messaging-streaming-0.0.1-SNAPSHOT.jar!/com/vmware/tanzu/data/IoT/vehicles/messaging/streaming/creational/RabbitStreamEnvironmentCreator.class]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.RabbitStreamEnvironmentCreator]: Constructor threw exception; nested exception is java.lang.ExceptionInInitializerError
+at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1354) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1204) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:917) ~[spring-context-5.3.4.jar:5.3.4]
+at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:582) ~[spring-context-5.3.4.jar:5.3.4]
+at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:144) ~[spring-boot-2.4.3.jar:2.4.3]
+at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:767) ~[spring-boot-2.4.3.jar:2.4.3]
+at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.4.3.jar:2.4.3]
+at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:426) ~[spring-boot-2.4.3.jar:2.4.3]
+at org.springframework.boot.SpringApplication.run(SpringApplication.java:326) ~[spring-boot-2.4.3.jar:2.4.3]
+at org.springframework.boot.SpringApplication.run(SpringApplication.java:1311) ~[spring-boot-2.4.3.jar:2.4.3]
+at org.springframework.boot.SpringApplication.run(SpringApplication.java:1300) ~[spring-boot-2.4.3.jar:2.4.3]
+at com.vmware.tanzu.data.IoT.vehicles.streaming.jdbc.sink.VehicleTelemetryStreamingJdbcSinkApplicationKt.main(VehicleTelemetryStreamingJdbcSinkApplication.kt:13) ~[classes/:na]
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) ~[workspace/:na]
+at org.springframework.boot.loader.Launcher.launch(Launcher.java:107) ~[workspace/:na]
+at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) ~[workspace/:na]
+at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:88) ~[workspace/:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'rabbitStreamEnvironmentCreator' defined in URL [jar:file:/workspace/BOOT-INF/lib/messaging-streaming-0.0.1-SNAPSHOT.jar!/com/vmware/tanzu/data/IoT/vehicles/messaging/streaming/creational/RabbitStreamEnvironmentCreator.class]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.RabbitStreamEnvironmentCreator]: Constructor threw exception; nested exception is java.lang.ExceptionInInitializerError
+at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:315) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:296) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1354) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1204) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-5.3.4.jar:5.3.4]
+... 28 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.RabbitStreamEnvironmentCreator]: Constructor threw exception; nested exception is java.lang.ExceptionInInitializerError
+at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:225) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:117) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:311) ~[spring-beans-5.3.4.jar:5.3.4]
+... 42 common frames omitted
+Caused by: java.lang.ExceptionInInitializerError: null
+at com.rabbitmq.stream.impl.StreamEnvironmentBuilder.build(StreamEnvironmentBuilder.java:279) ~[stream-client-0.1.0-SNAPSHOT.jar:0.1.0-SNAPSHOT]
+at com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.RabbitStreamEnvironmentCreator.<init>(RabbitStreamEnvironmentCreator.kt:24) ~[messaging-streaming-0.0.1-SNAPSHOT.jar:na]
+at com.vmware.tanzu.data.IoT.vehicles.messaging.streaming.creational.RabbitStreamEnvironmentCreator.<init>(RabbitStreamEnvironmentCreator.kt:21) ~[messaging-streaming-0.0.1-SNAPSHOT.jar:na]
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source) ~[na:na]
+at kotlin.reflect.jvm.internal.calls.CallerImpl$Constructor.call(CallerImpl.kt:41) ~[kotlin-reflect-1.4.30.jar:1.4.30-release-302 (1.4.30)]
+at kotlin.reflect.jvm.internal.KCallableImpl.callDefaultMethod$kotlin_reflection(KCallableImpl.kt:173) ~[kotlin-reflect-1.4.30.jar:1.4.30-release-302 (1.4.30)]
+at kotlin.reflect.jvm.internal.KCallableImpl.callBy(KCallableImpl.kt:112) ~[kotlin-reflect-1.4.30.jar:1.4.30-release-302 (1.4.30)]
+at org.springframework.beans.BeanUtils$KotlinDelegate.instantiateClass(BeanUtils.java:866) ~[spring-beans-5.3.4.jar:5.3.4]
+at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:197) ~[spring-beans-5.3.4.jar:5.3.4]
+... 44 common frames omitted
+Caused by: com.rabbitmq.stream.StreamException: null
+at com.rabbitmq.stream.impl.CompressionCodecs.instanciateDefault(CompressionCodecs.java:37) ~[stream-client-0.1.0-SNAPSHOT.jar:0.1.0-SNAPSHOT]
+at com.rabbitmq.stream.impl.CompressionCodecs.<clinit>(CompressionCodecs.java:25) ~[stream-client-0.1.0-SNAPSHOT.jar:0.1.0-SNAPSHOT]
+... 56 common frames omitted
+Caused by: java.lang.reflect.InvocationTargetException: null
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source) ~[na:na]
+at com.rabbitmq.stream.impl.CompressionCodecs.instanciateDefault(CompressionCodecs.java:35) ~[stream-client-0.1.0-SNAPSHOT.jar:0.1.0-SNAPSHOT]
+... 57 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: org/xerial/snappy/SnappyFramedInputStream
+at com.rabbitmq.stream.compression.DefaultCompressionCodecFactory.<init>(DefaultCompressionCodecFactory.java:36) ~[stream-client-0.1.0-SNAPSHOT.jar:0.1.0-SNAPSHOT]
+... 62 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.xerial.snappy.SnappyFramedInputStream
+at java.base/java.net.URLClassLoader.findClass(Unknown Source) ~[na:na]
+at java.base/java.lang.ClassLoader.loadClass(Unknown Source) ~[na:na]
+at org.springframework.boot.loader.LaunchedURLClassLoader.loadClass(LaunchedURLClassLoader.java:135) ~[workspace/:na]
+at java.base/java.lang.ClassLoader.loadClass(Unknown Source) ~[na:na]
+... 63 common frames omitted
+
