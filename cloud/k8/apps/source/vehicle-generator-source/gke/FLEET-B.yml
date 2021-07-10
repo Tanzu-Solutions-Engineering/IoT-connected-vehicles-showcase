@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: vehicle-generator-source
+  name: vehicle-generator-source-b
   labels:
-    run: vehicle-generator-source
+    run: vehicle-generator-source-b
 spec:
   containers:
-    - name: vehicle-generator-source
+    - name: vehicle-generator-source-b
       image: nyla/vehicle-generator-source:0.0.4-SNAPSHOT
       resources:
         requests:
@@ -16,15 +16,15 @@ spec:
         - name: "JVM_ARGS"
           value: "-Xms4g -Xmx4g"
         - name: vehicleCount
-          value: "50"
+          value: "25"
         - name: messageCount
-          value: "500"
+          value: "10000"
         - name: distanceIncrements
-          value: "2"
+          value: "1"
         - name: delayMs
-          value: "10"
+          value: "5"
         - name: vinPrefix
-          value: "G"
+          value: "FLEET-B"
         - name: spring_rabbitmq_host
           value: rabbitmq
         - name: spring_rabbitmq_username
