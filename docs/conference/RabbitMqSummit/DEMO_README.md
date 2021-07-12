@@ -69,7 +69,7 @@ Example
     cd /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase
     k apply -f cloud/k8/data-services/gemfire/gemfire-gcp.yml
 
-kubectl exec gemfire1-locator-0 -- gfsh -e "connect" -e "create region --name=Vehicle --eviction-action=local-destroy --eviction-max-memory=10000 --entry-time-to-live-expiration=60 --entry-time-to-live-expiration-action=DESTROY --enable-statistics=true --type=PARTITION"
+    kubectl exec gemfire1-locator-0 -- gfsh -e "connect" -e "create region --name=Vehicle --eviction-action=local-destroy --eviction-max-memory=10000 --entry-time-to-live-expiration=60 --entry-time-to-live-expiration-action=DESTROY --enable-statistics=true --type=PARTITION"
 
 *RabbitMq*
 kubectl apply -f "https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml"
@@ -87,6 +87,8 @@ kubectl exec rabbitmq-server-0 -- rabbitmqctl set_permissions  -p / vehicle ".*"
 kubectl exec rabbitmq-server-0 -- rabbitmqctl set_user_tags vehicle monitoring
 
 k port-forward rabbitmq-server-0 15670:15672
+
+SAFARI
 open http://localhost:15670
 
 ```
