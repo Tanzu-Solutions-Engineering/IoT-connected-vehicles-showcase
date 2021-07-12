@@ -30,13 +30,14 @@ Example
     kubectl create secret docker-registry regsecret --docker-server=https://registry.pivotal.io --docker-username=${HARBOR_USER} --docker-password=${HARBOR_PASSWORD}    
 
     helm install postgres-operator operator-gke/
-kubectl get all
+    kubectl get all
 
 *Optional in Kind*
 kind load  docker-image postgres-instance:v1.1.0
 kind load  docker-image postgres-operator:v1.1.0
 
 
+cd /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase
 k apply -f cloud/k8/data-services/postgres/postgres.yml
 
 k port-forward postgres-0 5432:5432
@@ -199,6 +200,9 @@ select avg(speed), max(speed), min(speed),  count(*)
 from vehicle_iot.vehicle_telemetry
 
 
+Scale up instances
+
+k apply -f cloud/k8/apps/sink/vehicle-telemetry-jdbc-streaming-sink/vehicle-telemetry-jdbc-streaming-sink.yml
 
 FAQ
 
