@@ -22,12 +22,13 @@ Example
 
     docker tag $(cat ./images/postgres-instance-id) ${INSTANCE_IMAGE_NAME}
     docker push ${INSTANCE_IMAGE_NAME}
-    
+
     OPERATOR_IMAGE_NAME="${REGISTRY}/postgres-operator:$(cat ./images/postgres-operator-tag)"
     docker tag $(cat ./images/postgres-operator-id) ${OPERATOR_IMAGE_NAME}
     docker push ${OPERATOR_IMAGE_NAME}
 
-    kubectl create secret docker-registry regsecret --docker-server=https://registry.pivotal.io --docker-username=${HARBOR_USER} --docker-password=${HARBOR_PASSWORD}    
+    source ~/.bash_profile
+    kubectl create secret docker-registry regsecret --docker-server=https://registry.pivotal.io --docker-username=$HARBOR_USER --docker-password=$HARBOR_PASSWORD
 
     helm install postgres-operator operator-gke/
     kubectl get all
@@ -65,7 +66,7 @@ Example
 
     helm install gemfire-operator gemfire-operator-1.0.1.tgz --namespace gemfire-system
     helm ls --namespace gemfire-system
-    
+
     cd /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase
     k apply -f cloud/k8/data-services/gemfire/gemfire-gcp.yml
 
@@ -150,7 +151,7 @@ rabbitmqadmin declare binding source=amq.topic  destination=vehicleSink.vehicleR
 
 rabbitmqctl set_parameter shovel dc-shovel  '{"src-protocol": "amqp091", "src-uri": "amqp://", "src-queue": "vehicleSink.vehicleRepositorySink", "dest-protocol": "amqp091", "dest-uri": "amqp://vehicle:security@host.docker.internal", "dest-queue": "vehicleSink.vehicleRepositorySink"}'
 
-SAFARI http://localhost:15674 
+SAFARI http://localhost:15674
 
 
 cd /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase
@@ -208,8 +209,8 @@ k apply -f cloud/k8/apps/sink/vehicle-telemetry-jdbc-streaming-sink/vehicle-tele
 
 FAQ
 
-- No space on disk 
-  
+- No space on disk
+
 ```shell
 docker system prune
 ```
