@@ -38,8 +38,8 @@ kind load  docker-image postgres-instance:v1.1.0
 kind load  docker-image postgres-operator:v1.1.0
 
 
-cd /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase
-k apply -f cloud/k8/data-services/postgres/postgres.yml
+  cd /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase
+  k apply -f cloud/k8/data-services/postgres/postgres.yml
 
 k port-forward postgres-0 5432:5432
 
@@ -61,6 +61,7 @@ Example
     kubectl create namespace gemfire-system
     cd /Users/devtools/repositories/IMDG/gf-kubernetes
 
+    source ~/.bash_profile
     kubectl create secret docker-registry image-pull-secret --docker-server=registry.pivotal.io --docker-username=$HARBOR_USER --docker-password=$HARBOR_PASSWORD
     kubectl create secret docker-registry image-pull-secret --docker-server=registry.pivotal.io --docker-username=$HARBOR_USER --docker-password=$HARBOR_PASSWORD --namespace gemfire-system
 
@@ -89,7 +90,7 @@ kubectl exec rabbitmq-server-0 -- rabbitmqctl set_user_tags vehicle monitoring
 
 k port-forward rabbitmq-server-0 15670:15672
 
-SAFARI
+CHROME
 open http://localhost:15670
 
 ```
@@ -128,28 +129,29 @@ k delete -f cloud/k8/apps/source/vehicle-generator-source/gke
 
 ----
 
-Edge running RabbitMq
-
-k port-forward rabbitmq-server-0 5672:5672
-
-#docker run --network edge --name rabbitmqEdge --hostname localhost -it -p 15674:15672  -p  1883:1883 -e RABBITMQ_ENABLED_PLUGINS_FILE=/etc/rabbitmq/additional_plugins/enable_plugins -v  /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase/cloud/docker/rabbitmq/additional_plugins:/etc/rabbitmq/additional_plugins --rm pivotalrabbitmq/rabbitmq-stream
-#docker run --network edge --name rabbitmqMqttEdge --hostname localhost -it -p 15674:15672  -p  1883:1883 -rabbitmq_stream tcp_listeners [5554]" -e RABBITMQ_ENABLED_PLUGINS_FILE=/etc/rabbitmq/additional_plugins/enable_plugins -v  /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase/cloud/docker/rabbitmq/additional_plugins:/etc/rabbitmq/additional_plugins --rm pivotalrabbitmq/rabbitmq-stream
-docker run --network edge --name rabbitmqMqttEdge --hostname localhost -it -p 15674:15672  -p  1883:1883  -e RABBITMQ_ENABLED_PLUGINS_FILE=/etc/rabbitmq/additional_plugins/enable_plugins -v  /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase/cloud/docker/rabbitmq/additional_plugins:/etc/rabbitmq/additional_plugins --rm pivotalrabbitmq/rabbitmq-stream
+## Edge running RabbitMq
 
 
+  k delete -f cloud/k8/apps/source/vehicle-generator-source/gke
 
-docker exec -it rabbitmqMqttEdge bash
+  k port-forward rabbitmq-server-0 5672:5672
 
-rabbitmqctl -n rabbit add_user mqtt
+  docker run --network edge --name rabbitmqMqttEdge --hostname localhost -it -p 15674:15672  -p  1883:1883  -e RABBITMQ_ENABLED_PLUGINS_FILE=/etc/rabbitmq/additional_plugins/enable_plugins -v  /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase/cloud/docker/rabbitmq/additional_plugins:/etc/rabbitmq/additional_plugins --rm pivotalrabbitmq/rabbitmq-stream
 
-rabbitmqctl -n rabbit set_permissions mqtt "amq.topic|veh.*|mqtt.*|Vehicle.*" "amq.topic|veh.*|mqtt.*|Vehicle.*" "amq.topic|veh.*|mqtt.*|Vehicle.*"
-rabbitmqctl set_user_tags mqtt monitoring
 
-rabbitmqadmin declare queue name=vehicleSink.vehicleRepositorySink queue_type=quorum arguments='{"x-max-length":10000,"x-max-in-memory-bytes":0}'
+  docker exec -it rabbitmqMqttEdge bash
 
-rabbitmqadmin declare binding source=amq.topic  destination=vehicleSink.vehicleRepositorySink routing_key=#
+  rabbitmqctl -n rabbit add_user mqtt
 
-rabbitmqctl set_parameter shovel dc-shovel  '{"src-protocol": "amqp091", "src-uri": "amqp://", "src-queue": "vehicleSink.vehicleRepositorySink", "dest-protocol": "amqp091", "dest-uri": "amqp://vehicle:security@host.docker.internal", "dest-queue": "vehicleSink.vehicleRepositorySink"}'
+  rabbitmqctl -n rabbit set_permissions mqtt "amq.topic|veh.*|mqtt.*|Vehicle.*" "amq.topic|veh.*|mqtt.*|Vehicle.*" "amq.topic|veh.*|mqtt.*|Vehicle.*"
+  rabbitmqctl set_user_tags mqtt monitoring
+
+  rabbitmqadmin declare queue name=vehicleSink.vehicleRepositorySink queue_type=quorum arguments='{"x-max-length":10000,"x-max-in-memory-bytes":0}'
+
+  rabbitmqadmin declare binding source=amq.topic  destination=vehicleSink.vehicleRepositorySink routing_key=#
+
+  rabbitmqctl set_parameter shovel dc-shovel  '{"src-protocol": "amqp091", "src-uri": "amqp://", "src-queue": "vehicleSink.vehicleRepositorySink", "dest-protocol": "amqp091", "dest-uri": "amqp://vehicle:security@host.docker.internal", "dest-queue": "vehicleSink.vehicleRepositorySink"}'
+
 
 SAFARI http://localhost:15674
 
@@ -164,6 +166,7 @@ kill shovel connection
 
 # Postgres streaming
 
+cd /Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase
 k apply -f cloud/k8/apps/sink/vehicle-telemetry-jdbc-streaming-sink
 
 docker run --network edge --name rabbitmqStreamEdge --hostname localhost -it -p 15676:15672  -p 5554:5554 -e RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS="-rabbitmq_stream advertised_host localhost -rabbitmq_stream advertised_port 5554 -rabbitmq_stream tcp_listeners [5554]" --rm pivotalrabbitmq/rabbitmq-stream

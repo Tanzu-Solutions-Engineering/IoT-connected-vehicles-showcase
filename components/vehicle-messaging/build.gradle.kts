@@ -21,9 +21,10 @@ extra["springGeodeVersion"] = "1.4.3"
 
 dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
-    implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.3")
+    implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("io.micrometer:micrometer-core:1.7.2")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.amqp:spring-rabbit:2.3.5")
     testImplementation("org.assertj:assertj-core:3.19.0")

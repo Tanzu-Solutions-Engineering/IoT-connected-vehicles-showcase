@@ -597,3 +597,33 @@ at org.springframework.boot.loader.LaunchedURLClassLoader.loadClass(LaunchedURLC
 at java.base/java.lang.ClassLoader.loadClass(Unknown Source) ~[na:na]
 ... 63 common frames omitted
 
+
+2021-07-02 22:29:37.358  INFO 1 --- [imer-DEFAULT-90] o.a.g.c.c.i.AutoConnectionSourceImpl     : Communication with locator gemfire1-locator/192.168.9.43:10334 failed
+
+java.net.SocketTimeoutException: Read timed out
+	at java.base/java.net.SocketInputStream.socketRead0(Native Method) ~[na:na]
+	at java.base/java.net.SocketInputStream.socketRead(Unknown Source) ~[na:na]
+	at java.base/java.net.SocketInputStream.read(Unknown Source) ~[na:na]
+	at java.base/java.net.SocketInputStream.read(Unknown Source) ~[na:na]
+	at java.base/java.net.SocketInputStream.read(Unknown Source) ~[na:na]
+	at java.base/java.io.FilterInputStream.read(Unknown Source) ~[na:na]
+	at java.base/java.io.DataInputStream.readByte(Unknown Source) ~[na:na]
+	at org.apache.geode.internal.InternalDataSerializer.basicReadObject(InternalDataSerializer.java:2493) ~[geode-core-1.13.1.jar:na]
+	at org.apache.geode.DataSerializer.readObject(DataSerializer.java:2864) ~[geode-core-1.13.1.jar:na]
+	at org.apache.geode.internal.InternalDataSerializer$1.readObject(InternalDataSerializer.java:301) ~[geode-core-1.13.1.jar:na]
+	at org.apache.geode.distributed.internal.tcpserver.TcpClient.requestToServer(TcpClient.java:197) ~[geode-tcp-server-1.13.1.jar:na]
+	at org.apache.geode.cache.client.internal.AutoConnectionSourceImpl.queryOneLocatorUsingConnection(AutoConnectionSourceImpl.java:217) ~[geode-core-1.13.1.jar:na]
+	at org.apache.geode.cache.client.internal.AutoConnectionSourceImpl.queryOneLocator(AutoConnectionSourceImpl.java:207) ~[geode-core-1.13.1.jar:na]
+	at org.apache.geode.cache.client.internal.AutoConnectionSourceImpl.queryLocators(AutoConnectionSourceImpl.java:254) ~[geode-core-1.13.1.jar:na]
+	at org.apache.geode.cache.client.internal.AutoConnectionSourceImpl.access$200(AutoConnectionSourceImpl.java:68) ~[geode-core-1.13.1.jar:na]
+	at org.apache.geode.cache.client.internal.AutoConnectionSourceImpl$UpdateLocatorListTask.run2(AutoConnectionSourceImpl.java:457) ~[geode-core-1.13.1.jar:na]
+	at org.apache.geode.cache.client.internal.PoolImpl$PoolTask.run(PoolImpl.java:1329) ~[geode-core-1.13.1.jar:na]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.runAndReset(Unknown Source) ~[na:na]
+	at org.apache.geode.internal.ScheduledThreadPoolExecutorWithKeepAlive$DelegatingScheduledFuture.run(ScheduledThreadPoolExecutorWithKeepAlive.java:276) ~[geode-core-1.13.1.jar:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:na]
+	at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
+
+
+
