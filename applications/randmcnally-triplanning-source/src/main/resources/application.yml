@@ -1,0 +1,17 @@
+management.endpoints.web.exposure.include: "*"
+springdoc.api-docs.path: /api-docs
+spring:
+  application.name: randmcnallySource
+  cloud:
+    function.definition: randmcnallyVehicles
+    stream:
+      bindings:
+        randmcnallyVehicles-out-0:
+          destination: vehicleSink
+      function:
+        bindings:
+          vehicleGemFireSink-out-0: vehicleSink
+      rabbit:
+        default:
+          quorum.enabled: true
+

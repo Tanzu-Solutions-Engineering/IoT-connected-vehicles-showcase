@@ -1,0 +1,32 @@
+management.endpoints.web.exposure.include: "*"
+vehicleCount : 25
+messageCount : 1000000
+distanceIncrements : 1
+streamName : VehicleStream
+delayMs : 1
+
+server:
+  port: 7030
+springdoc.api-docs.path: /api-docs
+spring:
+  application.name: shovel-streaming-app
+rabbitmq:
+  streaming:
+    routing:
+      input:
+        uris: rabbitmq-stream://guest:guest@localhost:5554
+        replay:
+          bool: false
+          offset: 0
+        stream:
+          name: input
+      output:
+        uris: rabbitmq-stream://guest:guest@localhost:5552
+        stream:
+          name: output
+    stream:
+      maxAgeHours: 1
+      maxLengthGb: 10
+      maxSegmentSizeMb: 500
+    host: localhost
+    port: 5552
