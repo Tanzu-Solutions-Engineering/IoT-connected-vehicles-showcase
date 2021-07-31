@@ -21,7 +21,7 @@ dependencies {
     implementation("org.junit.jupiter:junit-jupiter:5.4.2")
     implementation("org.apache.logging.log4j:log4j-api:2.13.1")
     implementation(project(":components:IoT-connected-vehicles-domains"))
-    implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.3")
+    implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")
     testImplementation("org.mockito:mockito-junit-jupiter:3.8.0")
     testImplementation( "org.mockito:mockito-core:3.8.0")
     testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.1")
