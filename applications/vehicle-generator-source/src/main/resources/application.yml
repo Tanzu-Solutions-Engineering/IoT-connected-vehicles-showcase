@@ -1,0 +1,28 @@
+management.endpoints.web.exposure.include: "*"
+vehicleCount : 25
+messageCount : 10000
+distanceIncrements : 1
+vinPrefix: VS
+delayMs : 0
+server:
+  port: 7020
+springdoc.api-docs.path: /api-docs
+spring:
+  task:
+    execution:
+      pool:
+        max-size: 40
+  application.name: generateVehicleSource
+  cloud:
+    function.definition: generateVehicles
+    stream:
+      bindings:
+        generateVehicles-out-0:
+          destination: vehicleSink
+#      function:
+#        bindings:
+#          volvoVehicles-out-0: vehicleSink
+      rabbit:
+        default:
+          quorum.enabled: trues
+

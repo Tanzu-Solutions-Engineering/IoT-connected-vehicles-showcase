@@ -1,0 +1,19 @@
+SqlScheduler:
+  sql: "delete from pivotalmarkets.vehicle_telemetry
+        where telemetry_id in(
+        select telemetry_id from (
+        select row_number() OVER (ORDER BY capture_ts desc) AS rownum,
+        capture_ts, telemetry_id
+        FROM pivotalmarkets.vehicle_telemetry) telemetry_max_set
+        where telemetry_max_set.rownum > 50000)"
+  fixedDelayString:
+    milliseconds: 30000
+management.endpoints.web.exposure.include: "*"
+server:
+ port: 0
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: security
+  application.name: schedule-jdbc-sql-app

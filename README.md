@@ -27,13 +27,28 @@ Applications                                                                    
 [randmcnally-triplanning-source](applications/randmcnally-triplanning-source)       |    Trip planninhg details based on Rand McNally fleet management streaming source for vehicle data in XML format
 [volvo-safecar-source](applications/volvo-safecar-source)                           |    Safe car Volvo Fleet Management management streaming source for vehicle data in XML format
 
+# Env prerequisite
+
+```
+jdk: 11
+gradle: 6(if you are not sure which gradle version you are using, please try `gradle -v` and use `./gradlew` instead of `gradle`)
+kind
+kubectl
+cert-manager(<=1.2)
+helm(>=version3)
+
+nice to have:
+k9s
+kubectx
+```
+
 
 # Docker
 
 Use the following command to build docker images
 
 ```shell script
-gradle :applications:vehicle-generator-app:bootBuildImage
+gradle :applications:vehicle-generator-source:bootBuildImage
 gradle :applications:iot-connected-vehicle-dashboard:bootBuildImage
 gradle :applications:vehicles-geode-sink:bootBuildImage
 
@@ -47,9 +62,9 @@ TODO: What does the prod look like (source providers or vehicle)
 Locally
 
 ```shell script
-kind load docker-image vehicle-generator-app:0.0.1-SNAPSHOT
-kind load docker-image iot-connected-vehicle-dashboard:0.0.1-SNAPSHOT
-kind load docker-image iot-connected-vehicles-sink:0.0.1-SNAPSHOT
+kind load docker-image vehicle-generator-source:0.0.4-SNAPSHOT
+kind load docker-image iot-connected-vehicle-dashboard:0.0.2-SNAPSHOT
+kind load docker-image vehicles-geode-sink:0.0.4-SNAPSHOT
 ```
 
 ```shell script
@@ -59,7 +74,10 @@ kubectl apply -f cloud/k8/secrets
 vehicle-secrets
 
 ```shell script
-kubectl apply -f cloud/k8
+#kubectl apply -f cloud/k8
+kubectl apply -f cloud/k8/iot-connected-vehicle-dashboard.yml -n tds-workshop
+kubectl apply -f cloud/k8/apps/source/vehicle-generator-source/vehicle-generator-source.yml -n tds-workshop
+kubectl apply -f cloud/k8/apps/sink/geode-sink/vehicles-geode-sink.yml -n tds-workshop
 ```
 
 
@@ -104,7 +122,7 @@ kubectl port-forward rabbitmq-server-0 15672:15672
 Scale RabbitMQ to 3 nodes
 
 ```shell script
-kubectl apply -f cloud/k8/data-services/rabbitmq/rabbitmq-cluster-node3.yml
+kubectl apply -f cloud/k8/data-services/rabbitmq/local-cluster-node3.yml
 ```
 
 Scale GemFire to 2 locator and 3 datanodes
@@ -117,8 +135,8 @@ kubectl apply -f cloud/k8/data-services/gemfire/gf-cluster-locators-2-datanodes-
 k port-forward iot-connected-vehicle-dashboard 7000:7000
 
 
-k apply -f config-maps.yml
-k apply -f secrets/
+kubectl create -f cloud/k8/apps/config-maps.yml -n tds-workshop
+kubectl apply -f cloud/k8/secrets -n tds-workshop
 
 
 ### GKE

@@ -19,7 +19,7 @@ repositories {
 extra["springCloudVersion"] = "2020.0.3"
 
 dependencies {
-	implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.3")
+	implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")

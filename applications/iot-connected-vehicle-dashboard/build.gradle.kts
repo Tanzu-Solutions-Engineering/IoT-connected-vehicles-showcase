@@ -24,7 +24,7 @@ dependencies {
 	implementation("io.pivotal.services.dataTx:dataTx-geode-extensions-core:2.4.0")
 	implementation("io.pivotal.services.dataTx:dataTx-geode-extensions-spring-security:2.5.0")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.3")
+	implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")
 	implementation(project(":components:IoT-connected-vehicles-domains"))
 	implementation(project(":components:iot-connected-vehicles-repository"))
 	implementation("org.springframework.boot:spring-boot-starter-actuator")

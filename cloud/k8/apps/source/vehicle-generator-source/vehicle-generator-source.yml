@@ -10,11 +10,11 @@ spec:
       image: nyla/vehicle-generator-source:0.0.4-SNAPSHOT
       resources:
         requests:
-          memory: "5Gi"
+          memory: "1Gi"
       imagePullPolicy: Always
       env:
         - name: "JVM_ARGS"
-          value: "-Xms4g -Xmx4g"
+          value: "-Xms800m -Xmx800m"
         - name: vehicleCount
           value: "50"
         - name: messageCount

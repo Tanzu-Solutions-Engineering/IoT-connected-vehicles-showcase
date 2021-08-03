@@ -1,0 +1,16 @@
+management.endpoints.web.exposure.include: "*"
+vehicleCount : 1
+messageCount : 100000
+distanceIncrements : 1
+delayMs : 1
+vinPrefix: "EDGE"
+server:
+  port: 7020
+springdoc.api-docs.path: /api-docs
+spring:
+  application.name: vehicle-generator-mqtt-source
+mqtt:
+  connectionUrl: tcp://localhost:1883
+  userName: mqtt
+  userPassword: mqtt
+  topic: vehicleSink.vehicleSink

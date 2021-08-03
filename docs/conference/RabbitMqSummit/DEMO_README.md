@@ -105,7 +105,7 @@ k get services
 
 **Start Demo**
 ---------------
-
+###
 k apply -f cloud/k8/apps/sink/geode-sink/gke/vehicles-geode-sink-gke.yml
 
 k apply -f cloud/k8/apps/source/vehicle-generator-source/gke/FLEET-A.yml
