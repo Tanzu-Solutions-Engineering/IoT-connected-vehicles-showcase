@@ -28,21 +28,19 @@ Applications                                                                    
 
 # Prerequisite
 
-```text
-kubernetes env and kubectl（or Docker app with kubernetes)
-jdk: 11
-gradle: 6(if you are not sure which gradle version you are using, please try `gradle -v` and use `./gradlew` instead of `gradle`)
-kind https://kind.sigs.k8s.io/
-cert-manager(<=v1.2) https://cert-manager.io/docs/
-helm(>=v3) https://helm.sh/
-```
+- kubernetes env and kubectl（or Docker app with kubernetes)
+- jdk: 11
+- gradle: 6(if you are not sure which gradle version you are using, please try `gradle -v` and use `./gradlew` instead of `gradle`)
+- kind https://kind.sigs.k8s.io/
+- cert-manager(<=v1.2) https://cert-manager.io/docs/
+- helm(>=v3) https://helm.sh/
+- nice to have:
 
-nice to have:
-
-```text
-k9s https://k9scli.io/
-kubectx https://github.com/ahmetb/kubectx
-```
+   ```text
+   k9s: to manage kubernetes in terminal. https://k9scli.io/
+   kubectx: to switch kubernetes context. https://github.com/ahmetb/kubectx
+   jenv: to switch jvm/jdk version. https://www.jenv.be/
+   ```
 
 # Preparation
 1. install operators of VMware Tanzu GemFire for Kubernetes(v1.0), VMware Tanzu RabbitMQ for Kubernetes(v1.1.0) and VMware Tanzu SQL with Postgres for Kubernetes(v1.2) 
@@ -148,18 +146,23 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     ```shell script
     kubectl -n tds-workshop apply -f cloud/k8/data-services/gemfire/gf-cluster-locators-2-datanodes-3.yml
     ```
+1. create Region in GemFire
+   
+   `kubectl -n tds-workshop exec gemfire1-locator-0 -- gfsh -e "connect" -e "create region --name=Vehicle --eviction-action=local-destroy --eviction-max-memory=10000 --entry-time-to-live-expiration=60 --entry-time-to-live-expiration-action=DESTROY --enable-statistics=true --type=PARTITION"`
 
 ## App
 1. forward app port
     ```shell
-    kubectl -n tds-workshop port-forward iot-connected-vehicle-dashboard 7070:7070
+    kubectl -n tds-workshop port-forward iot-connected-vehicle-dashboard 7000:7000
     ```
-
+## run the app
+1. CHROME - open http://localhost:7000
+   ![iot-connected-vehicle-dashboard_demo.png](../images/iot-connected-vehicle-dashboard_demo.png)
 
 # FAQ
 1. gradle version 
    
     if you are not sure the gradle version on your env will match this repo,  please use `./gradlew` instead of `gradle`
-1. namespace
+1. Kubernetes namespace
    
-    if you choose to run all the app and data service in a namespace other than default namespace
+    if you choose to run all the app and data service in a namespace other than default namespace, please ensure all the commands running under same namespace.
