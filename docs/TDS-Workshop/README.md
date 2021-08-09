@@ -108,8 +108,8 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     ```shell script
     kubectl -n tds-workshop get secret rabbitmq-default-user -o jsonpath="{.data.username}"
     
-    export ruser=`kubectl get secret rabbitmq-default-user -o jsonpath="{.data.username}"| base64 --decode`
-    export rpwd=`kubectl get secret rabbitmq-default-user -o jsonpath="{.data.password}"| base64 --decode`
+    export ruser=`kubectl -n tds-workshop get secret rabbitmq-default-user -o jsonpath="{.data.username}"| base64 --decode`
+    export rpwd=`kubectl -n tds-workshop get secret rabbitmq-default-user -o jsonpath="{.data.password}"| base64 --decode`
     
     echo ""
     echo "USER:" $ruser
@@ -157,6 +157,7 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     ```
 ## run the app
 1. CHROME - open http://localhost:7000
+   
    ![iot-connected-vehicle-dashboard_demo.png](../images/iot-connected-vehicle-dashboard_demo.png)
 
 # FAQ
@@ -166,3 +167,6 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
 1. Kubernetes namespace
    
     if you choose to run all the app and data service in a namespace other than default namespace, please ensure all the commands running under same namespace.
+1. debug related commands
+   
+   [debug help](README-debug.md)
