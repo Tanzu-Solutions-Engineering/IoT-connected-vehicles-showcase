@@ -13,9 +13,7 @@
 - Low latency data read/write operations with GemFire
 - show telemetry in PostgreSQL
 
-
-![img.png](../images/overview.png)
-![connected_car_demo.png](../images/connected_car_demo.png)
+![TDS-workshop-apps-and-DataServices](../images/TDS-workshop-apps-and-DataServices.jpg)
 
 # Project Modules
 
