@@ -53,15 +53,13 @@ VMware Tanzu RabbitMQ for Kubernetes(v1.1.0)        | https://www.rabbitmq.com/k
 VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernetes.docs.pivotal.io/1-2/index.html
 
 
-
+## build local images
 1. clean and build local code
    
     ```shell script
     ./gradlew clean
     ./gradlew build
     ```
-
-# Docker images
 
 1. Use the following command to build docker images
 
@@ -70,14 +68,24 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     ./gradlew :applications:iot-connected-vehicle-dashboard:bootBuildImage
     ./gradlew :applications:vehicles-geode-sink:bootBuildImage
     ```
-
-
-# Accessing K8 Services
-
-## namespace
-1. create namespace
+## k8s preparation
+1. switch kind context
    
+   `kubectl config use-context kind-kind`
+   
+   Or
+   
+   `kubectx kind-kind`
+
+1.  create kind cluster
+    
+    `kind create cluster`
+
+1. create namespace
+
    `kubectl create namespace tds-workshop`
+   
+# Accessing K8 Services
 ## RabbitMQ Access
 1. Get the RabbitMQ user/password, please keep $ruser and $rpwd on note, later you can login RabbiMQ Management UI by it.
     ```shell script
