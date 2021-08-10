@@ -1,6 +1,6 @@
 # debug help
 
-## gradle
+## gradle related
 1. `brew install gradle`
 1.  run `gradle build` first
 1. `./gradlew clean`
@@ -10,14 +10,14 @@
 1. `./gradlew buildDependents`
 1. `./gradlew build`
 
-## kind
+## kind related
 
-1. `kubectl config get-contexts`.    ` kubectx`
-1. `kubectl config use-context kind-kind`.   `kubectx kind-kind`
+1. `kubectl config get-contexts`  or    ` kubectx`
+1. `kubectl config use-context kind-kind` or `kubectx kind-kind`
 1. `kind delete cluster`
 1. `kind create cluster` 
 
-## kubenetes 
+## kubenetes related
 1. namespace
     2. `kubectl create namespace tds-workshop`
 1. configMap
@@ -32,6 +32,7 @@
       1. `echo "PASWORD:" $rpwd`
 1. secret
     1. `kubectl get secret -n tds-workshop`
+    1. `kubectl get secret -n tds-workshop vehicle-secrets -o yaml`
 1. GemFire
     1. run GFSH `kubectl -n tds-workshop exec -it gemfire1-locator-0 -- gfsh`
     1. get configMap of GemFire `kubectl get cm gemfire1-config -o yaml -n tds-workshop`
@@ -43,3 +44,6 @@
    1. `kubectl -n tds-workshop delete pod vehicle-generator-source`
    1. `kubectl -n tds-workshop delete pod vehicles-geode-sink`
    1. `kubectl -n tds-workshop delete pod iot-connected-vehicle-dashboard`
+1. port forward
+   1. `kubectl -n tds-workshop port-forward rabbitmq-server-0 15672:15672 > /tmp/k8s-rabbitMq1.log &`
+   1. `kubectl port-forward iot-connected-vehicle-dashboard 7000:7000 -n tds-workshop >/tmp/ios-dashboard1.log&`

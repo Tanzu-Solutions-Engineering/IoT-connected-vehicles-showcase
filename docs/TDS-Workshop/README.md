@@ -43,8 +43,8 @@ Applications                                                                    
    ```
 
 # Preparation
+## Tanzu Data Service Operators
 1. install operators of VMware Tanzu GemFire for Kubernetes(v1.0), VMware Tanzu RabbitMQ for Kubernetes(v1.1.0) and VMware Tanzu SQL with Postgres for Kubernetes(v1.2) 
-
 
 Tanzu Products | URL
 ---------------|--------
@@ -53,7 +53,7 @@ VMware Tanzu RabbitMQ for Kubernetes(v1.1.0)        | https://www.rabbitmq.com/k
 VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernetes.docs.pivotal.io/1-2/index.html
 
 
-## build local images
+## Build local images
 1. clean and build local code
    
     ```shell script
@@ -68,7 +68,7 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     ./gradlew :applications:iot-connected-vehicle-dashboard:bootBuildImage
     ./gradlew :applications:vehicles-geode-sink:bootBuildImage
     ```
-## k8s preparation
+## K8s preparation
 1. switch kind context
    
    `kubectl config use-context kind-kind`
