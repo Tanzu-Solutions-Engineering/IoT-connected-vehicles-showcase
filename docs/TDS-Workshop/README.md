@@ -69,39 +69,10 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     ./gradlew :applications:vehicle-generator-source:bootBuildImage
     ./gradlew :applications:iot-connected-vehicle-dashboard:bootBuildImage
     ./gradlew :applications:vehicles-geode-sink:bootBuildImage
-    
     ```
 
-# K8
-
-1. load docker-image of apps
-
-    ```shell script
-    kind load docker-image vehicle-generator-source:0.0.4-SNAPSHOT
-    kind load docker-image iot-connected-vehicle-dashboard:0.0.2-SNAPSHOT
-    kind load docker-image vehicles-geode-sink:0.0.4-SNAPSHOT
-    ```
-
-1. add vehicle-secrets to kubernetes
-    ```shell script
-    kubectl apply -f cloud/k8/secrets -n tds-workshop
-    ```
-
-1. add config-map to kubernetes 
-    ```shell script
-    kubectl create -f cloud/k8/apps/config-maps.yml -n tds-workshop
-    ```
-1. deploy pods
-   
-    ```shell script
-    kubectl apply -f cloud/k8/iot-connected-vehicle-dashboard.yml -n tds-workshop
-    kubectl apply -f cloud/k8/apps/source/vehicle-generator-source/vehicle-generator-source.yml -n tds-workshop
-    kubectl apply -f cloud/k8/apps/sink/geode-sink/vehicles-geode-sink.yml -n tds-workshop
-    ```
 
 # Accessing K8 Services
-
-
 
 ## RabbitMQ Access
 1. Get the RabbitMQ user/password
@@ -150,13 +121,40 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
    
    `kubectl -n tds-workshop exec gemfire1-locator-0 -- gfsh -e "connect" -e "create region --name=Vehicle --eviction-action=local-destroy --eviction-max-memory=10000 --entry-time-to-live-expiration=60 --entry-time-to-live-expiration-action=DESTROY --enable-statistics=true --type=PARTITION"`
 
-## App
+# Apps
+
+1. load docker-image of apps
+
+    ```shell script
+    kind load docker-image vehicle-generator-source:0.0.4-SNAPSHOT
+    kind load docker-image iot-connected-vehicle-dashboard:0.0.2-SNAPSHOT
+    kind load docker-image vehicles-geode-sink:0.0.4-SNAPSHOT
+    ```
+
+1. add vehicle-secrets to kubernetes
+    ```shell script
+    kubectl apply -f cloud/k8/secrets -n tds-workshop
+    ```
+
+1. add config-map to kubernetes
+    ```shell script
+    kubectl create -f cloud/k8/apps/config-maps.yml -n tds-workshop
+    ```
+
+1. deploy pods
+
+    ```shell script
+    kubectl apply -f cloud/k8/iot-connected-vehicle-dashboard.yml -n tds-workshop
+    kubectl apply -f cloud/k8/apps/source/vehicle-generator-source/vehicle-generator-source.yml -n tds-workshop
+    kubectl apply -f cloud/k8/apps/sink/geode-sink/vehicles-geode-sink.yml -n tds-workshop
+    ```
+
 1. forward app port
     ```shell
     kubectl -n tds-workshop port-forward iot-connected-vehicle-dashboard 7000:7000
     ```
-## run the app
-1. CHROME - open http://localhost:7000
+1. run the app
+   1. CHROME - open http://localhost:7000
    
    ![iot-connected-vehicle-dashboard_demo.png](../images/iot-connected-vehicle-dashboard_demo.png)
 
