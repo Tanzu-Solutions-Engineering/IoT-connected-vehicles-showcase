@@ -74,8 +74,12 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
 
 # Accessing K8 Services
 
+## namespace
+1. create namespace
+   
+   `kubectl create namespace tds-workshop`
 ## RabbitMQ Access
-1. Get the RabbitMQ user/password
+1. Get the RabbitMQ user/password, please keep $ruser and $rpwd on note, later you can login RabbiMQ Management UI by it.
     ```shell script
     kubectl -n tds-workshop get secret rabbitmq-default-user -o jsonpath="{.data.username}"
     
@@ -168,3 +172,5 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
 1. debug related commands
    
    [debug help](README-debug.md)
+1. OOM(out of memory) or insufficient resource error
+   please assign more resource(CPU and memory) to pod or data services.
