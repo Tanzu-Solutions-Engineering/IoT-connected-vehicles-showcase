@@ -41,15 +41,6 @@ Applications                                                                    
    ```
 
 # Preparation
-## Tanzu Data Service Operators
-1. install operators of VMware Tanzu GemFire for Kubernetes(v1.0), VMware Tanzu RabbitMQ for Kubernetes(v1.1.0) and VMware Tanzu SQL with Postgres for Kubernetes(v1.2) 
-
-Tanzu Products | URL
----------------|--------
-VMware Tanzu GemFire for Kubernetes(v1.0)           | https://tgf.docs.pivotal.io/tgf/1-0/index.html
-VMware Tanzu RabbitMQ for Kubernetes(v1.1.0)        | https://www.rabbitmq.com/kubernetes/operator/operator-overview.html
-VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernetes.docs.pivotal.io/1-2/index.html
-
 
 ## Build local images
 1. clean and build local code
@@ -68,21 +59,30 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     ```
 ## K8s preparation
 1. switch kind context
-   
+
    `kubectl config use-context kind-kind`
-   
+
    Or
-   
+
    `kubectx kind-kind`
 
 1.  create kind cluster
-    
+
     `kind create cluster`
 
 1. create namespace
 
    `kubectl create namespace tds-workshop`
-   
+
+## Installation of Tanzu Data Service Operators
+1. install operators of VMware Tanzu GemFire for Kubernetes(v1.0), VMware Tanzu RabbitMQ for Kubernetes(v1.1.0) and VMware Tanzu SQL with Postgres for Kubernetes(v1.2) to the namespace `tds-workshop`
+
+Tanzu Products | URL
+---------------|--------
+VMware Tanzu GemFire for Kubernetes(v1.0)           | https://tgf.docs.pivotal.io/tgf/1-0/index.html
+VMware Tanzu RabbitMQ for Kubernetes(v1.1.0)        | https://www.rabbitmq.com/kubernetes/operator/operator-overview.html
+VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernetes.docs.pivotal.io/1-2/index.html
+
 # Accessing K8 Services
 ## RabbitMQ Access
 1. Get the RabbitMQ user/password, please keep $ruser and $rpwd on note, later you can login RabbiMQ Management UI by it.
