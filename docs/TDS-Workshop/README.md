@@ -115,7 +115,7 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     kubectl -n tds-workshop exec rabbitmq-server-0 -- rabbitmqctl set_user_tags <user> administrator
     
     ```
-4. forward port
+4. forward port of RabbitMQ
     ```shell script
     kubectl -n tds-workshop port-forward rabbitmq-server-0 15672:15672
     ```
@@ -159,11 +159,11 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     kubectl apply -f cloud/k8/apps/sink/geode-sink/vehicles-geode-sink.yml -n tds-workshop
     ```
 
-1. forward app port
+1. forward port of vehicle-dashboard
     ```shell
     kubectl -n tds-workshop port-forward iot-connected-vehicle-dashboard 7000:7000
     ```
-1. run the app
+1. view the page of vehicle-dashboard
    1. CHROME - open http://localhost:7000
    
    ![iot-connected-vehicle-dashboard_demo.png](../images/iot-connected-vehicle-dashboard_demo.png)
@@ -178,5 +178,7 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
 1. debug related commands
    
    [debug help](README-debug.md)
+   
 1. OOM(out of memory) or insufficient resource error
+   
    please assign more resource(CPU and memory) to pod or data services.
