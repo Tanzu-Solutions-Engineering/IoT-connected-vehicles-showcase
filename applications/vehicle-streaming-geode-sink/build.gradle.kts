@@ -37,7 +37,7 @@ dependencies {
     implementation(project(":components:vehicle-messaging"))
     implementation(project(":components:messaging-streaming"))
     implementation(project(":components:vehicle-messaging-streaming"))
-    implementation("com.rabbitmq:stream-client:0.1.0-SNAPSHOT")
+    implementation("com.rabbitmq:stream-client:0.3.0")
     implementation("org.apache.qpid:proton-j:0.33.8")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.amqp:spring-rabbit-test")

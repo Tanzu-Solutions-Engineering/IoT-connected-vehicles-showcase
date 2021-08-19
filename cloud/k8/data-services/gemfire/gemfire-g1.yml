@@ -32,7 +32,7 @@ spec:
         - "-Xms19000m"
         - "-Xmx19000m"
         - "-Dgemfire.statistic-sample-rate=5000"
-        - "-Dgemfire.enable-time-statistics=true"
+        - "-Dgemfire.enable-timke-statistics=true"
         - "-Dgemfire.statistic-sampling-enabled=true"
         - "-Dgemfire.standard-output-always-on=true"
         - "-Dgemfire.archive-file-size-limit=10"

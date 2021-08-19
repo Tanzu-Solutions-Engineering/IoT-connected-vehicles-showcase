@@ -1,5 +1,12 @@
 # Setup 
 
+## Build Applications
+
+```shell
+./gradlew build
+```
+
+
 ## RabbitMQ
 
 ```shell
@@ -7,10 +14,28 @@ cd /Users/devtools/integration/messaging/rabbit/rabbit-devOps
 ./start.sh
 ```
 
-## Geode Pulse
+## Geode 
+
+```shell
+cd /Users/devtools/repositories/IMDG/geode/apache-geode-1.13.1/bin
+./gfsh 
+```
+
+In gfsh
+
+```shell
+start locator --name=locator
+start server --name=server1
+exit
+```
+
+### Pulse
+
 ```shell
 open -n -a "Google Chrome" --args "--new-window" "http://localhost:7070/pulse/clusterDetail.html"
 ````
+
+User admin/admin
 
 # Applications
 
@@ -27,13 +52,14 @@ open -n -a "Google Chrome" --args "--new-window" "http://localhost:7000"
 ## Sink
 
 ```shell script
- java -jar applications/vehicles-geode-sink/build/libs/vehicles-geode-sink-0.0.1-SNAPSHOT.jar
+ java -jar applications/vehicles-geode-sink/build/libs/vehicles-geode-sink-*.jar
 ```
 
 ## Generator
 
 ```shell script
-java -jar applications/vehicle-generator-app/build/libs/vehicle-generator-app-0.0.1-SNAPSHOT.jar  --delayMs=0
+java -jar applications/vehicle-generator-source/build/libs/vehicle-generator-source-*.jar --delayMs=5 
+
 ```
 
 ```shell

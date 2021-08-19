@@ -54,8 +54,6 @@ gradle :applications:vehicles-geode-sink:bootBuildImage
 
 ```
 
-TODO: What does the prod look like (source providers or vehicle)
-
 
 # K8 
 
@@ -129,21 +127,20 @@ Scale GemFire to 2 locator and 3 datanodes
 
 ```shell script
 kubectl apply -f cloud/k8/data-services/gemfire/gf-cluster-locators-2-datanodes-3.yml
+k port-forward iot-connected-vehicle-dashboard 7000:7000
+kubectl create -f cloud/k8/apps/config-maps.yml -n tds-workshop
+kubectl apply -f cloud/k8/secrets -n tds-workshop
 ```
 
 
-k port-forward iot-connected-vehicle-dashboard 7000:7000
-
-
-kubectl create -f cloud/k8/apps/config-maps.yml -n tds-workshop
-kubectl apply -f cloud/k8/secrets -n tds-workshop
 
 
 ### GKE
 
+```shell script
 k apply -f cloud/GKE/k8/iot-connected-vehicle-dashboard.yml
-
 k apply -f cloud/GKE/k8/iot-dashboard-service.yml
+```
 
 
 
@@ -158,36 +155,22 @@ To deploy the Wavefront Collector and Wavefront Proxy:
 
 Using helm 2:
 
+```shell script
 helm install wavefront/wavefront --name wavefront --set wavefront.url=https://YOUR_CLUSTER.wavefront.com --set wavefront.token=YOUR_API_TOKEN --set clusterName=<YOUR_CLUSTER_NAME> --namespace wavefront
+```
 
 Using helm 3:
 
-kubectl create namespace wavefront
-
 ```shell script
-
+kubectl create namespace wavefront
 ```
+`
+```shell script
 helm install wavefront wavefront/wavefront --set wavefront.url=https://YOUR_CLUSTER.wavefront.com --set wavefront.token=YOUR_API_TOKEN --set clusterName=<YOUR_CLUSTER_NAME> --namespace wavefront
-
+```
 
 [Local WaveFront](https://vmware.wavefront.com/dashboards/integration-kubernetes-clusters#_v01(g:(d:7200,ls:!t,s:1617894218,w:'2h'),p:(cluster_name:(v:gregoryg-cluster))))
 
-Look for gregoryg-cluster
-
-
-
-Return generate 
-
-k delete pod vehicle-generator-app
-
-## Streaming
-
-
-mvn -Dmaven.test.skip=true install
-
-git remote -v
-origin	https://github.com/rabbitmq/rabbitmq-stream-java-client.git (fetch)
-origin	https://github.com/rabbitmq/rabbitmq-stream-java-client.git (push)
 
 
 ## Lessons Learned
@@ -437,6 +420,7 @@ ResourceExhausted! (1/0)
 
 2021-06-25 18:45:58.053  WARN 1 --- [ntLoopGroup-2-5] com.rabbitmq.stream.impl.Client          : Error in stream handler
 
+```
 java.lang.OutOfMemoryError: Direct buffer memory
 at java.base/java.nio.Bits.reserveMemory(Unknown Source) ~[na:na]
 at java.base/java.nio.DirectByteBuffer.<init>(Unknown Source) ~[na:na]
@@ -642,6 +626,8 @@ java.net.SocketTimeoutException: Read timed out
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:na]
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:na]
 	at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
+
+```
 
 
 

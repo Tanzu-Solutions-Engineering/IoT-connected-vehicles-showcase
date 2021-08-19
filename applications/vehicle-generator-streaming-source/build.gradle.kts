@@ -30,7 +30,7 @@ dependencies {
     implementation(project(":components:messaging-streaming"))
     implementation(project(":components:vehicle-messaging-streaming"))
     implementation("org.springframework.boot:spring-boot-starter-amqp")
-    implementation("com.rabbitmq:stream-client:0.1.0-SNAPSHOT")
+    implementation("com.rabbitmq:stream-client:0.3.0")
     implementation("org.apache.qpid:proton-j:0.33.8")
 //    implementation("org.xerial.snappy:snappy-java:1.1.8.4")
 //    implementation("org.lz4:lz4-java:1.8.0")

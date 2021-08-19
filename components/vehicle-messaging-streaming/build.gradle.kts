@@ -27,7 +27,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation(project(":components:messaging-streaming"))
     implementation(project(":components:vehicle-messaging"))
-    implementation("com.rabbitmq:stream-client:0.1.0-SNAPSHOT")
+    implementation("com.rabbitmq:stream-client:0.3.0")
     implementation("org.apache.qpid:proton-j:0.33.8")
     testImplementation("org.mockito.kotlin:mockito-kotlin:3.1.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.0-M1")
