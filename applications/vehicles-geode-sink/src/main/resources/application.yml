@@ -1,10 +1,7 @@
-#management.endpoints.web.exposure.include: "*"
 server:
   port: 0
 spring:
   application.name: VehicleGeodeSink
-#  main:
-#    allow-bean-definition-overriding: true
   cloud:
     function.definition: vehicleRepositorySink
     stream:
@@ -12,7 +9,6 @@ spring:
         vehicleRepositorySink-in-0:
           destination: vehicleSink
           group: vehicleRepositorySink
-          #          queueNameGroupOnly: true
           consumer:
             concurrency: 20
       rabbit:
