@@ -104,11 +104,11 @@ echo "PASWORD:" $rpwd
 Add new users
 
 ```shell
-kubectl exec rabbitmq-server-0 -- rabbitmqctl add_user <user> <password>
+kubectl exec rabbitmq-server-0 -- rabbitmqctl add_user $APP_USER $APP_PWD
 
-kubectl exec rabbitmq-server-0 -- rabbitmqctl set_permissions  -p / <user> ".*" ".*" ".*"
+kubectl exec rabbitmq-server-0 -- rabbitmqctl set_permissions  -p / $APP_USER ".*" ".*" ".*"
 
-kubectl exec rabbitmq-server-0 -- rabbitmqctl set_user_tags <user> administrator
+kubectl exec rabbitmq-server-0 -- rabbitmqctl set_user_tags $APP_USER administrator
 
 ```
 

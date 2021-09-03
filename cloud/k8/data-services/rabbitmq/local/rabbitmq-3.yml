@@ -7,13 +7,13 @@ spec:
   image: pivotalrabbitmq/rabbitmq-stream
   resources:
     requests:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 500m
+      memory: 700Mi
     limits:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 500m
+      memory: 700Mi
   persistence:
-    storage: 3Gi
+    storage: 2Gi
   rabbitmq:
     additionalPlugins:
       - rabbitmq_mqtt

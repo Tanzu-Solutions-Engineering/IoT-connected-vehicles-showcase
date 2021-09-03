@@ -10,7 +10,7 @@ spring:
           destination: vehicleSink
           group: vehicleRepositorySink
           consumer:
-            concurrency: 20
+            concurrency: 2
       rabbit:
         bindings:
           vehicleRepositorySink-in-0:

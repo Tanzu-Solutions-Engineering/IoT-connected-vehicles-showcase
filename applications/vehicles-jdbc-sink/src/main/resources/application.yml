@@ -5,13 +5,13 @@ flyway:
  locations: "filesystem:/Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase/applications/vehicles-jdbc-sink/src/main/resources/db/migration"
 spring:
   flyway:
-    url: jdbc:postgresql://localhost:5432/postgres
-    user: postgres
-    password: security
-    locations: "filesystem:/Users/Projects/VMware/Tanzu/IoT/dev/IoT-connected-vehicles-showcase/applications/vehicles-jdbc-sink/src/main/resources/db/migration"
+#    url: jdbc:postgresql://localhost:5432/postgres
+#    user: postgres
+#    password: security
+    locations: "classpath:db/migration"
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     generate-ddl: true
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
@@ -27,7 +27,7 @@ spring:
           group: vehicleTelemetryRepositorySink
 #          queueNameGroupOnly: true
           consumer:
-            concurrency: 20
+            concurrency: 1
       rabbit:
         bindings:
           vehicleTelemetryRepositorySink-in-0:

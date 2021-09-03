@@ -5,7 +5,7 @@ metadata:
     run:  iot-connected-vehicle-dashboard
   name:  iot-connected-vehicle-dashboard
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       run:  iot-connected-vehicle-dashboard

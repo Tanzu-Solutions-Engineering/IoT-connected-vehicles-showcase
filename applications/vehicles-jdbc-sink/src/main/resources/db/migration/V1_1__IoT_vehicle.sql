@@ -1,5 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS vehicle_iot;
 
-CREATE TABLE pivotalmarkets.vehicle_telemetry (
+CREATE TABLE vehicle_iot.vehicle_telemetry (
     telemetry_id SERIAL,
 	latitude float8 null,
 	longitude float8 null ,
