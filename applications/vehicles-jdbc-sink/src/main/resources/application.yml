@@ -11,7 +11,7 @@ spring:
     locations: "classpath:db/migration"
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     generate-ddl: true
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres

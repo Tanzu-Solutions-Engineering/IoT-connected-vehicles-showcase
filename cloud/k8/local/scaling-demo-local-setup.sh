@@ -35,7 +35,7 @@ kubectl create rolebinding psp-gemfire --clusterrole=psp:vmware-system-privilege
 sleep 1m
 
 #helm install gemfire-operator gemfire-operator --namespace gemfire-system
-kubectl wait pod -l=app.kubernetes.io/component=webhook -n cert-manager --for=condition=Ready --timeout=15m
+kubectl wait pod -l=app.kubernetes.io/component=webhook -n cert-manager --for=condition=Ready --timeout=1m
 
 
 helm install gemfire-operator $GF_INSTALL/gemfire-operator-1.0.2.tgz --namespace gemfire-system
@@ -59,7 +59,7 @@ kubectl create secret docker-registry regsecret \
 --docker-server=https://registry.pivotal.io --docker-username=$HARBOR_USER \
 --docker-password=$HARBOR_PASSWORD
 
-helm install --wait postgres-operator /tmp/postgres-operator/ --timeout=15m
+helm install --wait postgres-operator /tmp/postgres-operator/ --timeout=1m
 sleep 30s
 
 
@@ -74,7 +74,7 @@ kubectl exec -it postgres-0 -- psql -c "ALTER USER postgres PASSWORD 'CHANGEME'"
 
 kubectl apply -f "https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml"
 kubectl apply -f cloud/k8/data-services/rabbitmq/local/rabbitmq-1.yml
-kubectl wait pod -l=app.kubernetes.io/name=rabbitmq --for=condition=Ready --timeout=15m
+kubectl wait pod -l=app.kubernetes.io/name=rabbitmq --for=condition=Ready --timeout=1m
 
 
 # --------------------------------
@@ -112,13 +112,13 @@ kubectl apply -f $SCDF_HOME/services/dev/rabbitmq/secret.yaml
 
 kubectl apply -f $SCDF_HOME/services/dev/skipper.yaml
 sleep 15s
-kubectl wait pod -l=app=skipper --for=condition=Ready --timeout=15m
+kubectl wait pod -l=app=skipper --for=condition=Ready --timeout=1m
 kubectl apply -f $SCDF_HOME/services/dev/data-flow.yaml
 
  sleep 10s
-kubectl wait pod -l=app=scdf-server --for=condition=Ready --timeout=15m
+kubectl wait pod -l=app=scdf-server --for=condition=Ready --timeout=1m
 
-kubectl apply -f $SCDF_HOME/services/dev/monitoring-proxy
+#kubectl apply -f $SCDF_HOME/services/dev/monitoring-proxy
 
 --------------------------
 
@@ -127,17 +127,17 @@ kubectl apply -f $SCDF_HOME/services/dev/monitoring-proxy
 
 cd $PROJECT_HOME
 
-gradle :applications:vehicle-generator-source:bootBuildImage
-gradle :applications:iot-connected-vehicle-dashboard:bootBuildImage
-gradle :applications:vehicles-geode-sink:bootBuildImage
-gradle :applications:vehicles-jdbc-sink:bootBuildImage
+#gradle :applications:vehicle-generator-source:bootBuildImage
+#gradle :applications:iot-connected-vehicle-dashboard:bootBuildImage
+#gradle :applications:vehicles-geode-sink:bootBuildImage
+#gradle :applications:vehicles-jdbc-sink:bootBuildImage
 
 # Locally add images to docker
 
-kind load docker-image vehicle-generator-source:0.0.4-SNAPSHOT
-kind load docker-image iot-connected-vehicle-dashboard:0.0.2-SNAPSHOT
-kind load docker-image vehicles-geode-sink:0.0.4-SNAPSHOT
-kind load docker-image vehicles-jdbc-sink:0.0.1-SNAPSHOT
+#kind load docker-image vehicle-generator-source:0.0.4-SNAPSHOT &
+#kind load docker-image iot-connected-vehicle-dashboard:0.0.2-SNAPSHOT &
+#kind load docker-image vehicles-geode-sink:0.0.4-SNAPSHOT &
+kind load docker-image vehicles-jdbc-sink:0.0.1-SNAPSHOT &
 
 # Setup K8 Config/Secrets
 
@@ -150,13 +150,14 @@ kubectl apply -f $PROJECT_HOME/cloud/k8/apps/dashboard
 
 # Expose RabbitMQ Dashboard
 
-k port-forward rabbitmq-server-0 15672:15672 &
+
 
 # Expose Vehicle Dashboard
 
-kubectl port-forward service/vehicle-dashboards-service 7000:80 &
+
 
 k port-forward deployment/scdf-server 9393:8080&
+k port-forward rabbitmq-server-0 15672:15672 &
 
 kubectl exec gemfire1-locator-0 -- gfsh -e "connect" -e "create region --name=Vehicle --eviction-action=local-destroy --eviction-max-memory=10000 --entry-time-to-live-expiration=60 --entry-time-to-live-expiration-action=DESTROY --enable-statistics=true --type=PARTITION"
 
@@ -171,3 +172,5 @@ kubectl exec rabbitmq-server-0 -- rabbitmqctl set_user_tags $APP_USER administra
 kubectl exec rabbitmq-server-0 -- rabbitmqctl add_user app CHANGEME
 kubectl exec rabbitmq-server-0 -- rabbitmqctl set_permissions  -p / app ".*" ".*" ".*"
 kubectl exec rabbitmq-server-0 -- rabbitmqctl set_user_tags app administrator
+
+kubectl port-forward service/vehicle-dashboards-service 7000:80 &
