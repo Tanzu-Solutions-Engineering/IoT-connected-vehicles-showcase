@@ -6,7 +6,7 @@ plugins {
     kotlin("jvm") version "1.4.32"
     kotlin("plugin.spring") version "1.4.32"
     kotlin("plugin.jpa") version "1.4.32"
-    maven
+    //maven
 }
 
 group = "com.vmware.tanzu.data"
