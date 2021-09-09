@@ -25,20 +25,20 @@ Applications                                                                    
 [vehicle-generator-source](applications/vehicle-generator-source)                   |    Car positioning data generator for vehicle details in JSON format
 
 # Prerequisite
-
+## required
 - kubernetes env and kubectl（or Docker app with kubernetes)
 - jdk: 11
 - gradle: 6(if you are not sure which gradle version you are using, please try `gradle -v` and use `./gradlew` instead of `gradle`)
-- kind https://kind.sigs.k8s.io/
+- kind and create kind cluster by `kind create cluster` https://kind.sigs.k8s.io/
 - cert-manager(<=v1.2) https://cert-manager.io/docs/
 - helm(>=v3) https://helm.sh/
-- nice to have:
 
-   ```text
-   k9s: to manage kubernetes in terminal. https://k9scli.io/
-   kubectx: to switch kubernetes context. https://github.com/ahmetb/kubectx
-   jenv: to switch jvm/jdk version. https://www.jenv.be/
-   ```
+## nice to have:
+
+- k9s: to manage kubernetes in terminal. https://k9scli.io/
+- kubectx: to switch kubernetes context. https://github.com/ahmetb/kubectx
+- jenv: to switch jvm/jdk version. https://www.jenv.be/
+
 
 # Preparation
 
