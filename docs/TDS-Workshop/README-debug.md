@@ -46,4 +46,4 @@
    1. `kubectl -n tds-workshop delete pod iot-connected-vehicle-dashboard`
 1. port forward
    1. `kubectl -n tds-workshop port-forward rabbitmq-server-0 15672:15672 > /tmp/k8s-rabbitMq1.log &`
-   1. `kubectl pzort-forward iot-connected-vehicle-dashboard 7000:7000 -n tds-workshop >/tmp/iot-dashboard1.log&`
+   1. `kubectl -n tds-workshop port-forward iot-connected-vehicle-dashboard 7000:7000 >/tmp/iot-dashboard1.log&`
