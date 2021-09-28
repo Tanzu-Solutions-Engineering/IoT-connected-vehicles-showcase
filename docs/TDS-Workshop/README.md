@@ -137,7 +137,7 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
 
     ```shell script
     kind load docker-image vehicle-generator-source:0.0.4-SNAPSHOT
-    kind load docker-image iot-connected-vehicle-dashboard:0.0.2-SNAPSHOT
+    kind load docker-image iot-connected-vehicle-dashboard:0.0.4-SNAPSHOT
     kind load docker-image vehicles-geode-sink:0.0.4-SNAPSHOT
     ```
 
