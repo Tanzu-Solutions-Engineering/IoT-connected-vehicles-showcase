@@ -129,7 +129,7 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     ```
 1. create Region in GemFire
    
-   `kubectl -n tds-workshop exec gemfire1-locator-0 -- gfsh -e "connect" -e "create region --name=Vehicle --eviction-action=local-destroy --eviction-max-memory=10000 --entry-time-to-live-expiration=60 --entry-time-to-live-expiration-action=DESTROY --enable-statistics=true --type=PARTITION"`
+   `kubectl -n tds-workshop exec -it gemfire1-locator-0 -- gfsh -e "connect" -e "create region --name=Vehicle --eviction-action=local-destroy --eviction-max-memory=10000 --entry-time-to-live-expiration=60 --entry-time-to-live-expiration-action=DESTROY --enable-statistics=true --type=PARTITION"`
 
 # Apps
 
