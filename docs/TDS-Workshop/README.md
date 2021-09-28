@@ -80,7 +80,7 @@ Applications                                                                    
 Tanzu Products | URL
 ---------------|--------
 VMware Tanzu GemFire for Kubernetes(v1.0)           | https://tgf.docs.pivotal.io/tgf/1-0/index.html
-VMware Tanzu RabbitMQ for Kubernetes(v1.1.0)        | https://www.rabbitmq.com/kubernetes/operator/operator-overview.html
+VMware Tanzu RabbitMQ for Kubernetes(v1.1.0)        | https://docs.pivotal.io/tanzu-rabbitmq/1-0/kubernetes/tanzu/installation.html
 VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernetes.docs.pivotal.io/1-2/index.html
 
 # Accessing K8 Services

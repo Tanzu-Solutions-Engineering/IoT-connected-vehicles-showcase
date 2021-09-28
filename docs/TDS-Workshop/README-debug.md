@@ -37,13 +37,16 @@
     1. run GFSH `kubectl -n tds-workshop exec -it gemfire1-locator-0 -- gfsh`
     1. get configMap of GemFire `kubectl get cm gemfire1-config -o yaml -n tds-workshop`
 1. pods
-   1. `kubectl get pods -n tds-workshop`
-   1. `kubectl describe pod vehicle-generator-source -n tds-workshop`
-   1. `kubectl logs vehicle-generator-source -n tds-workshop`
-   1. `kubectl -n tds-workshop delete pod --all`
-   1. `kubectl -n tds-workshop delete pod vehicle-generator-source`
-   1. `kubectl -n tds-workshop delete pod vehicles-geode-sink`
-   1. `kubectl -n tds-workshop delete pod iot-connected-vehicle-dashboard`
+   1. `kubectl -n tds-workshop get pods`
+   2. `kubectl -n tds-workshop get pods -o wide`
+   3. `kubectl -n tds-workshop get all`
+   4. `kubectl -n tds-workshop describe pod vehicle-generator-source`
+   5. `kubectl -n tds-workshop logs vehicle-generator-source`
+   6. `kubectl -n tds-workshop delete pod --all`
+   7. `kubectl -n tds-workshop delete pod vehicle-generator-source`
+   8. `kubectl -n tds-workshop delete pod vehicles-geode-sink`
+   9. `kubectl -n tds-workshop delete pod iot-connected-vehicle-dashboard`
+
 1. port forward
    1. `kubectl -n tds-workshop port-forward rabbitmq-server-0 15672:15672 > /tmp/k8s-rabbitMq1.log &`
    1. `kubectl -n tds-workshop port-forward iot-connected-vehicle-dashboard 7000:7000 >/tmp/iot-dashboard1.log&`
