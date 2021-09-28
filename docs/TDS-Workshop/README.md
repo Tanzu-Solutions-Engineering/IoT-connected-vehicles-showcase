@@ -122,7 +122,7 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
 
 ## GemFire
 
-1. start GemFire to 2 locator and 3 datanodes
+1. start GemFire to 1 locator and 2 datanodes
 
     ```shell script
     kubectl -n tds-workshop apply -f cloud/k8/data-services/gemfire/gf-cluster-locators-2-datanodes-3.yml
