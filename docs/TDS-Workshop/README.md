@@ -58,17 +58,17 @@ Applications                                                                    
     ./gradlew :applications:vehicles-geode-sink:bootBuildImage
     ```
 ## K8s preparation
-1. switch kind context
+1. please ensure that new kind cluster had been created in the process of kind installation. If it didn't happen, please run following command to create a new kind cluster.
+
+    `kind create cluster`
+
+2. switch kind context
 
    `kubectl config use-context kind-kind`
 
    Or
 
    `kubectx kind-kind`
-
-1.  create kind cluster
-
-    `kind create cluster`
 
 1. create namespace
 
@@ -97,13 +97,13 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     echo "PASWORD:" $rpwd
     ```
 
-1. start RabbitMQ with 3 nodes
+2. start RabbitMQ with 3 nodes
 
     ```shell script
     kubectl -n tds-workshop apply -f cloud/k8/data-services/rabbitmq/local-cluster-node3.yml
     ```
 
-1. Add new users
+3. Add new user and set permission
 
     ```shell
     # <user>: vehicle
@@ -116,10 +116,14 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     
     ```
 4. forward port of RabbitMQ
-    ```shell script
-    kubectl -n tds-workshop port-forward rabbitmq-server-0 15672:15672
-    ```
-
+   1. normal
+       ```shell script
+       kubectl -n tds-workshop port-forward rabbitmq-server-0 15672:15672
+       ```
+   2. in nohup mode, later the log file can be monitored by `tail -f`
+       ```shell script
+       kubectl -n tds-workshop port-forward rabbitmq-server-0 15672:15672 > /tmp/k8s-rabbitMq1.log &
+       ```
 ## GemFire
 
 1. start GemFire to 1 locator and 2 datanodes
@@ -141,17 +145,17 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     kind load docker-image vehicles-geode-sink:0.0.4-SNAPSHOT
     ```
 
-1. add vehicle-secrets to kubernetes
+2. add vehicle-secrets to kubernetes
     ```shell script
     kubectl apply -f cloud/k8/secrets -n tds-workshop
     ```
 
-1. add config-map to kubernetes
+3. add config-map to kubernetes
     ```shell script
     kubectl create -f cloud/k8/apps/config-maps.yml -n tds-workshop
     ```
 
-1. deploy pods
+4. deploy pods
 
     ```shell script
     kubectl apply -f cloud/k8/iot-connected-vehicle-dashboard.yml -n tds-workshop
@@ -159,11 +163,16 @@ VMware Tanzu SQL with Postgres for Kubernetes(v1.2) | https://postgres-kubernete
     kubectl apply -f cloud/k8/apps/sink/geode-sink/vehicles-geode-sink.yml -n tds-workshop
     ```
 
-1. forward port of vehicle-dashboard
-    ```shell
-    kubectl -n tds-workshop port-forward iot-connected-vehicle-dashboard 7000:7000
-    ```
-1. view the page of vehicle-dashboard
+5. forward port of vehicle-dashboard
+   1. normal
+       ```shell
+       kubectl -n tds-workshop port-forward iot-connected-vehicle-dashboard 7000:7000
+       ```
+   1. nohup mode, later the log file can be monitored by `tail -f`
+      ```shell
+      kubectl -n tds-workshop port-forward iot-connected-vehicle-dashboard 7000:7000 >/tmp/iot-dashboard1.log&
+       ```
+6. view the page of vehicle-dashboard
    1. CHROME - open http://localhost:7000
    
    ![iot-connected-vehicle-dashboard_demo.png](../images/iot-connected-vehicle-dashboard_demo.png)
