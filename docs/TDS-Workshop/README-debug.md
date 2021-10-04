@@ -19,7 +19,7 @@
 
 ## kubenetes related
 1. namespace
-    2. `kubectl create namespace tds-workshop`
+   1. `kubectl create namespace tds-workshop`
 2. configMap
     1. `kubectl get cm -n tds-workshop`
     1. please use `kubectl create -f cloud/k8/apps/config-maps.yml -n tds-workshop` instead of `kubectl create configmap vehicle-configmap --from-file=./cloud/k8/apps/` to create configMap
