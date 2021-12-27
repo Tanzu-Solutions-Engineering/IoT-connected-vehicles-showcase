@@ -8,11 +8,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 
+
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var socket = new SockJS('/gs-guide-websocket');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+
+        stompClient.subscribe('/topic/vehicles', function (vehicleResponse) {
+
+                var vehicle = JSON.parse(vehicleResponse.body);
+                drawVehicle(vehicle);
+        });
+
+    });
+    </script>
+
     <script>
     $(document).ready(function(){
       $("p").click(function(){
@@ -71,10 +89,6 @@ div {
 		tileSize: 512,
 		zoomOffset: -1
 	}).addTo(mymap);
-
-	//window['V3AKJGEDV0GSGV9577'] = L.marker([33.9478264, -117.867065]);
-	//window['V3AKJGEDV0GSGV9577'].addTo(mymap)
-	//	.bindPopup("<b>Hello world!</b><br />I am a popup.");
 
 
 	var popup = L.popup();
@@ -166,13 +180,38 @@ div {
             iconSize: [18, 35],
         });
 
-    var source = new EventSource("/updates");
-    source.onmessage = function(event) {
+
+     //------------------------
+     // Get initial list of vehicles
+
+     $.ajax({
+            type: 'get',
+            url: '/vehicles/',
+            contentType: "application/json; charset=utf-8",
+            traditional: true,
+            success: function (vehicles) {
+                if(vehicles == null || vehicles.length == 0)
+                   return;
+
+
+                for (var i = 0; i < vehicles.length; i++) {
+                   drawVehicle(vehicles[i]);
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("ERROR: " + JSON.stringify(XMLHttpRequest.responseJSON));
+
+            }
+        });
+
+     //---------------------------------
+   // var source = new EventSource("/updates");
+   /* source.onmessage = function(event) {
 
       var vehicle = JSON.parse(event.data)
 
       drawVehicle(vehicle);
-    };
+    };*/
 
     function drawVehicle(vehicle)
     {

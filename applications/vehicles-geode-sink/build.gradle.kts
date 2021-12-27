@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.4.3"
+    id("org.springframework.boot") version "2.6.1"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.4.30"
     kotlin("plugin.spring") version "1.4.30"
@@ -19,8 +19,7 @@ repositories {
 
 extra["springCloudVersion"] = "2020.0.1"
 extra["springGeodeVersion"] = "1.4.3"
-
-
+extra["geodeVersion"] = "1.13.1"
 
 dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -31,7 +30,14 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-stream-binder-rabbit")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.geode:spring-geode-starter")
+    implementation("org.springframework.geode:spring-geode-starter") {
+        exclude(group = "org.apache.geode")
+    }
+    implementation("org.apache.geode:geode-core:${property("geodeVersion")}")
+    implementation("org.apache.geode:geode-cq:${property("geodeVersion")}")
+    implementation("org.apache.geode:geode-lucene:${property("geodeVersion")}")
+    implementation("org.apache.geode:geode-wan:${property("geodeVersion")}")
+
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation(project(":components:iot-connected-vehicles-repository"))
     implementation(project(":components:iot-connected-vehicles-repository-sink"))

@@ -26,8 +26,12 @@ In gfsh
 ```shell
 start locator --name=locator
 start server --name=server1
-exit
 ```
+
+```shell
+create region --name=Vehicle --eviction-action=local-destroy --eviction-max-memory=10000 --entry-time-to-live-expiration=60 --entry-time-to-live-expiration-action=DESTROY --enable-statistics=true --type=PARTITION
+```
+
 
 ### Pulse
 
@@ -52,13 +56,13 @@ open -n -a "Google Chrome" --args "--new-window" "http://localhost:7000"
 ## Sink
 
 ```shell script
- java -jar applications/vehicles-geode-sink/build/libs/vehicles-geode-sink-*.jar
+ java -jar applications/vehicles-geode-sink/build/libs/vehicles-geode-sink-*T.jar
 ```
 
 ## Generator
 
 ```shell script
-java -jar applications/vehicle-generator-source/build/libs/vehicle-generator-source-*.jar --delayMs=5 
+java -jar applications/vehicle-generator-source/build/libs/vehicle-generator-source-*T.jar --delayMs=5 
 
 ```
 

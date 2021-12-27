@@ -1,10 +1,36 @@
-#
+# iot-connected-vehicle-dashboard
 
-http://localhost:7000/updates
+This application provides a map visual of vehicles.
 
 
+The default port is 7000.
 
-# k8
+
+```shell
+open http://localhost:7000
+```
+
+## Setup
+
+In [Apache Geode](https://geode.apache.org/) gfsh
+
+
+```shell
+start locator --name=locator
+configure pdx --read-serialized=true --disk-store
+start server --name=server
+```
+
+
+Create regions
+
+
+```shell
+create region --name=Vehicle --eviction-action=local-destroy --eviction-max-memory=10000 --entry-time-to-live-expiration=60 --entry-time-to-live-expiration-action=DESTROY --enable-statistics=true --type=PARTITION
+```
+
+
+# Kubernetes
 
 k port-forward iot-connected-vehicle-dashboard 7000:7000
 

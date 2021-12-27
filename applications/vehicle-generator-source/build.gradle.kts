@@ -1,11 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.4.3"
+    id("org.springframework.boot") version "2.6.2"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.4.30"
-    kotlin("plugin.spring") version "1.4.30"
-    //maven
+    kotlin("jvm") version "1.6.10"
+    kotlin("plugin.spring") version "1.6.10"
 }
 
 group = "com.vmware.tanzu.data"
@@ -17,10 +16,10 @@ repositories {
     mavenLocal()
 }
 
-extra["springCloudVersion"] = "2020.0.1"
+extra["springCloudVersion"] = "2021.0.0"
 
 dependencies {
-    implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.3")
     implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation(project(":components:vehicle-messaging"))

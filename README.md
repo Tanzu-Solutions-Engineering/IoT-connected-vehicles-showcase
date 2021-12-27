@@ -16,6 +16,11 @@
 
 ![img.png](docs/images/overview.png)
 
+
+# References
+
+- [VMworld - Running Microservices With Tanzu Data Services at Scale on Kubernetes](https://www.vmware.com/vmworld/en/video-library/video-landing.html?sessionid=1623429099247001qu01)
+
 # Project Modules
 
 
