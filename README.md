@@ -6,6 +6,9 @@
 - Hundreds of thousands of vehicles driving across the globe, 24 hours a day, 7 days a week.
 - Need to access aggregated real-time location, driving, behavior data, temperature sensors and more.
 
+
+![img.png](docs/images/preview.png)
+
 **Solution**
 
 - Scalable, resiliency Kubernetes platform based on Tanzu

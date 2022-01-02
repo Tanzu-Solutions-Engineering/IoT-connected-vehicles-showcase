@@ -21,8 +21,7 @@ repositories {
 
 extra["springCloudVersion"] = "2020.0.1"
 extra["springGeodeVersion"] = "1.4.3"
-
-
+extra["geodeVersion"] = "1.13.1"
 
 dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -30,15 +29,22 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.geode:spring-geode-starter")
+    implementation("org.springframework.geode:spring-geode-starter") {
+        exclude(group = "org.apache.geode")
+    }
+    implementation("org.apache.geode:geode-core:${property("geodeVersion")}")
+    implementation("org.apache.geode:geode-cq:${property("geodeVersion")}")
+    implementation("org.apache.geode:geode-lucene:${property("geodeVersion")}")
+    implementation("org.apache.geode:geode-wan:${property("geodeVersion")}")
+
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation(project(":components:iot-connected-vehicles-repository"))
     implementation(project(":components:iot-connected-vehicles-repository-sink"))
     implementation(project(":components:vehicle-messaging"))
     implementation(project(":components:messaging-streaming"))
     implementation(project(":components:vehicle-messaging-streaming"))
-    implementation("com.rabbitmq:stream-client:0.3.0")
-    implementation("org.apache.qpid:proton-j:0.33.8")
+    implementation("com.rabbitmq:stream-client:0.4.0")
+    implementation("org.apache.qpid:proton-j:0.33.9")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.amqp:spring-rabbit-test")
 }

@@ -3,7 +3,7 @@ vehicleCount : 25
 messageCount : 10000
 distanceIncrements : 1
 streamName : VehicleStream
-delayMs : 1
+delayMs : 400
 vinPrefix: G
 server:
   port: 0
