@@ -25,6 +25,7 @@ In gfsh
 
 ```shell
 start locator --name=locator
+configure pdx --read-serialized=true --disk-store
 start server --name=server1
 ```
 

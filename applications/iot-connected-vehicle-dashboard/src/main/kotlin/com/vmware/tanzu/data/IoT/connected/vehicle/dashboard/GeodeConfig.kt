@@ -35,6 +35,7 @@ class GeodeConfig {
         region.setDataPolicy(DataPolicy.EMPTY)
         region.setRegionName("Vehicle")
 
+        //Add consumer to send Geode events to a web socket
         var consumer = Consumer<Vehicle>{ v -> messageTemple.convertAndSend(destination,v)}
 
         var listenerConsumerBridge = CacheListerConsumerBridge<String,Vehicle>(consumer)
