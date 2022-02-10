@@ -20,7 +20,6 @@ extra["springCloudVersion"] = "2021.0.0"
 extra["springGeodeVersion"] = "1.6.3"
 
 dependencies {
-//	implementation("io.pivotal.services.dataTx:dataTx-geode-extensions-core:2.4.0")
 
 	implementation("io.pivotal.services.dataTx:dataTx-geode-extensions-core:2.4.0")
 	implementation("io.pivotal.services.dataTx:dataTx-geode-extensions-spring-security:2.5.0")
