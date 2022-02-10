@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.4.3"
+    id("org.springframework.boot") version "2.6.3"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.4.30"
-    kotlin("plugin.spring") version "1.4.30"
+    kotlin("jvm") version "1.6.10"
+    kotlin("plugin.spring") version "1.6.10"
     //maven
 }
 
@@ -17,8 +17,8 @@ repositories {
     mavenLocal()
 }
 
-extra["springCloudVersion"] = "2020.0.1"
-extra["springGeodeVersion"] = "1.4.3"
+extra["springCloudVersion"] = "2021.0.0"
+extra["springGeodeVersion"] = "1.6.3"
 
 
 
@@ -32,6 +32,24 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.geode:spring-geode-starter")
+    {
+        exclude(group = "org.apache.geode")
+    }
+    //------------
+    //Apache Geode
+    implementation("org.apache.geode:geode-core:1.13.2")
+    implementation("org.apache.geode:geode-cq:1.13.2")
+    implementation("org.apache.geode:geode-lucene:1.13.2")
+    implementation("org.apache.geode:geode-wan:1.13.2")
+    implementation("org.apache.geode:geode-common:1.13.2")
+    implementation("org.apache.geode:geode-management:1.13.2")
+    implementation("org.apache.geode:geode-logging:1.13.2")
+    implementation("org.apache.geode:geode-membership:1.13.2")
+    implementation("org.apache.geode:geode-unsafe:1.13.2")
+    implementation("org.apache.geode:geode-serialization:1.13.2")
+
+
+    //---------------------
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation(project(":components:iot-connected-vehicles-repository"))
     implementation(project(":components:iot-connected-vehicles-repository-sink"))

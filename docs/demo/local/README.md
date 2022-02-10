@@ -58,7 +58,7 @@ open -n -a "Google Chrome" --args "--new-window" "http://localhost:7000"
 ## Generator
 
 ```shell script
-java -jar applications/vehicle-generator-source/build/libs/vehicle-generator-source-*.jar --delayMs=5 
+java -jar applications/vehicle-generator-source/build/libs/vehicle-generator-source-0.0.4-SNAPSHOT.jar --delayMs=5 
 
 ```
 
