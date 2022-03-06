@@ -3,6 +3,7 @@ package com.vmware.tanzu.data.IoT.vehicles.mqtt.geode.sink
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.consumer.BytesToVehicle
 import com.vmware.tanzu.data.IoT.vehicles.messaging.mqtt.MqttVehicleMessageListener
+import com.vmware.tanzu.data.IoT.vehicles.sink.vehicle.VehicleRepositorySink
 import org.eclipse.paho.client.mqttv3.IMqttClient
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener
 import org.eclipse.paho.client.mqttv3.MqttClient
@@ -11,11 +12,13 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import java.util.function.Consumer
 
 
 @Configuration
+@ComponentScan(basePackageClasses = [VehicleRepositorySink::class])
 class MqttConsumerConfig {
 
     @Value("\${mqtt.userName:mqtt}")

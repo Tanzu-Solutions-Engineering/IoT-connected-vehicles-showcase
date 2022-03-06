@@ -10,8 +10,8 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation("org.apache.geode:geode-core:1.13.1");
-    implementation("org.apache.geode:geode-lucene:1.13.1")
+    implementation("org.apache.geode:geode-core:1.13.7");
+    implementation("org.apache.geode:geode-lucene:1.13.7")
     implementation("org.junit.jupiter:junit-jupiter:5.4.2");
     implementation("org.apache.logging.log4j:log4j-api:2.13.1");
     testImplementation("org.mockito:mockito-junit-jupiter:3.8.0");

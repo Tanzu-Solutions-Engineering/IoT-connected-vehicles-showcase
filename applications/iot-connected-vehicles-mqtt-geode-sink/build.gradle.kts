@@ -36,17 +36,18 @@ dependencies {
     }
     //------------
     //Apache Geode
-    implementation("org.apache.geode:geode-core:1.13.2")
-    implementation("org.apache.geode:geode-cq:1.13.2")
-    implementation("org.apache.geode:geode-lucene:1.13.2")
-    implementation("org.apache.geode:geode-wan:1.13.2")
-    implementation("org.apache.geode:geode-common:1.13.2")
-    implementation("org.apache.geode:geode-management:1.13.2")
-    implementation("org.apache.geode:geode-logging:1.13.2")
-    implementation("org.apache.geode:geode-membership:1.13.2")
-    implementation("org.apache.geode:geode-unsafe:1.13.2")
-    implementation("org.apache.geode:geode-serialization:1.13.2")
+    implementation("org.apache.geode:geode-core:1.13.7")
+    implementation("org.apache.geode:geode-cq:1.13.7")
+    implementation("org.apache.geode:geode-lucene:1.13.7")
+    implementation("org.apache.geode:geode-wan:1.13.7")
+    implementation("org.apache.geode:geode-common:1.13.7")
+    implementation("org.apache.geode:geode-management:1.13.7")
+    implementation("org.apache.geode:geode-logging:1.13.7")
+    implementation("org.apache.geode:geode-membership:1.13.7")
+    implementation("org.apache.geode:geode-unsafe:1.13.7")
+    implementation("org.apache.geode:geode-serialization:1.13.7")
 
+    implementation(project(":components:iot-connected-vehicles-repository"))
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation(project(":components:iot-connected-vehicles-repository-sink"))
     implementation(project(":components:vehicle-messaging"))

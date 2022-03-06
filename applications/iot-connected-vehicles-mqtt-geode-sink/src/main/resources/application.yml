@@ -5,4 +5,7 @@ management.endpoints.web.exposure.include: "*"
 server:
  port: 9001
 spring:
-  application.name: vehicles-mqtt-geode-sink
+ application.name: vehicles-mqtt-geode-sink
+ mvc:
+  pathmatch:
+   matching-strategy: ANT_PATH_MATCHER

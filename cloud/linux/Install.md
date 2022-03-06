@@ -55,5 +55,5 @@ rabbitmqctl delete_user guest
 
 # GemFire
 
-wget https://apache.claz.org/geode/1.13.2/apache-geode-1.13.2.tgz
+wget https://apache.claz.org/geode/1.13.7/apache-geode-1.13.7.tgz
 

@@ -1,16 +1,20 @@
-
+# Setup 
 
 RabbitMQ Configurations
 
+
+```shell
 rabbitmq-plugins enable rabbitmq_mqtt
+```
 
 restart server
 
 
-
+```shell
 rabbitmqctl -n rabbit add_user mqtt
-
 rabbitmqctl -n rabbit set_permissions mqtt ".*" ".*" ".*"
+```
+
 
 
 
