@@ -55,13 +55,13 @@ open -n -a "Google Chrome" --args "--new-window" "http://localhost:1000"
 ## Sink
 
 ```shell script
- java -jar applications/vehicles-geode-sink/build/libs/vehicles-geode-sink-0.0.4-SNAPSHOT.jar --serverport--1
+ java -jar applications/vehicles-geode-sink/build/libs/vehicles-geode-sink-0.0.4-SNAPSHOT.jar --server.port--1
 ```
 
 ## Generator
 
 ```shell script
-java -jar applications/vehicle-generator-source/build/libs/vehicle-generator-source-0.0.4-SNAPSHOT.jar --delayMs=5 --serverport--1 
+java -jar applications/vehicle-generator-source/build/libs/vehicle-generator-source-0.0.4-SNAPSHOT.jar --delayMs=5 --server.port--1 
 
 ```
 
