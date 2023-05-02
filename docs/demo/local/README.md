@@ -18,19 +18,13 @@ cd /Users/devtools/integration/messaging/rabbit/rabbit-devOps
 
 ```shell
 cd /Users/devtools/repositories/IMDG/geode/apache-geode-1.13.7/bin
-./gfsh 
+./gfsh
 ```
 
 In gfsh
 
-```shell
-start locator --name=locator
-configure pdx --read-serialized=true --disk-store
+See datastores/geode/README.md
 
-start server --name=server1
-create region --name=Vehicle --eviction-action=local-destroy --eviction-max-memory=10000 --entry-time-to-live-expiration=60 --entry-time-to-live-expiration-action=DESTROY --enable-statistics=true --type=PARTITION
-exit
-```
 
 ### Pulse
 
@@ -50,6 +44,20 @@ java -jar applications/iot-connected-vehicle-dashboard/build/libs/iot-connected-
 
 ```shell script
 open -n -a "Google Chrome" --args "--new-window" "http://localhost:1000"
+```
+
+
+Added record
+
+```shell
+query --query="select * from /VehicleAggregation"
+```
+
+
+Eviction after 
+```shell
+query --query="select * from /Vehicle"
+
 ```
 
 ## Sink
