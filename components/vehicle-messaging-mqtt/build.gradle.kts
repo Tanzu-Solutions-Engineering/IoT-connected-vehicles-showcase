@@ -18,7 +18,7 @@ repositories {
 
 }
 
-extra["springCloudVersion"] = "2020.0.1"
+extra["springCloudVersion"] = "2021.0.0"
 
 dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
