@@ -6,7 +6,7 @@ import com.vmware.tanzu.data.IoT.vehicles.repositories.VehicleRepository
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import javax.servlet.http.HttpServletResponse
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * @author Gregory Green

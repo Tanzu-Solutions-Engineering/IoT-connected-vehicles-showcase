@@ -2,6 +2,7 @@ package com.vmware.tanzu.data.IoT.connected.vehicle.dashboard.controller
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.repositories.VehicleRepository
+import jakarta.servlet.http.HttpServletResponse
 import nyla.solutions.core.patterns.creational.generator.JavaBeanGeneratorCreator
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -11,7 +12,6 @@ import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import java.io.PrintWriter
-import javax.servlet.http.HttpServletResponse
 
 @ExtendWith(MockitoExtension::class)
 internal class VehicleStreamingControllerTest{
