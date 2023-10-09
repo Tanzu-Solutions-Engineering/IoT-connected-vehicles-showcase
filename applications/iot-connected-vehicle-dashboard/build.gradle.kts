@@ -25,7 +25,8 @@ extra["springGeodeVersion"] = "1.6.3"
 dependencies {
 
 	// https://mvnrepository.com/artifact/org.apache.geronimo.specs/geronimo-servlet_2.5_spec
-	compileOnly("org.apache.geronimo.specs:geronimo-servlet_2.5_spec:1.2")
+//	compileOnly("org.apache.geronimo.specs:geronimo-servlet_2.5_spec:1.2")
+
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("io.pivotal.services.dataTx:dataTx-geode-extensions-core:2.4.0")

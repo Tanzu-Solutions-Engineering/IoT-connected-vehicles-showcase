@@ -27,6 +27,7 @@ extra["springCloudVersion"] = "2021.0.0"
 
 dependencies {
 //    implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
+    implementation("org.springdoc:springdoc-openapi:2.2.0")
     implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation(project(":components:vehicle-messaging"))

@@ -1,6 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+//    id("org.springframework.boot") version "3.1.4"
+    id("io.spring.dependency-management") version "1.1.3"
     kotlin("jvm") version "1.8.22"
 }
 
@@ -11,8 +13,6 @@ java {
 }
 
 repositories {
-    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
-    maven { url = uri("https://packagecloud.io/rabbitmq/maven-milestones/maven2") }
     mavenCentral()
     mavenLocal()
 
@@ -22,7 +22,9 @@ extra["springCloudVersion"] = "2021.0.0"
 extra["springGeodeVersion"] = "1.4.3"
 
 dependencies {
-    implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
+    implementation("org.springframework.boot:spring-boot-starter:3.1.4")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.springdoc:springdoc-openapi:2.2.0")
     implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")

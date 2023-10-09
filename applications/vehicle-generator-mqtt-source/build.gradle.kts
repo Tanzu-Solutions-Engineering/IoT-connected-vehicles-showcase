@@ -27,7 +27,7 @@ extra["springGeodeVersion"] = "1.4.3"
 
 
 dependencies {
-    implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
+    implementation("org.springdoc:springdoc-openapi:2.2.0")
     implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation("org.springframework.boot:spring-boot-starter-amqp")
