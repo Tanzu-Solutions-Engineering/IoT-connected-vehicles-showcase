@@ -11,8 +11,6 @@ java {
 }
 
 repositories {
-    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
-    maven { url = uri("https://packagecloud.io/rabbitmq/maven-milestones/maven2") }
     mavenCentral()
     mavenLocal()
 
@@ -23,18 +21,20 @@ extra["springGeodeVersion"] = "1.4.3"
 
 dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
-    implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")
+    implementation("com.github.nyla-solutions:nyla.solutions.core:2.0.1")
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("io.micrometer:micrometer-core:1.7.2")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.springframework.amqp:spring-rabbit:2.3.5")
+    implementation("org.springframework.amqp:spring-rabbit:3.0.9")
+//    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+    implementation("io.micrometer:micrometer-core:1.11.4")
     testImplementation("org.assertj:assertj-core:3.19.0")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:3.1.0")
-    testImplementation("org.assertj:assertj-core:3.19.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.0-M1")
-    testImplementation("org.mockito:mockito-core:3.8.0")
-    testImplementation("org.mockito:mockito-junit-jupiter:3.8.0")
+//    testImplementation("org.mockito.kotlin:mockito-kotlin:3.1.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
+    testImplementation("org.assertj:assertj-core:3.24.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.0")
+    testImplementation("org.mockito:mockito-core:5.6.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.6.0")
 }
 
 tasks.withType<KotlinCompile> {

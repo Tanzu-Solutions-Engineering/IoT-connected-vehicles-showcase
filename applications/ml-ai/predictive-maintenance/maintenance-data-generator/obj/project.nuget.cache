@@ -1,8 +1,0 @@
-{
-  "version": 2,
-  "dgSpecHash": "Y9ZYB5xEMXu5C42ARByniaxKEW0rGVgwbX9q0uPFHD4o+34zsMFap9YpDL7icALUWHAkPdWk7sv5iKseMOF4iw==",
-  "success": true,
-  "projectFilePath": "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/predictive-maintenance/maintenance-data-generator/maintenance-data-generator.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
-}
