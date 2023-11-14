@@ -1,1 +1,1 @@
-rootProject.name = "shovel-streaming-app"
+//rootProject.name = "shovel-streaming-app"

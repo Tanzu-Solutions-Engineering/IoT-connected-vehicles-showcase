@@ -1,15 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Description>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance</Description>
     <RootNamespace>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance</RootNamespace>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <ContainerRepository>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance</ContainerRepository>
   </PropertyGroup>
+  <PropertyGroup>
+    <!-- <OutputType>Exe</OutputType> -->
+    <StartupObject>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Program</StartupObject>
+     <Nullable>enable</Nullable>
+  </PropertyGroup>
 
   <PropertyGroup>
-    <GenerateProgramFile>false</GenerateProgramFile>
+    <!-- <GenerateProgramFile>false</GenerateProgramFile> -->
     <SteeltoeVersion>3.2.0</SteeltoeVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
@@ -17,9 +22,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-rc.2.23479.6" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.*" />
     <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Stream.StreamBase" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>

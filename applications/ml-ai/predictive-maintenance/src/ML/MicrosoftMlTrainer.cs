@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.ML;
+using Polly;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.ML;
 
 namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.ML
@@ -34,33 +35,32 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.ML
                 "make_year",
                 "region",
                 "mileage_range",
-                "mileage",
-                "oil_filter",
-                "engine_oil",
-                "washer_plug_drain",
-                "dust_and_pollen_filter",
-                "whell_alignment_and_balancing",
-                "air_clean_filter",
-                "fuel_filter",
-                "spark_plug",
-                "brake_fluid",
-                "brake_and_clutch_oil",
-                "transmission_fluid",
-                "brake_pads",
-                "clutch",
-                "coolant",
-                "cost"
+                "mileage"
                 )
                 .Append(mlContext.BinaryClassification.Trainers.FastTree(
-                    labelColumnName: "label", featureColumnName: outColumn));
+                   labelColumnName: "label", featureColumnName: outColumn));
 
             ITransformer trainedModel = pipeline.Fit(trainingDataView);
 
+            
 
-            //to Onnxx
-             using MemoryStream stream = new MemoryStream();
+            // var pipeline = mlContext.Transforms.Conversion.MapValueToKey(inputColumnName: "maintenance", outputColumnName: outColumn)
+            //         .Append(mlContext.Transforms.Concatenate(outColumn,
+            //         "vehicle_type", 
+            //         "brand",
+            //         "model",
+            //         "engine_type",
+            //         "make_year",
+            //         "region",
+            //         "mileage_range",
+            //         "mileage"
+            // //         ));
+
+            // ITransformer trainedModel = pipeline.Fit(trainingDataView);
+
+            using MemoryStream stream = new MemoryStream();
             {
-                mlContext.Model.ConvertToOnnx(trainedModel, trainingDataView, stream);
+                mlContext.Model.Save(trainedModel, trainingDataView.Schema, stream);
                 byte[] outputBinary = stream.ToArray();
 
                 return outputBinary;

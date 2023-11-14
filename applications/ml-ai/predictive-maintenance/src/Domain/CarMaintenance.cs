@@ -30,48 +30,8 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain
         public float mileage_range { get; set; }
         [LoadColumn(8)]
         public float mileage { get; set; }
+  
         [LoadColumn(9)]
-        public float oil_filter { get; set; }
-        [LoadColumn(10)]
-        public float engine_oil { get; set; }
-        [LoadColumn(11)]
-        public float washer_plug_drain { get; set; }
-        [LoadColumn(12)]
-        public float dust_and_pollen_filter { get; set; }
-        [LoadColumn(13)]
-        public float whell_alignment_and_balancing { get; set; }
-
-        [LoadColumn(14)]
-        public float air_clean_filter { get; set;}
-
-        [LoadColumn(15)]
-        public float fuel_filter { get; set;}
-
-        [LoadColumn(16)]
-        public float spark_plug { get; set;}
-
-        [LoadColumn(17)]
-        public float brake_fluid { get; set;}
-
-        [LoadColumn(18)]
-        public float brake_and_clutch_oil { get; set;}
-
-        [LoadColumn(19)]
-        public float transmission_fluid { get; set;}
-
-        [LoadColumn(20)]
-        public float brake_pads { get; set;}
-
-        [LoadColumn(21)]
-        public float clutch { get; set;}
-
-        [LoadColumn(22)]
-        public float coolant  { get; set;}
-
-        [LoadColumn(23)]
-        public float cost  { get; set;}
-
-        [LoadColumn(24)]
         public bool label { get; set; }
         
     }
