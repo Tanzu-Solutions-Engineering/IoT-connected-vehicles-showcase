@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Description>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance</Description>
-    <RootNamespace>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance</RootNamespace>
+    <Description>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training</Description>
+    <RootNamespace>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training</RootNamespace>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <ContainerRepository>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance</ContainerRepository>
+    <ContainerRepository>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training</ContainerRepository>
   </PropertyGroup>
   <PropertyGroup>
     <!-- <OutputType>Exe</OutputType> -->
-    <StartupObject>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Program</StartupObject>
+    <StartupObject>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.Program</StartupObject>
      <Nullable>enable</Nullable>
   </PropertyGroup>
 

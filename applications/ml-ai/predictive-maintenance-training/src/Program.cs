@@ -6,7 +6,7 @@ using Steeltoe.Extensions.Configuration.Placeholder;
 using Steeltoe.Extensions.Logging;
 using Steeltoe.Stream.Extensions;
 
-namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance
+namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
 {
     public class Program
     {

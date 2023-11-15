@@ -12,7 +12,7 @@ using Steeltoe.Connector.PostgreSql;
 using Steeltoe.Connector.RabbitMQ;
 using Steeltoe.Management.Endpoint;
 
-namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance
+namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
 {
     public class Startup
     {
