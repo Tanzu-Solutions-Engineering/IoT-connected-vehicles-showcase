@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Description>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training</Description>
+    <RootNamespace>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training</RootNamespace>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <ContainerRepository>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training</ContainerRepository>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- <OutputType>Exe</OutputType> -->
+    <StartupObject>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.Program</StartupObject>
+     <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- <GenerateProgramFile>false</GenerateProgramFile> -->
+    <SteeltoeVersion>3.2.0</SteeltoeVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../maintenance-domain/maintenance-domain.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-rc.2.23479.6" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.*" />
+    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Stream.StreamBase" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RabbitMQ.Client" Version="5.1.*" />
+    <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.PlaceholderCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
+  </ItemGroup>
+
+      <ItemGroup>
+    <PackageReference Include="Imani.Solutions.Core" Version="0.1.0" />
+    <PackageReference Include="Microsoft.ML" Version="3.0.0-preview.23511.1" />
+    <PackageReference Include="Microsoft.ML.FastTree" Version="3.0.0-preview.23511.1" />
+    <PackageReference Include="Microsoft.ML.OnnxConverter" Version="0.21.0-preview.23511.1" />
+    <PackageReference Include="Microsoft.ML.OnnxTransformer" Version="3.0.0-preview.23511.1" />
+    <PackageReference Include="Npgsql" Version="7.0.6" />
+  </ItemGroup>
+  <ItemGroup>
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.1" />
+      <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+      <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+        <PackageReference Include="Moq" Version="4.20.69" />
+  </ItemGroup>
+</Project>
