@@ -11,7 +11,7 @@ using Serilog.Core;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Stream;
 
-namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.ML
+namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.Stream
 {
     [TestClass]
     public class MaintenanceProcessorTest

@@ -14,16 +14,18 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Stream
     [EnableBinding(typeof(IProcessor))]
     public class MaintenanceProcessor
     {
-        private readonly ITransformer trainedModel;
+        
         private PredictionEngine<CarMaintenance, MaintenancePrediction> predictionEngine;
         private readonly MLContext mlContext;
+
+        public ITransformer? TrainedModel { get; set;} 
 
         public MaintenanceProcessor(ITransformer trainedModel)
         {
             this.mlContext = new MLContext();
 
             // Load trained model
-           this.trainedModel = trainedModel;
+           this.TrainedModel = trainedModel;
 
            //Predict
          predictionEngine = mlContext.Model.CreatePredictionEngine<CarMaintenance, MaintenancePrediction>(trainedModel);
