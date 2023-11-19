@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Description>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training</Description>
-    <RootNamespace>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training</RootNamespace>
+    <Description>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference</Description>
+    <RootNamespace>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference</RootNamespace>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <ContainerRepository>Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training</ContainerRepository>
   </PropertyGroup>

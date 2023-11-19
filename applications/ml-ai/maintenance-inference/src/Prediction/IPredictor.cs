@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.ML;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain;
 
-namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.Stream
+namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Prediction
 {
     public interface IPredictor
     {

@@ -1,12 +1,11 @@
 using System.IO;
 using Microsoft.ML;
-using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Stream;
-using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.Stream;
+using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Prediction;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
 
 
-namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.src.Stream
+namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Stream
 {
     [EnableBinding(typeof(ISink))]
     public class UpdateModelConsumer
@@ -20,7 +19,8 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.src.St
             this.predictor = predictor;
         }
 
-        [StreamListener(ISink.INPUT)]
+        // [StreamListener(ISink.INPUT)]
+        [StreamListener(ISink.INPUT, "Headers['type']=='Dog'")]
         // [StreamListener("UpdateModel")]
         public void UpdateModel(byte[] model)
         {

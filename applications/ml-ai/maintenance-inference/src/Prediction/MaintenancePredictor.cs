@@ -1,13 +1,12 @@
 using Microsoft.ML;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain;
-using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.Stream;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
 
-namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Stream
+namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Prediction
 {
-    [EnableBinding(typeof(IProcessor))]
+    
     public class MaintenancePredictor : IPredictor
     {
 
@@ -37,7 +36,6 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Stream
                     //Predict
                     predictionEngine = mlContext.Model.CreatePredictionEngine<CarMaintenance, MaintenancePrediction>(this.trainedModel);
                 }
-
             }
         }
 

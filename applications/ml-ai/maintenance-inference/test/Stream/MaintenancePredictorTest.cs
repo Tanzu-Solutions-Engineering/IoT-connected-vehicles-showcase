@@ -5,7 +5,8 @@ using Moq;
 using Serilog;
 using Serilog.Core;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain;
-using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Stream;
+using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Prediction;
+using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Stream;
 
 namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.Stream
 {

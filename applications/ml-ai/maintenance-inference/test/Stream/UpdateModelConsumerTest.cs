@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using Microsoft.ML;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Stream;
-using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.src.Stream;
+using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Prediction;
+using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Stream;
 
 namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.test.Stream
 {

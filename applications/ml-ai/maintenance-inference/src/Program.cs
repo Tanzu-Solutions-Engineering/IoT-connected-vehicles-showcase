@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Stream;
-using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.src.Stream;
+using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Stream;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Configuration.Placeholder;
 using Steeltoe.Extensions.Logging;
@@ -27,7 +26,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
                     webBuilder.AddPlaceholderResolver();
                 })
                 .AddDynamicLogging()
-                // .AddStreamServices<MaintenancePredictor>()
+                .AddStreamServices<MaintenanceProcessor>()
                 .AddStreamServices<UpdateModelConsumer>()
                 .AddConfigServer();
     }
