@@ -27,7 +27,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
                     webBuilder.AddPlaceholderResolver();
                 })
                 .AddDynamicLogging()
-                .AddStreamServices<MaintenanceProcessor>()
+                // .AddStreamServices<MaintenancePredictor>()
                 .AddStreamServices<UpdateModelConsumer>()
                 .AddConfigServer();
     }

@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Stream;
+using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.Stream;
 using Steeltoe.Connector.PostgreSql;
 using Steeltoe.Connector.RabbitMQ;
 using Steeltoe.Management.Endpoint;
@@ -44,6 +46,8 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "predictive_maintenance", Version = "v1" });
             });
+
+            services.AddSingleton<IPredictor,MaintenancePredictor>();
 
         }
 

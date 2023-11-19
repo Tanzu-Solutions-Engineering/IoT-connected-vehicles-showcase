@@ -10,7 +10,7 @@ using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Stream;
 namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.Stream
 {
     [TestClass]
-    public class MaintenanceProcessorTest
+    public class MaintenancePredictorTest
     {
         private static string logFile = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-inference/runtime/maintenance-interface-test.log";
 
@@ -25,7 +25,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.Stream
         
         string fileName = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-inference/runtime/model.zip";
                         
-        MaintenanceProcessor? subject;
+        MaintenancePredictor subject;
         private  ITransformer? trainModel;
         private string vin = "123";
 
@@ -40,7 +40,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.Stream
             // Load trained model
            trainModel = mlContext.Model.Load(fileName, out modelSchema);
 
-            subject = new MaintenanceProcessor();
+            subject = new MaintenancePredictor();
             
         }
 
@@ -73,6 +73,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.Stream
             Assert.IsNotNull(actual);
 
             Assert.AreEqual(vin,actual.vin);
+            Assert.IsNotNull(actual.prediction);
             Assert.AreEqual(true,actual.prediction.Prediction);
 
         }

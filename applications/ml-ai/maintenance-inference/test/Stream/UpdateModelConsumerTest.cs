@@ -14,10 +14,9 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.test.S
     [TestClass]
     public class UpdateModelConsumerTest
     {
-        
 
         private UpdateModelConsumer subject;
-        private MaintenanceProcessor processor;
+        private MaintenancePredictor processor;
         private ITransformer trainedModel;
 
         private static string fileName = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-inference/runtime/model.zip";
@@ -30,7 +29,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.test.S
             
             trainedModel = new MLContext().Model.Load(fileName, out modelSchema);
 
-            processor = new MaintenanceProcessor();
+            processor = new MaintenancePredictor();
 
             subject = new UpdateModelConsumer(processor);
         }
@@ -39,15 +38,13 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.test.S
         public void UpdateModel()
         {
 
-            processor.TrainedModel = trainedModel;
+            processor.TrainedModel = null;
 
             subject.UpdateModel(model);
 
             Assert.IsNotNull(processor.TrainedModel);
         }
 
-
-        
 
     }
 }
