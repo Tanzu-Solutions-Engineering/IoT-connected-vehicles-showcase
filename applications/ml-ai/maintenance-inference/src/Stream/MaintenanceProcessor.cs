@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Microsoft.ML;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain;
 using Steeltoe.Messaging.Handler.Attributes;
@@ -15,26 +10,35 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Stream
     public class MaintenanceProcessor
     {
         
-        private PredictionEngine<CarMaintenance, MaintenancePrediction> predictionEngine;
+        private PredictionEngine<CarMaintenance, MaintenancePrediction>? predictionEngine;
         private readonly MLContext mlContext;
 
-        public ITransformer? TrainedModel { get; set;} 
+        private ITransformer? trainedModel = null;
 
-        public MaintenanceProcessor(ITransformer trainedModel)
+        public ITransformer? TrainedModel { 
+            get { return trainedModel;}
+            set{
+                this.trainedModel = value;
+
+                //Predict
+                predictionEngine = mlContext.Model.CreatePredictionEngine<CarMaintenance, MaintenancePrediction>(this.trainedModel);
+
+            }
+        } 
+
+        public MaintenanceProcessor()
         {
             this.mlContext = new MLContext();
 
-            // Load trained model
-           this.TrainedModel = trainedModel;
-
-           //Predict
-         predictionEngine = mlContext.Model.CreatePredictionEngine<CarMaintenance, MaintenancePrediction>(trainedModel);
         }
 
         [StreamListener(IProcessor.INPUT)]
             [SendTo(IProcessor.OUTPUT)]
-            public MaintenanceDto Predict(CarMaintenanceDto carMaintenanceDto)
+            public MaintenanceDto? Predict(CarMaintenanceDto carMaintenanceDto)
             {
+                if(predictionEngine == null)
+                    return null;
+
                  var prediction = predictionEngine.Predict(carMaintenanceDto.carMaintenance);
 
                  var maintenanceDto = new MaintenanceDto();

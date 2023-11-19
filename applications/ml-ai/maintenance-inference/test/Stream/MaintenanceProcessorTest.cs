@@ -1,7 +1,3 @@
-using System;
-using System.Diagnostics;
-using System.IO;
-using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.Extensions.Logging;
 using Microsoft.ML;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,26 +12,26 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.Stream
     [TestClass]
     public class MaintenanceProcessorTest
     {
-        private Logger debugger;
-        private Microsoft.Extensions.Logging.ILogger logger;
+        private static string logFile = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-inference/runtime/maintenance-interface-test.log";
+
+        private Logger debugger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.Console()
+            .WriteTo.File(logFile, rollingInterval: RollingInterval.Day)
+            .CreateLogger();
+
+        private Microsoft.Extensions.Logging.ILogger logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger("Program");
     
-        private string logFile = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-inference/runtime/maintenance-interface-test.log";
+        
         string fileName = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-inference/runtime/model.zip";
                         
-        MaintenanceProcessor subject;
+        MaintenanceProcessor? subject;
         private  ITransformer? trainModel;
         private string vin = "123";
 
         [TestInitialize]
         public void InitializeMicrosoftMlTrainerTest()
         {
-            debugger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .WriteTo.Console()
-            .WriteTo.File(logFile, rollingInterval: RollingInterval.Day)
-            .CreateLogger();
-
-            logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger("Program");
 
             MLContext mlContext = new MLContext();
             //Define DataViewSchema for data preparation pipeline and trained model
@@ -44,14 +40,11 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.Stream
             // Load trained model
            trainModel = mlContext.Model.Load(fileName, out modelSchema);
 
-            subject = new MaintenanceProcessor(trainModel);
+            subject = new MaintenanceProcessor();
             
         }
 
-        public MaintenanceProcessor? GetSubject()
-        {
-            return subject;
-        }
+
 
         [TestMethod]
         public void Predict()
@@ -72,6 +65,8 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.Stream
             debugger.Information($"{carMaintenance}");
 
             CarMaintenanceDto carMaintenanceDto = new CarMaintenanceDto(vin,carMaintenance);
+            
+            subject.TrainedModel = trainModel;
             
             var actual = subject.Predict(carMaintenanceDto);
 

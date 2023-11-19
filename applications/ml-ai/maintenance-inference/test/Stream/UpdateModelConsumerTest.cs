@@ -23,21 +23,31 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.test.S
         private static string fileName = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-inference/runtime/model.zip";
         private byte[] model = File.ReadAllBytes(fileName);
 
-        [TestMethod]
-        public void UpdateModel()
+        [TestInitialize]
+        public void InitializeUpdateModelConsumerTest()
         {
             DataViewSchema modelSchema;
             
             trainedModel = new MLContext().Model.Load(fileName, out modelSchema);
-            processor = new MaintenanceProcessor(trainedModel);
-            
-            subject = new UpdateModelConsumer(processor);
 
-            processor.TrainedModel = null;
+            processor = new MaintenanceProcessor();
+
+            subject = new UpdateModelConsumer(processor);
+        }
+
+        [TestMethod]
+        public void UpdateModel()
+        {
+
+            processor.TrainedModel = trainedModel;
 
             subject.UpdateModel(model);
 
             Assert.IsNotNull(processor.TrainedModel);
         }
+
+
+        
+
     }
 }

@@ -44,6 +44,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "predictive_maintenance", Version = "v1" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +63,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
