@@ -7,7 +7,6 @@ using Steeltoe.Stream.Messaging;
 
 namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Stream
 {
-    [EnableBinding(typeof(ISink))]
     public class UpdateModelConsumer
     {
         private IPredictor predictor;
@@ -19,9 +18,6 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
             this.predictor = predictor;
         }
 
-        // [StreamListener(ISink.INPUT)]
-        [StreamListener(ISink.INPUT, "Headers['type']=='Dog'")]
-        // [StreamListener("UpdateModel")]
         public void UpdateModel(byte[] model)
         {
             DataViewSchema modelSchema;

@@ -5,6 +5,8 @@ using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Configuration.Placeholder;
 using Steeltoe.Extensions.Logging;
 using Steeltoe.Stream.Extensions;
+using RabbitMQ.Client;
+using Imani.Solutions.RabbitMQ.API;
 
 namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
 {
@@ -25,9 +27,9 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
                     webBuilder.UseStartup<Startup>(); 
                     webBuilder.AddPlaceholderResolver();
                 })
-                .AddDynamicLogging()
                 .AddStreamServices<MaintenanceProcessor>()
-                .AddStreamServices<UpdateModelConsumer>()
+                // .AddStreamServices<UpdateModelConsumer>()
                 .AddConfigServer();
+
     }
 }

@@ -15,12 +15,13 @@
 
   <PropertyGroup>
     <!-- <GenerateProgramFile>false</GenerateProgramFile> -->
-    <SteeltoeVersion>3.2.0</SteeltoeVersion>
+    <SteeltoeVersion>3.2.5</SteeltoeVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Imani.Solutions.RabbitMQ" Version="0.0.1" />
     <ProjectReference Include="../maintenance-domain/maintenance-domain.csproj" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-rc.2.23479.6" />
     <PackageReference Include="Serilog" Version="3.1.1" />
