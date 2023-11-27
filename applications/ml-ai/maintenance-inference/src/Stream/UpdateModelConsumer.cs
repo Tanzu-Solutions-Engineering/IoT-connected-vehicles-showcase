@@ -1,9 +1,7 @@
+using System;
 using System.IO;
 using Microsoft.ML;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Prediction;
-using Steeltoe.Stream.Attributes;
-using Steeltoe.Stream.Messaging;
-
 
 namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Stream
 {
@@ -20,6 +18,8 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
 
         public void UpdateModel(byte[] model)
         {
+            Console.WriteLine($"**** Updating model {model}");
+            
             DataViewSchema modelSchema;
 
             MemoryStream stream = new MemoryStream(model);

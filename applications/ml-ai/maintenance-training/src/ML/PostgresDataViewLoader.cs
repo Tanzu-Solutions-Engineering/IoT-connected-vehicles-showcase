@@ -30,21 +30,6 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.src.ML
                                         region,
                                         mileage_range,
                                         mileage,
-                                        oil_filter,
-                                        engine_oil,
-                                        washer_plug_drain,
-                                        dust_and_pollen_filter,
-                                        whell_alignment_and_balancing,
-                                        air_clean_filter,
-                                        fuel_filter,
-                                        spark_plug,
-                                        brake_fluid,
-                                        brake_and_clutch_oil,
-                                        transmission_fluid,
-                                        brake_pads,
-                                        clutch,
-                                        coolant,
-                                        cost,
                                         (CASE WHEN label=1 THEN true ELSE false END)::boolean as label 
                                     FROM cars.maintenance_training";
 

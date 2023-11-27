@@ -21,8 +21,9 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.ML
         private MicrosoftMlTrainer? subject;
         private LoadDataView? dvLoader;
         // private System.IO.Stream ModelPath;
-        private string TestDataPath = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/predictive-maintenance/test/resources/car-predictive-test-data.csv";
-        private string logFile = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/predictive-maintenance/runtime/predictive-maintenance.log";
+        private string TestDataPath = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-training/test/resources/car-predictive-test-data.csv";
+                                         
+        private string logFile = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-training/runtime/predictive-maintenance.log";
 
         // private Mock<ILogger> logger;
 
@@ -50,7 +51,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.ML
             var actual = subject.Train();
             Assert.IsNotNull(actual);
 
-            string fileName = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/predictive-maintenance/runtime/model.zip";
+            string fileName = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-training/runtime/model.zip";
 
             //writer to to file
             using (var fileStream = File.Open(fileName, FileMode.Create))

@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.ML;
 using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Stream.Attributes;

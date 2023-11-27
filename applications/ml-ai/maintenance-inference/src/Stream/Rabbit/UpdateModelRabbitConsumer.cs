@@ -44,12 +44,14 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
 
             queueName = config.GetProperty("RabbitMQ_Queue",DEFAULT_TRAINED_MODEL_QUEUE_NM);
 
+            Console.WriteLine($"**** Reading queue:{queueName} ");
+
             conn = factory.CreateConnection();
             channel = conn.CreateModel();
 
-            IDictionary<string, object> args = new Dictionary<string, object>();
-            args["x-queue-type"] = "stream";
-            args["x-stream-offset"] = "first";
+            IDictionary<string, object> queueArgs = new Dictionary<string, object>();
+            queueArgs["x-queue-type"] = "stream";
+            
 
 
             exchangeName = config.GetProperty("UPDATE_MODEL_EXCHANGE_NM",DEFAULT_EXCHANGE_NM);
@@ -65,7 +67,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
                 durable: true,
                 exclusive: false,
                 autoDelete: false,
-                arguments: args );
+                arguments: queueArgs );
 
 
             channel.QueueBind(queueName,exchangeName,routingKey: DEFAULT_ROUTING_KEY_RULE);
@@ -80,7 +82,16 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
                     channel.BasicAck(ea.DeliveryTag, false);
                 };
 
-             string consumerTag = channel.BasicConsume(queueName, false, consumer);
+            IDictionary<string, object> consumerArgs = new Dictionary<string,object>();
+
+            consumerArgs["x-stream-offset"] = "first";
+            //"x-stream-offset"
+
+            string consumerTag = channel.BasicConsume(queue: queueName, 
+                                                    autoAck: false, 
+                                                    exclusive: true,
+                                                    arguments : consumerArgs, 
+                                                    consumer: consumer);
         }
         
     }

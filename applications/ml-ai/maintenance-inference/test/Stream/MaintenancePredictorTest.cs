@@ -24,9 +24,9 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.test.Stream
         private Microsoft.Extensions.Logging.ILogger logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger("Program");
     
         
-        string fileName = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-inference/runtime/model.zip";
+        private string fileName = "/Users/Projects/VMware/Tanzu/Use-Cases/IoT/dev/IoT-connected-vehicles-showcase/applications/ml-ai/maintenance-inference/runtime/model.zip";
                         
-        MaintenancePredictor subject;
+        private MaintenancePredictor subject;
         private  ITransformer? trainModel;
         private string vin = "123";
 
