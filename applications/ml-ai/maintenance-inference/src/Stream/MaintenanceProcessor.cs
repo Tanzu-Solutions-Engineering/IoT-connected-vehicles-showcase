@@ -1,4 +1,7 @@
 
+using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Prediction;
 using Steeltoe.Messaging.Handler.Attributes;
@@ -11,18 +14,24 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
     public class MaintenanceProcessor
     {
         private readonly IPredictor predictor;
+        private readonly ILogger logger;
 
-        public MaintenanceProcessor(IPredictor predictor)
+        public MaintenanceProcessor(IPredictor predictor, ILogger<MaintenanceProcessor> logger)
         {
             this.predictor = predictor;
+            this.logger = logger;
         }
 
 
         [StreamListener(IProcessor.INPUT)]
         [SendTo(IProcessor.OUTPUT)]
-        public MaintenanceDto? Predict(CarMaintenanceDto carMaintenanceDto)
+        public MaintenanceDto Predict(CarMaintenanceDto carMaintenanceDto)
         {
-            return predictor.Predict(carMaintenanceDto);
+            logger.LogInformation($"*****  Predict dto: {carMaintenanceDto}");
+            var maintenanceDto = predictor.Predict(carMaintenanceDto);
+
+            logger.LogInformation($"*****  RETURNING Maintenance DTO: {maintenanceDto}");
+            return maintenanceDto;
         }
     }
 }

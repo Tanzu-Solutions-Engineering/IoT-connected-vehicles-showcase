@@ -51,7 +51,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
 
             var updateModelConsumer = new UpdateModelConsumer(predictor);
             services.AddSingleton<UpdateModelConsumer>(updateModelConsumer);
-            services.AddSingleton<UpdateModelRabbitConsumer>(new UpdateModelRabbitConsumer(updateModelConsumer,configSettings));
+            services.AddSingleton<RabbitStreamBuilder>(new RabbitStreamBuilder(updateModelConsumer,configSettings));
 
             services.AddAllActuators(Configuration);
             services.ActivateActuatorEndpoints();

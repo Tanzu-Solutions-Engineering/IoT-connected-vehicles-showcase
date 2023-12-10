@@ -39,6 +39,8 @@
     <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.PlaceholderCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="$(SteeltoeVersion)" />
+    
+    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicSerilogBase" Version="$(SteeltoeVersion)"/>
     <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 

@@ -11,7 +11,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Predi
     {
         ITransformer? TrainedModel { get; set;}
 
-        public MaintenanceDto? Predict(CarMaintenanceDto carMaintenanceDto);
+        public MaintenanceDto Predict(CarMaintenanceDto carMaintenanceDto);
 
         
     }

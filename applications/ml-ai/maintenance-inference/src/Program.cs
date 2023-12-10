@@ -5,8 +5,7 @@ using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.Extensions.Configuration.Placeholder;
 using Steeltoe.Extensions.Logging;
 using Steeltoe.Stream.Extensions;
-using RabbitMQ.Client;
-using Imani.Solutions.RabbitMQ.API;
+using Steeltoe.Extensions.Logging.DynamicSerilog;
 
 namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
 {
@@ -19,9 +18,11 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .AddDynamicSerilog()
                 .UseDefaultServiceProvider(options =>
                     options.ValidateScopes = false)
                 .ConfigureLogging((context, builder) => builder.AddDynamicConsole())
+    
                  .ConfigureWebHostDefaults(webBuilder => 
                 { 
                     webBuilder.UseStartup<Startup>(); 

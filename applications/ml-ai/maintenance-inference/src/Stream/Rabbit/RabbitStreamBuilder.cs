@@ -7,14 +7,14 @@ using RabbitMQ.Client.Events;
 
 namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Stream.Rabbit
 {
-    public class UpdateModelRabbitConsumer
+    public class RabbitStreamBuilder
     {
         public static readonly string DEFAULT_TRAINED_MODEL_QUEUE_NM = "vehicle.trained.model";
 
         public static readonly string RABBIT_URI_PROP_NM = "RabbitMQ_URI";
         private static readonly string applicationName = "maintenance-inference";
 
-        private string queueName;
+        private string traininModelQueueName;
         private IConnection conn;
         private IModel channel;
         private readonly UpdateModelConsumer updateModelConsumer;
@@ -23,14 +23,14 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
 
 
         private readonly IConnectionFactory factory;
-        private readonly string exchangeName;
+        private readonly string updateModelExchangeName;
 
-        public UpdateModelRabbitConsumer(UpdateModelConsumer updateModelConsumer,
+        public RabbitStreamBuilder(UpdateModelConsumer updateModelConsumer,
                                          ISettings config)
                                          : this(new ConnectionFactory(),updateModelConsumer,config)
         {
         }
-        public UpdateModelRabbitConsumer(IConnectionFactory factory, UpdateModelConsumer updateModelConsumer, ISettings config)
+        public RabbitStreamBuilder(IConnectionFactory factory, UpdateModelConsumer updateModelConsumer, ISettings config)
         {
             this.factory = factory;
             this.updateModelConsumer = updateModelConsumer;
@@ -42,36 +42,41 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
 
             factory.Uri = new Uri(uriString: uri);
 
-            queueName = config.GetProperty("RabbitMQ_Queue",DEFAULT_TRAINED_MODEL_QUEUE_NM);
-
-            Console.WriteLine($"**** Reading queue:{queueName} ");
+            traininModelQueueName = config.GetProperty("TRAINING_MODEL_QUEUE_NM",DEFAULT_TRAINED_MODEL_QUEUE_NM);
+            updateModelExchangeName = config.GetProperty("UPDATE_MODEL_EXCHANGE_NM",DEFAULT_EXCHANGE_NM);
 
             conn = factory.CreateConnection();
+
+            ConstructTraining();
+        }
+
+        private void ConstructTraining()
+        {
+
+            Console.WriteLine($"**** Reading queue:{traininModelQueueName} ");
+
+          
             channel = conn.CreateModel();
 
             IDictionary<string, object> queueArgs = new Dictionary<string, object>();
             queueArgs["x-queue-type"] = "stream";
             
-
-
-            exchangeName = config.GetProperty("UPDATE_MODEL_EXCHANGE_NM",DEFAULT_EXCHANGE_NM);
             
             channel.ExchangeDeclare(
-                exchange: exchangeName,
+                exchange: updateModelExchangeName,
                 type: "topic",
                 durable: true,
                 autoDelete: false);
 
             var response = channel.QueueDeclare(
-                queue: queueName, 
+                queue: traininModelQueueName, 
                 durable: true,
                 exclusive: false,
                 autoDelete: false,
                 arguments: queueArgs );
 
 
-            channel.QueueBind(queueName,exchangeName,routingKey: DEFAULT_ROUTING_KEY_RULE);
-
+            channel.QueueBind(traininModelQueueName,updateModelExchangeName,routingKey: DEFAULT_ROUTING_KEY_RULE);
 
             channel.BasicQos(prefetchSize: 0, prefetchCount: 10000, global: false);
             
@@ -85,14 +90,12 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
             IDictionary<string, object> consumerArgs = new Dictionary<string,object>();
 
             consumerArgs["x-stream-offset"] = "first";
-            //"x-stream-offset"
 
-            string consumerTag = channel.BasicConsume(queue: queueName, 
+            string consumerTag = channel.BasicConsume(queue: traininModelQueueName, 
                                                     autoAck: false, 
                                                     exclusive: true,
                                                     arguments : consumerArgs, 
                                                     consumer: consumer);
         }
-        
     }
 }

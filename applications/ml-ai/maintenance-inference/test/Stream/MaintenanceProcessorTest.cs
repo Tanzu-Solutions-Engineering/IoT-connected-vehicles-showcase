@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Imani.Solutions.Core.API.Serialization;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain;
@@ -13,17 +12,19 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.test.
     [TestClass]
     public class MaintenanceProcessorTest
     {
-        private readonly float? probability = 2;
-        private readonly float? score = 5;
+        private readonly float probability = 2;
+        private readonly float score = 5;
         private CarMaintenanceDto carMaintenance;
         private MaintenanceProcessor subject;
         private Mock<IPredictor> predictor;
+        private Mock<ILogger<MaintenanceProcessor>> logger;
         private MaintenanceDto expected;
 
         [TestInitialize]
         public void InitializeMaintenanceProcessorTest()
         {
             predictor = new Mock<IPredictor>();
+            logger = new Mock<ILogger<MaintenanceProcessor>>();
             carMaintenance = new CarMaintenanceDto();
             carMaintenance.vin = "12";
 
@@ -36,7 +37,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.test.
             expected.prediction.Score = score;
 
 
-            subject = new MaintenanceProcessor(predictor.Object);
+            subject = new MaintenanceProcessor(predictor.Object,logger.Object);
         }
         [TestMethod]
         public void Predict()
@@ -48,6 +49,14 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.test.
             Assert.IsNotNull(actual);
 
             Assert.AreEqual(actual.vin,carMaintenance.vin);
+
+            JsonSerde<MaintenanceDto> jsonSerde = new JsonSerde<MaintenanceDto>();
+            var json = jsonSerde.Serialize(actual);
+
+            Console.WriteLine($"OUTPUT: {json}");
+
+            Assert.IsTrue(json.Contains(carMaintenance.vin));
+
         }
     }
 }
