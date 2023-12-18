@@ -1,3 +1,4 @@
+using System;
 using Microsoft.ML;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain;
 using Steeltoe.Messaging.Handler.Attributes;
@@ -44,7 +45,10 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Predi
         public MaintenanceDto? Predict(CarMaintenanceDto carMaintenanceDto)
         {
             if (predictionEngine == null || carMaintenanceDto.carMaintenance == null)
+            {
+                Console.WriteLine($"WARNING returning because either is null predictionEngine == {predictionEngine} || carMaintenanceDto.carMaintenance = {carMaintenanceDto.carMaintenance}");
                 return null;
+            }
 
             var prediction = predictionEngine.Predict(carMaintenanceDto.carMaintenance);
 

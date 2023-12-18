@@ -27,10 +27,10 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
         [SendTo(IProcessor.OUTPUT)]
         public MaintenanceDto Predict(CarMaintenanceDto carMaintenanceDto)
         {
-            logger.LogInformation($"*****  Predict dto: {carMaintenanceDto}");
+            // logger.LogInformation($"*****  Predict dto: {carMaintenanceDto}");
             var maintenanceDto = predictor.Predict(carMaintenanceDto);
 
-            logger.LogInformation($"*****  RETURNING Maintenance DTO: {maintenanceDto}");
+            // logger.LogInformation($"*****  RETURNING Maintenance DTO: {maintenanceDto}");
             return maintenanceDto;
         }
     }

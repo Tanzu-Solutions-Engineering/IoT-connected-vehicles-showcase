@@ -45,13 +45,21 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
 
             services.AddPostgresConnection(Configuration);
             services.AddRabbitMQConnection(Configuration);
+            
 
             var predictor = new MaintenancePredictor();
             services.AddSingleton<IPredictor>(predictor);
+            services.AddSingleton<MaintenanceProcessor>();
 
             var updateModelConsumer = new UpdateModelConsumer(predictor);
             services.AddSingleton<UpdateModelConsumer>(updateModelConsumer);
-            services.AddSingleton<RabbitStreamBuilder>(new RabbitStreamBuilder(updateModelConsumer,configSettings));
+
+            
+            services.AddSingleton<ISettings>(new ConfigSettings());
+            services.AddSingleton<RabbitStreamBuilder>(new RabbitStreamBuilder(updateModelConsumer,configSettings,new MaintenanceProcessor(new MaintenancePredictor(),null)));
+            // services.AddSingleton<RabbitStreamBuilder>();
+
+
 
             services.AddAllActuators(Configuration);
             services.ActivateActuatorEndpoints();
