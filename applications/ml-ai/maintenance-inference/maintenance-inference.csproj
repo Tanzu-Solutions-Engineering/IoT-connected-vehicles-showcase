@@ -30,6 +30,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.*" />
     <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Stream.StreamBase" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Messaging.RabbitMQ" Version="$(SteeltoeVersion)" />
     <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
   </ItemGroup>
 

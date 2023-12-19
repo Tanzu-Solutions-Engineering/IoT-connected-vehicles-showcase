@@ -74,7 +74,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
                   
             ConstructTraining();
 
-            ConstructPredictMaintenance();
+            // ConstructPredictMaintenance();
         }
 
         private void ConstructPredictMaintenance()
@@ -124,20 +124,20 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
                   var carMaintenanceDto = toCarMaintenanceDto(ea.Body);
 
                   Console.WriteLine($"***** Got Car maintenance Dto {carMaintenanceDto}");
-                    var maintenanceDto = maintenanceProcessor.Predict(carMaintenanceDto);
+                    // var maintenanceDto = maintenanceProcessor.Predict(carMaintenanceDto);
 
-                    Console.WriteLine($"***** Got maintenance Dto {maintenanceDto}");
+                    // Console.WriteLine($"***** Got maintenance Dto {maintenanceDto}");
 
                     //Send 
-                    Console.WriteLine($"***** Sending vehicle.maintenance.prediction");
-                    maintenanceChannel.BasicPublish(
-                        "vehicle.maintenance.prediction", 
-                        maintenanceDto.vin, 
-                        null, 
-                        Encoding.UTF8.GetBytes(maintenanceDtoSerde.Serialize(maintenanceDto)));
+                    // Console.WriteLine($"***** Sending vehicle.maintenance.prediction");
+                    // maintenanceChannel.BasicPublish(
+                    //     "vehicle.maintenance.prediction", 
+                    //     maintenanceDto.vin, 
+                    //     null, 
+                    //     Encoding.UTF8.GetBytes(maintenanceDtoSerde.Serialize(maintenanceDto)));
 
 
-                    predictMaintenanceRequestChannel.BasicAck(ea.DeliveryTag, false);
+                    // predictMaintenanceRequestChannel.BasicAck(ea.DeliveryTag, false);
 
                     }
                     catch(Exception e)

@@ -40,10 +40,12 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Predi
             }
         }
 
-        [StreamListener(IProcessor.INPUT)]
-        [SendTo(IProcessor.OUTPUT)]
+        // [StreamListener(IProcessor.INPUT)]
+        // [SendTo(IProcessor.OUTPUT)]
         public MaintenanceDto? Predict(CarMaintenanceDto carMaintenanceDto)
         {
+            Console.WriteLine($"Processing carMaintenanceDto: {carMaintenanceDto}");
+
             if (predictionEngine == null || carMaintenanceDto.carMaintenance == null)
             {
                 Console.WriteLine($"WARNING returning because either is null predictionEngine == {predictionEngine} || carMaintenanceDto.carMaintenance = {carMaintenanceDto.carMaintenance}");
@@ -55,8 +57,36 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Predi
             var maintenanceDto = new MaintenanceDto();
             maintenanceDto.vin = carMaintenanceDto.vin;
             maintenanceDto.prediction = prediction;
+
+            Console.WriteLine($"Returing maintenanceDto: {maintenanceDto}");
             return maintenanceDto;
         }
+
+        /*
+
+        [StreamListener(IProcessor.INPUT)]
+        [SendTo(IProcessor.OUTPUT)]
+        public MaintenanceDto? Predict(CarMaintenanceDto carMaintenanceDto)
+        {
+            Console.WriteLine($"Processing carMaintenanceDto: {carMaintenanceDto}");
+
+            if (predictionEngine == null || carMaintenanceDto.carMaintenance == null)
+            {
+                Console.WriteLine($"WARNING returning because either is null predictionEngine == {predictionEngine} || carMaintenanceDto.carMaintenance = {carMaintenanceDto.carMaintenance}");
+                return null;
+            }
+
+            var prediction = predictionEngine.Predict(carMaintenanceDto.carMaintenance);
+
+            var maintenanceDto = new MaintenanceDto();
+            maintenanceDto.vin = carMaintenanceDto.vin;
+            maintenanceDto.prediction = prediction;
+
+            Console.WriteLine($"Returing maintenanceDto: {maintenanceDto}");
+            return maintenanceDto;
+        }
+
+        */
 
     }
 }

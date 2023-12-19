@@ -49,7 +49,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
 
             var predictor = new MaintenancePredictor();
             services.AddSingleton<IPredictor>(predictor);
-            services.AddSingleton<MaintenanceProcessor>();
+            // services.AddSingleton<MaintenanceProcessor>();
 
             var updateModelConsumer = new UpdateModelConsumer(predictor);
             services.AddSingleton<UpdateModelConsumer>(updateModelConsumer);

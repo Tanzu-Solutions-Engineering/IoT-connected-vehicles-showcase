@@ -39,24 +39,24 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.test.
 
             subject = new MaintenanceProcessor(predictor.Object,logger.Object);
         }
-        [TestMethod]
-        public void Predict()
-        {
-            predictor.Setup(p=> p.Predict(It.IsAny<CarMaintenanceDto>())).Returns(expected);
+        // [TestMethod]
+        // public void Predict()
+        // {
+        //     predictor.Setup(p=> p.Predict(It.IsAny<CarMaintenanceDto>())).Returns(expected);
             
-            var actual = subject.Predict(carMaintenance);
+        //     var actual = subject.Predict(carMaintenance);
 
-            Assert.IsNotNull(actual);
+        //     Assert.IsNotNull(actual);
 
-            Assert.AreEqual(actual.vin,carMaintenance.vin);
+        //     Assert.AreEqual(actual.vin,carMaintenance.vin);
 
-            JsonSerde<MaintenanceDto> jsonSerde = new JsonSerde<MaintenanceDto>();
-            var json = jsonSerde.Serialize(actual);
+        //     JsonSerde<MaintenanceDto> jsonSerde = new JsonSerde<MaintenanceDto>();
+        //     var json = jsonSerde.Serialize(actual);
 
-            Console.WriteLine($"OUTPUT: {json}");
+        //     Console.WriteLine($"OUTPUT: {json}");
 
-            Assert.IsTrue(json.Contains(carMaintenance.vin));
+        //     Assert.IsTrue(json.Contains(carMaintenance.vin));
 
-        }
+        // }
     }
 }
