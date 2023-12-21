@@ -31,7 +31,6 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
         private IModel maintenanceChannel;
         private readonly UpdateModelConsumer updateModelConsumer;
 
-        private readonly MaintenanceProcessor maintenanceProcessor;
 
         private static readonly string DEFAULT_EXCHANGE_NM = DEFAULT_TRAINED_MODEL_QUEUE_NM;
 
@@ -47,16 +46,15 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
 
 
         public RabbitStreamBuilder(UpdateModelConsumer updateModelConsumer,
-                                         ISettings config,MaintenanceProcessor maintenanceProcessor)
-                                         : this(new ConnectionFactory(),updateModelConsumer,config,maintenanceProcessor)
+                                         ISettings config)
+                                         : this(new ConnectionFactory(),updateModelConsumer,config)
         {
         }
-        public RabbitStreamBuilder(IConnectionFactory factory, UpdateModelConsumer updateModelConsumer, ISettings config,MaintenanceProcessor maintenanceProcessor)
+        public RabbitStreamBuilder(IConnectionFactory factory, UpdateModelConsumer updateModelConsumer, ISettings config)
         {
             
             this.factory = factory;
             this.updateModelConsumer = updateModelConsumer;
-            this.maintenanceProcessor = maintenanceProcessor;
             
             factory.ClientProperties["connection_name"] = applicationName;
 
@@ -114,7 +112,6 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
             
             var consumer = new EventingBasicConsumer(predictMaintenanceRequestChannel);
 
-            string payloadText = "";
 
             consumer.Received += (ch, ea) =>
                 {
@@ -124,20 +121,6 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Inference.Strea
                   var carMaintenanceDto = toCarMaintenanceDto(ea.Body);
 
                   Console.WriteLine($"***** Got Car maintenance Dto {carMaintenanceDto}");
-                    // var maintenanceDto = maintenanceProcessor.Predict(carMaintenanceDto);
-
-                    // Console.WriteLine($"***** Got maintenance Dto {maintenanceDto}");
-
-                    //Send 
-                    // Console.WriteLine($"***** Sending vehicle.maintenance.prediction");
-                    // maintenanceChannel.BasicPublish(
-                    //     "vehicle.maintenance.prediction", 
-                    //     maintenanceDto.vin, 
-                    //     null, 
-                    //     Encoding.UTF8.GetBytes(maintenanceDtoSerde.Serialize(maintenanceDto)));
-
-
-                    // predictMaintenanceRequestChannel.BasicAck(ea.DeliveryTag, false);
 
                     }
                     catch(Exception e)
