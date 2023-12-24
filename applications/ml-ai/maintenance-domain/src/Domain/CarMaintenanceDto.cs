@@ -19,5 +19,11 @@ namespace  Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain
 
         public string? vin{ get; set; } 
         public CarMaintenance? carMaintenance { get; set;}
+
+        public override string ToString()
+        {
+            return $"CarMaintenanceDto vin: {vin}, CarMaintenance : {carMaintenance}";
+        }
+
     }
 }

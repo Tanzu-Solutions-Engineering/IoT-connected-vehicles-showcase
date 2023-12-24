@@ -8,9 +8,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain
 {
     public class CarMaintenance
     {
-         /*
-        slno,vehicle_type,brand,model,engine_type,bonnet,door,front_bumper,rear_bumper,front_headlight,back_headlight,side_mirror,tail_light,clutch_plate,barke_pad,front_windsheild,rear_windsheild,ac_evaporator_coil,radiator,battery,total_acc
-        */
+        
           [LoadColumn(0)]
         public int slno { get; set; }
 
@@ -33,6 +31,11 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain
   
         [LoadColumn(9)]
         public bool label { get; set; }
+
+        public override string ToString()
+        {
+            return $"CarMaintenance slno:{slno} vehicle_type:{this.vehicle_type} brand:{this.brand} model:{this.model} engine_type:{this.engine_type} make_year:{this.make_year} region:{this.region} mileage_range:{this.mileage_range} mileage:{this.mileage} label:{this.label}";
+        }
         
     }
 }

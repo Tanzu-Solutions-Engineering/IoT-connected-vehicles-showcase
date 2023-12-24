@@ -18,5 +18,10 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Domain
         public float Probability;
 
         public float Score;
+
+        public override string ToString(){
+            return $"MaintenancePrediction  Prediction: {Prediction},  Probability : {Probability}, Score : {Score}";
+        }  
+        
     }
 }
