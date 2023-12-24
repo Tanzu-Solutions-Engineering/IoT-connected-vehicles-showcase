@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.ML;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.src.ML;
+using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.Repository;
 using Steeltoe.Connector.PostgreSql;
 using Steeltoe.Connector.RabbitMQ;
 using Steeltoe.Management.Endpoint;
@@ -29,7 +30,6 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddPostgresConnection(Configuration);
             services.AddRabbitMQConnection(Configuration);
             services.AddAllActuators(Configuration);
@@ -47,6 +47,8 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "predictive_maintenance", Version = "v1" });
             });
 
+            services.AddHostedService<TrainingDataLoader>();
+
             //Building ML
             services.AddSingleton<ITrainer,MicrosoftMlTrainer>();
 
@@ -54,6 +56,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
                     new PostgresDataViewLoader(
                         configSettings.GetProperty("ConnectionString")
                         ).Load);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

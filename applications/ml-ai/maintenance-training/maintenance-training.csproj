@@ -39,6 +39,7 @@
     <PackageReference Include="Steeltoe.Extensions.Configuration.PlaceholderCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
+     <PackageReference Include="Steeltoe.Messaging.RabbitMQ" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
       <ItemGroup>
