@@ -35,6 +35,12 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.Reposi
 	 (19.0,1.0,1.0,1.0,1.0,2017.0,1.0,1500.0,9606.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2643.0,0),
 	 (20.0,1.0,1.0,1.0,1.0,2017.0,1.0,1500.0,9806.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2643.0,0),
 	 (12.0,1.0,1.0,1.0,1.0,2017.0,1.0,1500.0,9006.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2643.0,0);
+        "
+        +
+    "INSERT INTO " + TRAING_TABLE_NM + @" (slno,vehicle_type,brand,model,engine_type,make_year,region,mileage_range,mileage,oil_filter,engine_oil,washer_plug_drain,dust_and_pollen_filter,whell_alignment_and_balancing,air_clean_filter,fuel_filter,spark_plug,brake_fluid,brake_and_clutch_oil,transmission_fluid,brake_pads,clutch,coolant,""cost"",""label"") VALUES
+	 (1.0,1.0,1.0,1.0,1.0,2020.0,1.0,10000.0,11400.0,1.0,1.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2566.0,1),
+	 (2.0,1.0,1.0,1.0,1.0,2020.0,1.0,10000.0,11453.0,1.0,1.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2633.0,1),
+	 (3.0,1.0,1.0,1.0,1.0,2017.0,1.0,10000.0,10706.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2643.0,1);
         ";
 
         private IDbConnection connection;
