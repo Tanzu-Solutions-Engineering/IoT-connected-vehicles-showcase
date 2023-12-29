@@ -70,6 +70,8 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
             }
 
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

@@ -18,6 +18,7 @@
     <SteeltoeVersion>3.2.0</SteeltoeVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <EFCoreVersion>7.0.4</EFCoreVersion>  
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,16 +34,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.10" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(EFCoreVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10"/>
     <PackageReference Include="RabbitMQ.Client" Version="5.1.*" />
     <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.PlaceholderCore" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="$(SteeltoeVersion)" />
     <PackageReference Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
-     <PackageReference Include="Steeltoe.Messaging.RabbitMQ" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.Messaging.RabbitMQ" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
-      <ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Imani.Solutions.Core" Version="0.1.0" />
     <PackageReference Include="Microsoft.ML" Version="3.0.0-preview.23511.1" />
     <PackageReference Include="Microsoft.ML.FastTree" Version="3.0.0-preview.23511.1" />
