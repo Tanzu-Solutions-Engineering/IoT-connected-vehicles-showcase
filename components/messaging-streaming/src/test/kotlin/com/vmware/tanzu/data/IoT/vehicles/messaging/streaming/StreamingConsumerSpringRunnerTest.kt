@@ -94,7 +94,7 @@ internal class StreamingConsumerSpringRunnerTest {
             streamSetup = streamSetup,
             offset = offset,
         );
-        subject.run("");
+        subject.run();
         verify(streamSetup).initialize(streamName);
         verify(consumerBuilder).stream(any());
         verify(consumerBuilder).offset(any());
@@ -116,7 +116,7 @@ internal class StreamingConsumerSpringRunnerTest {
             streamSetup = streamSetup,
             offset = offset,
         );
-        subject.run("");
+        subject.run();
         verify(streamSetup).initialize(streamName);
         verify(consumerBuilder, never()).offset(any());
         verify(consumerBuilder).stream(any());

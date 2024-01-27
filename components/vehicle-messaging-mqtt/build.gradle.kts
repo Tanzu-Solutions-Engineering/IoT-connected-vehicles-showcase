@@ -24,7 +24,6 @@ extra["springCloudVersion"] = "2021.0.0"
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter:3.1.4")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.springdoc:springdoc-openapi:2.2.0")
     implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

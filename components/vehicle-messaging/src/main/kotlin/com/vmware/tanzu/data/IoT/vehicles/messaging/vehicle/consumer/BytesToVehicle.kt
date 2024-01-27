@@ -8,7 +8,7 @@ import java.util.function.Function
 /**
  * @author Gregory Green
  */
-@Component
+//@Component
 class BytesToVehicle(private val objectMapper: ObjectMapper = ObjectMapper()) : Function<ByteArray,Vehicle>{
     /**
      * Applies this function to the given argument.

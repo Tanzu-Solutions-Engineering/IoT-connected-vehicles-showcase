@@ -26,6 +26,8 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.src.Co
         [HttpPost]
         public void SaveCarMaintenance(SaveCarMaintenanceRecord saveRecord)
         {
+            Console.WriteLine($"Saving saveRecord: {saveRecord}");
+            this.logger.LogInformation($"Saving record: {saveRecord}");
             this.repository.Save(saveRecord);
         }
     }

@@ -5,14 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.vmware</groupId>
-    <artifactId>tanzu-rabbitmq-event-streaming-showcase-parent</artifactId>
+    <artifactId>iot-connected-vehicles-showcase</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
-    <name>tanzu-rabbitmq-event-streaming-showcase-parent</name>
+    <name>iot-connected-vehicles-showcase</name>
 
     <modules>
-        <module>components/IoT-connected-vehicles-domains</module>
-<!--        <module>applications/vehicle-generator-mqtt-source</module>-->
+        <module>components/vehicle-domain</module>
         <module>applications/vehicle-generator-source</module>
     </modules>
     <build>
@@ -22,8 +21,8 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <configuration>
-                        <source>11</source>
-                        <target>11</target>
+                        <source>17</source>
+                        <target>17</target>
                     </configuration>
                 </plugin>
             </plugins>

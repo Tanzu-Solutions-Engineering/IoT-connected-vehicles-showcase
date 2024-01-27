@@ -31,9 +31,9 @@ docker push nyla/iot-connected-vehicle-dashboard:0.0.2-SNAPSHOT
 
 Starting GemFire
 
-```shell
-start locator --name=locator
-start server --name=server1
-create region --name=Vehicle --type=PARTITION
 
+export GEMFIRE_HOME=/Users/devtools/repositories/IMDG/gemfire/vmware-gemfire-10.0.2
+
+```shell
+./deployments/local/dataServices/gemfire/start.sh
 ```

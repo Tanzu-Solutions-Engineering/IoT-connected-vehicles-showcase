@@ -27,7 +27,7 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.src.Re
 
             builder.HasDefaultSchema(schemaName);    //To all the tables.
 
-            builder.Entity<CarMaintenance>()
+            builder.Entity<CarMaintenance>().ToTable("maintenance_training")
             .HasKey(cm => cm.slno).HasName("slno");
 
             builder.Entity<CarMaintenance>().Property(cm => cm.slno)

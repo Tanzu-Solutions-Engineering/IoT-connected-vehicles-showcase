@@ -15,8 +15,6 @@ repositories {
     mavenLocal()
 }
 
-extra["springCloudVersion"] = "2021.0.0"
-
 dependencies {
     implementation("org.springframework:spring-context:5.3.1")
     implementation("org.springframework.data:spring-data-commons:2.4.5")

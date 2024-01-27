@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.1.4"
-    id("io.spring.dependency-management") version "1.1.3"
+    id("org.springframework.boot") version "3.1.8"
+    id("io.spring.dependency-management") version "1.1.4"
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
     //maven
@@ -19,16 +19,17 @@ repositories {
     mavenLocal()
 }
 
-extra["springCloudVersion"] = "2021.0.0"
+extra["springCloudVersion"] = "2022.0.4"
 
 dependencies {
-    implementation("org.springdoc:springdoc-openapi:2.2.0")
-    implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")
+//    implementation("org.springdoc:springdoc-openapi:2.2.0")
+//    implementation("io.github.classgraph:classgraph:4.8.165")
+    implementation("com.github.nyla-solutions:nyla.solutions.core:2.1.0")
+
     implementation(project(":components:IoT-connected-vehicles-domains"))
-    implementation(project(":components:vehicle-messaging"))
+//    implementation(project(":components:vehicle-messaging"))
     implementation("org.springframework.boot:spring-boot-starter-amqp")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.cloud:spring-cloud-stream")
     implementation("org.springframework.cloud:spring-cloud-stream-binder-rabbit")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -52,4 +53,8 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.bootBuildImage {
+    builder.set("paketobuildpacks/builder-jammy-base:latest")
 }

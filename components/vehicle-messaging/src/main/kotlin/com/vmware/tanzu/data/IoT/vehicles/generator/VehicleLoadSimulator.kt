@@ -2,31 +2,31 @@ package com.vmware.tanzu.data.IoT.vehicles.generator
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.publisher.VehicleSender
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.CommandLineRunner
-import org.springframework.stereotype.Component
+//import org.springframework.beans.factory.annotation.Value
+//import org.springframework.boot.CommandLineRunner
+//import org.springframework.stereotype.Component
 
 /**
  * @author Gregory Green
  */
-@Component
+//@Component
 class VehicleLoadSimulator(
     private val sender: VehicleSender,
-    @Value("\${vehicleCount}")
+//    @Value("\${vehicleCount}")
     private val vehicleCount: Int,
-    @Value("\${messageCount}")
+//    @Value("\${messageCount}")
     private val messageCount: Int,
-    @Value("\${distanceIncrements}")
+//    @Value("\${distanceIncrements}")
     private val distanceIncrements: Double,
-    @Value("\${delayMs}")
+//    @Value("\${delayMs}")
     private val delayMs: Long,
-    @Value("\${vinPrefix}")
+//    @Value("\${vinPrefix}")
     private val vinPrefix: String = "V",
     private val generator: VehicleGenerator = VehicleGenerator(
         distanceIncrements = distanceIncrements
     ),
     private val vehicleRider: VehicleRider
-) : CommandLineRunner {
+) : Runnable {
 
 
     /**
@@ -54,7 +54,7 @@ class VehicleLoadSimulator(
      * @param args incoming main method arguments
      * @throws Exception on error
      */
-    override fun run(vararg args: String?) {
+    override fun run() {
         val vehicles = constructVehicles();
         process(vehicles);
     }

@@ -1,10 +1,12 @@
 package com.vmware.tanzu.data.IoT.vehicles.generator.simulator
 
-import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleGenerator
 import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleLoadSimulator
 import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.amqp.RabbitTemplateVehicleSender
-import nyla.solutions.core.data.collections.QueueSupplier
+//import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleGenerator
+//import com.vmware.tanzu.data.IoT.vehicles.generator.VehicleLoadSimulator
+//import com.vmware.tanzu.data.IoT.vehicles.messaging.vehicle.amqp.RabbitTemplateVehicleSender
+//import nyla.solutions.core.data.collections.QueueSupplier
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory
 import org.springframework.amqp.rabbit.connection.ConnectionFactory
 import org.springframework.amqp.rabbit.connection.ConnectionNameStrategy
@@ -57,11 +59,11 @@ class AmqpRabbitConfig {
         return ConnectionNameStrategy { connection: ConnectionFactory? -> applicationName!! }
     }
 
-    @Bean
-    fun generateVehicles()  :QueueSupplier<Vehicle>
-    {
-        return QueueSupplier<Vehicle>();
-    }
+//    @Bean
+//    fun generateVehicles()  :QueueSupplier<Vehicle>
+//    {
+//        return QueueSupplier<Vehicle>();
+//    }
 
     @Bean
     fun connectionFactory( ) : ConnectionFactory

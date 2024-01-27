@@ -9,7 +9,9 @@ using Microsoft.OpenApi.Models;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.ML;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.src.ML;
 using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.Repository;
+using Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training.src.Repository;
 using Steeltoe.Connector.PostgreSql;
+using Steeltoe.Connector.PostgreSql.EFCore;
 using Steeltoe.Connector.RabbitMQ;
 using Steeltoe.Management.Endpoint;
 
@@ -30,11 +32,13 @@ namespace Showcase.IoT.Connected.Vehicles.Predictive.Maintenance.Training
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CarMaintenanceDbContext>(options => options.UseNpgsql(Configuration));
             services.AddPostgresConnection(Configuration);
             services.AddRabbitMQConnection(Configuration);
             services.AddAllActuators(Configuration);
             services.ActivateActuatorEndpoints();
             services.AddControllers();
+            services.AddScoped<ICarMaintenanceRepository,CarMaintenanceRepository>();
             services.AddLogging(config =>
             {
                     config.AddDebug();

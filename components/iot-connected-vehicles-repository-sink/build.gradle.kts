@@ -16,16 +16,11 @@ repositories {
     mavenLocal()
 }
 
-extra["springCloudVersion"] = "2021.0.0"
-extra["springGeodeVersion"] = "1.4.3"
-
-
-
 dependencies {
-    implementation("org.springframework:spring-context:5.3.1")
-    implementation("org.springframework.data:spring-data-commons:2.4.5")
+    implementation("org.springframework:spring-context:6.0.12")
+    implementation("org.springframework.data:spring-data-commons:3.1.4")
     implementation("org.junit.jupiter:junit-jupiter:5.4.2")
-    implementation("org.apache.logging.log4j:log4j-api:2.13.1")
+//    implementation("org.apache.logging.log4j:log4j-api:2.13.1")
     implementation(project(":components:IoT-connected-vehicles-domains"))
     implementation(project(":components:iot-connected-vehicles-repository"))
     implementation("com.github.nyla-solutions:nyla.solutions.core:1.4.4")

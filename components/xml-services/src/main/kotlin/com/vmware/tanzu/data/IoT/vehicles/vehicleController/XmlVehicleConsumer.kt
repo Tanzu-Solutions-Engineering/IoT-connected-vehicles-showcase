@@ -2,13 +2,13 @@ package com.vmware.tanzu.data.IoT.vehicles.vehicleController
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle
 import nyla.solutions.core.xml.XML
-import org.springframework.web.bind.annotation.RestController
+//import org.springframework.web.bind.annotation.RestController
 import org.w3c.dom.Node
 import java.util.*
 import java.util.function.Consumer
 import java.util.function.Function
 
-@RestController
+//@RestController
 class XmlVehicleConsumer(
     private val consumer: Queue<Vehicle>,
     private val transformer: Function<Node, Vehicle>,

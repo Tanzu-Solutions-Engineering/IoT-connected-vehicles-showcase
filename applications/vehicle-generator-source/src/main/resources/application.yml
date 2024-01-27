@@ -3,7 +3,7 @@ vehicleCount : 25
 messageCount : 10000
 distanceIncrements : 1
 vinPrefix: VS
-delayMs : 0
+delayMs : 1000
 server:
   port: 7020
 springdoc.api-docs.path: /api-docs

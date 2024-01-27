@@ -32,7 +32,33 @@
 <script>
 $(document).ready(function(){
   $("button").click(function(){
-    $.get("Account", function(accounts, status){
+
+    var submitForm = $("#submitForm");
+    //var data = JSON.stringify(submitForm.serializeArray() );
+    var data = {
+      "carMaintenanceCount" : $("#instanceCount")[0].value,
+          "carMaintenance" : {
+            "vehicle_type" : $("#vehicle_type")[0].value,
+            "brand" : $("#brand")[0].value,
+            "model" : $("#model")[0].value,
+            "engine_type" : $("#engine_type")[0].value,
+            "make_year" : $("#make_year")[0].value,
+            "region" : $("#region")[0].value,
+            "mileage_range" : $("#mileage_range")[0].value,
+            "label" : $("#label")[0].value
+          }
+        };
+
+    // alert(JSON.stringify(data));
+
+    $.post("CarMaintenance", data, function(result,status){
+
+      alert("Data: " + data + "\nStatus: " + status);
+
+        $("$responseStatus").html("success");
+      },"json");
+
+    /*$.get("Account", function(accounts, status){
 
         var tableHTML = "<table class='dataTable'><tr><th>Id</th><th>data</th></tr>";
         for (let x in accounts) {
@@ -43,7 +69,7 @@ $(document).ready(function(){
          tableHTML +="</table>";
 
         $("#accountsPanel").html(tableHTML);
-    });
+    });*/
   });
 });
 </script>
@@ -54,69 +80,72 @@ $(document).ready(function(){
     <hr/>
     <button>Save Car Maintence</button> <a href="swagger/index.html">Swagger</a>
     <br/>
+    <p id="responseStatus"></p>
     <div id="carMaintenceFormPanel">
-      <table>
-        <tr>
-          <td><label for="vehicle_type">Vehicle Type</label></td>
-          <td>
-            <select name="vehicle_type">
-              <option value="1">Classic</option>
-            </select>
+      <form id="submitForm">
+        <table>
+          <tr>
+            <td><label for="vehicle_type">Vehicle Type</label></td>
+            <td>
+              <select id="vehicle_type" name="vehicle_type">
+                <option value="1">Classic</option>
+              </select>
+              </td>
+            </tr>  
+          <tr>
+            <td>
+              <label for="brand">Brand</label></td>
+            <td>
+              <select id="brand" name="brand">
+                <option value="1">Old Reliable</option>
+              </select>
             </td>
-          </tr>  
+          </tr>
         <tr>
-          <td>
-            <label for="brand">Brand</label></td>
-          <td>
-            <select name="brand">
-              <option value="1">Old Reliable</option>
-            </select>
+          <td><label for="model">Model</label></td>
+          <td><select id="model" name="model">
+            <option value="1">Model A</option>
+          </select>
           </td>
-        </tr>
-      <tr>
-        <td><label for="model">Model</label></td>
-        <td><select name="model">
-          <option value="1">Model A</option>
-        </select>
-        </td>
 
-      </tr>   
-      <tr>
-        <td><label for="engine_type">Engine Type</label></td>
-        <td><select name="engine_type">
-          <option value="1">T1ABC</option>
-        </select></td>
-      </tr>      
+        </tr>   
         <tr>
-          <td><label for="make_year">Make Year</label></td>
-          <td><input name="make_year" type="text"></td>
-        </tr>      
-        <tr>
-          <td><label for="region">Region</label></td>
-          <td><select name="region">
-            <option value="1">NORTH-EAST</option>
+          <td><label for="engine_type">Engine Type</label></td>
+          <td><select id="engine_type" name="engine_type">
+            <option value="1">T1ABC</option>
           </select></td>
         </tr>      
-        
-        <tr>
-          <td><label for="mileage_range">Mileage Range</label></td>
-          <td><input name="mileage_range" type="text"></td>
-        </tr>      
-        
-        <tr>
-          <td><label for="label">Maintenance Required?</label></td>
-          <td><select name="label">
-            <option value="False">False</option>
-            <option value="True">True</option>
-          </select>
-        </td>
-        </tr>      
-        <tr>
-          <td><label for="instanceCount">Count</label></td>
-          <td><input name="instanceCount" type="number"> </td>
-        </tr>
-        
-      </table>
+          <tr>
+            <td><label for="make_year">Make Year</label></td>
+            <td><input id="make_year" name="make_year" type="text"></td>
+          </tr>      
+          <tr>
+            <td><label for="region">Region</label></td>
+            <td><select id="region" name="region">
+              <option value="1">NORTH-EAST</option>
+            </select></td>
+          </tr>      
+          
+          <tr>
+            <td><label for="mileage_range">Mileage Range</label></td>
+            <td><input id="mileage_range" name="mileage_range" type="text"></td>
+          </tr>      
+          
+          <tr>
+            <td><label for="label">Maintenance Required?</label></td>
+            <td><select id="label" name="label">
+              <option value="False">False</option>
+              <option value="True">True</option>
+            </select>
+          </td>
+          </tr>      
+          <tr>
+            <td><label for="instanceCount">Count</label></td>
+            <td><input id="instanceCount" name="instanceCount" type="number"> </td>
+          </tr>
+          
+        </table>
+      </form>
     </div>
     
 </body>
