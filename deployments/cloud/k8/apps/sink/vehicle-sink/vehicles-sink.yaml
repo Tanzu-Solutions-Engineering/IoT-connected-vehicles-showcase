@@ -2,18 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    run:  vehicle-dashboard
-  name:  vehicle-dashboard
+    run:  vehicle-sink
+  name:  vehicle-sink
 spec:
   replicas: 1
   selector:
     matchLabels:
-      run:  vehicle-dashboard
+      name:  vehicle-sink
   template:
     metadata:
       labels:
-        run:  vehicle-dashboard
-        name:  vehicle-dashboard
+        name:  vehicle-sink
     spec:
       containers:
         - env:
@@ -34,6 +33,8 @@ spec:
                 secretKeyRef:
                   name: rabbitmq-default-user
                   key: password
+            - name: spring.cloud.stream.bindings.vehicleGemFireSink-in-0.consumer.concurrency
+              value: "5"
             - name: spring.data.gemfire.pool.default.locators
               valueFrom:
                 configMapKeyRef:
@@ -44,22 +45,7 @@ spec:
                 configMapKeyRef:
                   name: gemfire-config
                   key: locators
-          image: cloudnativedata/vehicle-dashboard:0.0.1-SNAPSHOT
+          image: cloudnativedata/vehicle-sink:0.0.1-SNAPSHOT
           imagePullPolicy: IfNotPresent
-#          imagePullPolicy: Always
-          name: vehicle-dashboard
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    run:  vehicle-dashboard
-  name: vehicle-dashboard
-spec:
-  selector:
-    run:  vehicle-dashboard
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: LoadBalancer
+          #          imagePullPolicy: Always
+          name: vehicle-sink

@@ -6,3 +6,5 @@ kubectl exec -it gemfire-locator-0 -- gfsh -e "connect --locator=gemfire-locator
 kubectl apply -f deployments/cloud/k8/data-services/gemfire/gemfire.yml
 kubectl apply -f deployments/cloud/k8/data-services/rabbitmq/rabbitmq.yml
 kubectl apply -f deployments/cloud/k8/apps/dashboard/vehicle-dashboard.yml
+kubectl apply -f deployments/cloud/k8/apps/sink/vehicle-sink/vehicles-sink.yaml
+kubectl apply -f deployments/cloud/k8/apps/source/vehicle-generator-source/vehicle-generator-source.yml

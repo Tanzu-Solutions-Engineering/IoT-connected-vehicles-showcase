@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run:  vehicle-generator-source
+  name:  vehicle-generator-source
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name:  vehicle-generator-source
+  template:
+    metadata:
+      labels:
+        name:  vehicle-generator-source
+    spec:
+      containers:
+        - env:
+            - name: "JVM_ARGS"
+              value: "-Xms800m -Xmx800m"
+            - name: vehicleCount
+              value: "20"
+            - name: messageCount
+              value: "500"
+            - name: distanceIncrements
+              value: "2"
+            - name: delayMs
+              value: "500"
+            - name: vinPrefix
+              value: "G"
+            - name: server.port
+              value: "8080"
+            - name: spring.rabbitmq.host
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-default-user
+                  key: host
+            - name: spring_rabbitmq_username
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-default-user
+                  key:  username
+            - name: spring_rabbitmq_password
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-default-user
+                  key: password
+            - name: spring.cloud.stream.bindings.vehicleGemFireSink-in-0.consumer.concurrency
+              value: "5"
+          image: cloudnativedata/vehicle-generator-source:0.0.6-SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          #          imagePullPolicy: Always
+          name: vehicle-generator-source
