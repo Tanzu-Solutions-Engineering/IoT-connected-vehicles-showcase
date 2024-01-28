@@ -1,0 +1,10 @@
+server.port: 7010
+
+
+spring:
+  application:
+    name: vehicle-dashboard
+  data:
+    gemfire:
+      name: vehicle-dashboard
+management.endpoints.web.exposure.include: "*"

@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Connected Vehicle Demo</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <link href='https://d1fto35gcfffzn.cloudfront.net/tanzu/favicon.ico' rel='shortcut icon' type='image/vnd.microsoft.icon'>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("p").click(function(){
+        $(this).hide();
+      });
+    });
+    </script>
+</head>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;s
+  padding: 20px;
+}
+</style>
+<body>
+
+
+
+<div id="mapid" style="width: 1000px; height: 800px;"></div>
+<script>
+
+    // Set  create a map of the center of London
+	var mymap = L.map('mapid').setView([35.659807, -97.017174], 4);
+
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamNiYWxvdSIsImEiOiJja204Y3Z5cjIwa2t1MndwOXhjMGVuMDN0In0.8h6HQJ_uvVKT2k5kVLTz_A', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/streets-v11',
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(mymap);
+
+	//window['V3AKJGEDV0GSGV9577'] = L.marker([33.9478264, -117.867065]);
+	//window['V3AKJGEDV0GSGV9577'].addTo(mymap)
+	//	.bindPopup("<b>Hello world!</b><br />I am a popup.");
+
+
+	var popup = L.popup();
+
+    function saveVehicle()
+    {
+       var vehicle = {
+        vin : document.getElementById("vin").value,
+        speed : document.getElementById("speed").value,
+        odometer : document.getElementById("odometer").value,
+        temperature : document.getElementById("temperature").value,
+        gpsLocation : {
+            latitude : document.getElementById("lat").value,
+            longitude : document.getElementById("lng").value
+        }
+       };
+
+       if(vehicle.vin == null || vehicle.vin.length == 0)
+       {
+          var label = document.getElementById("vinLabel");
+          label.innerHTML = "<span style='color:red;font-weight: bold;'>VIN (required)</span>";
+          return false;
+       }
+
+
+        $.ajax({
+            type: 'post',
+            url: '/saveVehicle',
+            data: JSON.stringify(vehicle),
+            contentType: "application/json; charset=utf-8",
+            traditional: true,
+            success: function (data) {
+                mymap.closePopup();
+                drawVehicle(vehicle);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("ERROR: " + JSON.stringify(XMLHttpRequest.responseJSON));
+
+            }
+        });
+
+
+    }
+    //-------------------------------------------
+
+	function constructFormHtml(latlng)
+	{
+         //Form HTML
+        var formHtml  = "<form>\n" +
+                "    <label for=\"vin\" id=\"vinLabel\">VIN</label>\n" +
+                "    <input type=\"text\" id=\"vin\" name=\"vin\" placeholder=\"VIN..\">\n" +
+                "\n" +
+                "    <label for=\"odometer\">Odometer</label>\n" +
+                "    <input type=\"text\" id=\"odometer\" name=\"odometer\" placeholder=\"odometer..\">\n" +
+                "\n" +
+                "    <label for=\"speed\">Speed</label>\n" +
+                "    <input type=\"text\" id=\"speed\" name=\"speed\" placeholder=\"speed..\">\n" +
+                "  \n" +
+                "    <label for=\"temperature\">Temperature</label>\n" +
+                "    <input type=\"text\" id=\"temperature\" name=\"temperature\" placeholder=\"temperature..\">\n" +
+                "\n" +
+                "    <label for=\"lat\">lat</label>\n" +
+                "    <input type=\"text\" id=\"lat\" name=\"lat\" value=\""+latlng.lat+"\">\n" +
+                "  \n" +
+                "    <label for=\"lng\">lng</label>\n" +
+                "    <input type=\"text\" id=\"lng\" name=\"lng\" value=\""+latlng.lng+"\">\n" +
+                "  \n" +
+                "    <input type=\"button\" value=\"Save\" onclick='saveVehicle();return false;'>\n" +
+                "  </form>";
+
+         return formHtml;
+	}//------------------------------------------------------------
+
+
+	function onMapClick(e) {
+		popup
+			.setLatLng(e.latlng)
+			.setContent(constructFormHtml(e.latlng))
+			.openOn(mymap);
+	}
+
+	mymap.on('click', onMapClick);
+
+</script>
+
+<script language="JavaScript">
+    var overheatingIcon = L.icon({
+            iconUrl: 'img/overheating.png',
+            iconSize: [18, 35],
+        });
+
+    var source = new EventSource("/updates");
+    source.onmessage = function(event) {
+
+      var vehicle = JSON.parse(event.data)
+
+      drawVehicle(vehicle);
+    };
+
+    function drawVehicle(vehicle)
+    {
+
+        if(typeof window[vehicle.vin] !== 'undefined')
+        {
+            window[vehicle.vin].remove();
+        }
+
+        if(vehicle.temperature < 220)
+        {
+                window[vehicle.vin] = L.marker([vehicle.gpsLocation.latitude, vehicle.gpsLocation.longitude]).addTo(mymap)
+                .bindPopup("<strong>vin:</strong>"+vehicle.vin+"</br/>"
+                        +" speed:"+vehicle.speed+"</br/>"
+                        +" odometer:"+vehicle.odometer+"</br/>");
+        }
+        else
+        {
+          //add with overheating
+            window[vehicle.vin] = L.marker([vehicle.gpsLocation.latitude, vehicle.gpsLocation.longitude], {
+              icon: overheatingIcon
+            }).addTo(mymap)
+                .bindPopup("<strong>vin:</strong>"+vehicle.vin+"</br/>"
+                        +" speed:"+vehicle.speed+"</br/>"
+                        +" <strong style='color:red'>temperature:</strong>"+vehicle.temperature+"</br/>"
+                        +" odometer:"+vehicle.odometer+"</br/>"
+                        +" latitude:"+vehicle.gpsLocation.latitude+"</br/>"
+                        +" longitude:"+vehicle.gpsLocation.longitude);
+
+        }
+
+
+    }
+</script>
+
+<!--<button onclick="drawVehicle(null);">testing</button>-->
+
+
+</body>
+</html>

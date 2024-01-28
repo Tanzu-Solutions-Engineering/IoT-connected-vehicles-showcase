@@ -1,7 +1,7 @@
-package com.vmware.vehicle.sink;
+package com.vmware.vehicle.dashboard;
+
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle;
-import com.vmware.vehicle.sink.repository.VehicleRepository;
 import org.apache.geode.cache.DataPolicy;
 import org.apache.geode.cache.GemFireCache;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,7 @@ import org.springframework.data.gemfire.config.annotation.EnableSecurity;
 import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories;
 
 @Configuration
-@ClientCacheApplication(name = "vehicle-sink")
+@ClientCacheApplication(name = "vehicle-dashboard")
 @EnableSecurity
 @EnablePdx
 @EnableGemfireRepositories
@@ -28,8 +28,8 @@ public class GemFireConfig {
 
         var factory = new ClientRegionFactoryBean<String, Vehicle>();
         factory.setName("Vehicle");
-        factory.setDataPolicy(DataPolicy.EMPTY);
         factory.setCache(gemfireCache);
+        factory.setDataPolicy(DataPolicy.EMPTY);
         return factory;
     }
 }
