@@ -8,3 +8,4 @@ kubectl apply -f deployments/cloud/k8/data-services/rabbitmq/rabbitmq.yml
 kubectl apply -f deployments/cloud/k8/apps/dashboard/vehicle-dashboard.yml
 kubectl apply -f deployments/cloud/k8/apps/sink/vehicle-sink/vehicles-sink.yaml
 kubectl apply -f deployments/cloud/k8/apps/source/vehicle-generator-source/vehicle-generator-source.yml
+kubectl apply -f deployments/cloud/k8/data-services/gemfire/console/gemfire-mgmt-console.yaml

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run:  gideon-console
+  name:  gideon-console
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run:  gideon-console
+  template:
+    metadata:
+      labels:
+        run:  gideon-console
+        name:  gideon-console
+    spec:
+      containers:
+        - env:
+            - name: server.port
+              value: "8080"
+          image: registry.tanzu.vmware.com/gemfire-management-console/gemfire-management-console:1.1.1
+          imagePullPolicy: IfNotPresent
+#          imagePullPolicy: Always
+          name: gideon-console
+      imagePullSecrets:
+      - name: image-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run:  gideon-console
+  name: gideon-console
+spec:
+  selector:
+    run:  gideon-console
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer

@@ -16,8 +16,33 @@ spec:
     resources:
       requests:
         memory: 1Gi
+    overrides:
+      gemFireProperties:
+        - name : "start-dev-rest-api"
+          value : "true"
   servers:
     replicas: 2
     resources:
       requests:
         memory: 1Gi
+    overrides:
+      gemFireProperties:
+        - name : "start-dev-rest-api"
+          value : "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gemfire-locator-lb
+spec:
+  selector:
+    gemfire.vmware.com/app: gemfire-locator
+  ports:
+    - name: management
+      port: 7070
+      targetPort: 7070
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  type: LoadBalancer
