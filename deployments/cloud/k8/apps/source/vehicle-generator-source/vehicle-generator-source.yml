@@ -25,7 +25,7 @@ spec:
             - name: distanceIncrements
               value: "2"
             - name: delayMs
-              value: "500"
+              value: "100"
             - name: vinPrefix
               value: "G"
             - name: server.port
