@@ -24,13 +24,11 @@
 # Project Modules
 
 
-Applications                                                                        |    Notes
--------------------------------------------------------------------------           |    ----------------------
-[geotabgroup-tracking-source](applications/geotabgroup-tracking-source)             |    Any car positioning based Geotab's fleet management streaming source microservice for vehicle details in JSON format
-[IoT-connected-vehicle-dashboard](applications/IoT-connected-vehicle-dashboard)     |    GUI interface to views vehicle information
-[IoT-connected-vehicles-sink](applications/IoT-connected-vehicles-sink)             |    Microservice streaming sink for storing Vehicle data in GemFire
-[randmcnally-triplanning-source](applications/randmcnally-triplanning-source)       |    Trip planninhg details based on Rand McNally fleet management streaming source for vehicle data in XML format
-[volvo-safecar-source](applications/volvo-safecar-source)                           |    Safe car Volvo Fleet Management management streaming source for vehicle data in XML format
+| Applications                                                                                             | Notes                                                                                        |
+|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| [applications/vehicle-dashboard](applications/vehicle-dashboard)                                         | GUI interface to views vehicle information                                                   |
+| [applications/vehicle-sink](applications/vehicle-sink)                                                   | Microservice streaming sink for storing Vehicle data in GemFire                              |
+| [applications/vehicle-telemetry-jdbc-streaming-sink](applications/vehicle-telemetry-jdbc-streaming-sink) | Microservice for historical telemetry sink to relational database such as Postgres/Greenplum |
 
 # Env prerequisite
 
