@@ -16,6 +16,11 @@
 
 ![img.png](docs/images/overview.png)
 
+**Demo/Records/Webinars**
+
+- [Building Scalable Resilient IoT Messaging (RabbitMQ Summit)](https://www.youtube.com/watch?v=BWcofi2FKHo) 
+
+
 # Project Modules
 
 

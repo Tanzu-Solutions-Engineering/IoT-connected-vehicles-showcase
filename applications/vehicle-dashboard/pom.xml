@@ -13,11 +13,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>vehicle-dashboard</name>
 	<description>vehicle-dashboard</description>
-	<properties>
-		<java.version>17</java.version>
-		<springDataForGemFire.version>1.0.0</springDataForGemFire.version>
-		<vmwareGemFire.version>10.0.0</vmwareGemFire.version>
-	</properties>
+    <properties>
+        <java.version>17</java.version>
+        <springDataForGemFire.version>1.0.0</springDataForGemFire.version>
+        <vmwareGemFire.version>10.0.0</vmwareGemFire.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.vmware.gemfire</groupId>
