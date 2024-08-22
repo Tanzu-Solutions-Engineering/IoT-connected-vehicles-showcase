@@ -37,7 +37,7 @@
         </dependency>
         <dependency>
             <groupId>com.vmware</groupId>
-            <artifactId>stream-account-domain</artifactId>
+            <artifactId>vehicle-domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -129,11 +129,17 @@
             </plugin>
         </plugins>
     </build>
-    <repositories>
+  <repositories>
+<!--  <repository>
+        <id>gemfire-release-repo</id>
+        <name>Broadcom GemFire Release Repository</name>
+        <url>https://packages.broadcom.com/artifactory/gemfire/</url>
+    </repository>
+-->  
         <repository>
-            <id>gemfire-release-repo</id>
-            <name>Pivotal GemFire Release Repository</name>
-            <url>https://commercial-repo.pivotal.io/data3/gemfire-release-repo/gemfire</url>
-        </repository>
-    </repositories>
+             <id>gemfire-release-repo</id>
+             <name>Pivotal GemFire Release Repository</name>
+             <url>https://commercial-repo.pivotal.io/data3/gemfire-release-repo/gemfire</url>
+         </repository>
+     </repositories>
 </project>
