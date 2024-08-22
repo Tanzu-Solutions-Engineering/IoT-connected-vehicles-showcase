@@ -1,6 +1,0 @@
-management.endpoints.web.exposure.include: "*"
-server:
-  port: 7001
-springdoc.api-docs.path: /api-docs
-spring:
-  application.name: geotabgroups-tracking-mqtt-source

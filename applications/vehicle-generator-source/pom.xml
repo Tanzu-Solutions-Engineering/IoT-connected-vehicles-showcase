@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.2</version>
+        <version>3.3.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.vmware</groupId>
@@ -15,8 +15,8 @@
     <description>vehicle-generator-source</description>
     <properties>
         <java.version>17</java.version>
-        <kotlin.version>1.8.22</kotlin.version>
-        <spring-cloud.version>2022.0.4</spring-cloud.version>
+        <kotlin.version>1.9.24</kotlin.version>
+        <spring-cloud.version>2023.0.3</spring-cloud.version>
         <wavefront.version>3.0.1</wavefront.version>
     </properties>
     <dependencies>
@@ -80,7 +80,7 @@
         <dependency>
             <groupId>org.mockito.kotlin</groupId>
             <artifactId>mockito-kotlin</artifactId>
-            <version>4.1.0</version>
+            <version>5.4.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
