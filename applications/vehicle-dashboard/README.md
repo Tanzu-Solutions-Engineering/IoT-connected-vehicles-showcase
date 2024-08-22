@@ -3,9 +3,6 @@
 http://localhost:7010
 
 
-Checking update
-
-
 ## Docker building image
 
 ```shell
@@ -31,11 +28,10 @@ export GEMFIRE_HOME=/Users/devtools/repositories/IMDG/gemfire/vmware-gemfire-10.
 ```
 
 
-
-# Kubernetes
+# Start Application
 
 
 ```shell
-kubeclt port-forward iot-connected-vehicle-dashboard 7000:7000
+java -jar applications/vehicle-dashboard/target/vehicle-dashboard-0.0.1-SNAPSHOT.jar
 ```
 
