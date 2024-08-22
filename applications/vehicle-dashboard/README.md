@@ -3,7 +3,7 @@
 http://localhost:7010
 
 
-Checking
+Checking update
 
 
 ## Docker building image
