@@ -3,19 +3,6 @@
 http://localhost:7010
 
 
-## Docker building image
-
-```shell
-mvn install
-cd applications/vehicle-dashboard
-mvn spring-boot:build-image
-```
-
-```shell
-docker tag vehicle-dashboard:0.0.1-SNAPSHOT cloudnativedata/vehicle-dashboard:0.0.1-SNAPSHOT
-docker push cloudnativedata/vehicle-dashboard:0.0.1-SNAPSHOT
-```
-
 ## Starting GemFire
 
 Set GEMFIRE_HOME
@@ -35,3 +22,18 @@ export GEMFIRE_HOME=/Users/devtools/repositories/IMDG/gemfire/vmware-gemfire-10.
 java -jar applications/vehicle-dashboard/target/vehicle-dashboard-0.0.1-SNAPSHOT.jar
 ```
 
+----------------------------
+
+
+## Docker building image
+
+```shell
+mvn install
+cd applications/q
+mvn spring-boot:build-image
+```
+
+```shell
+docker tag vehicle-dashboard:0.0.1-SNAPSHOT cloudnativedata/vehicle-dashboard:0.0.1-SNAPSHOT
+docker push cloudnativedata/vehicle-dashboard:0.0.1-SNAPSHOT
+```

@@ -1,8 +1,0 @@
-server.port: 8020
-spring:
-  application:
-    name: port-forward-gateway
-management.endpoints.web.exposure.include: "*"
-logging:
-  level:
-    reactor.netty: debug

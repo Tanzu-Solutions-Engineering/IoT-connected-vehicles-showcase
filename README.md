@@ -28,7 +28,7 @@
 |----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
 | [applications/vehicle-dashboard](applications/vehicle-dashboard)                                         | GUI interface to views vehicle information                                                   |
 | [applications/vehicle-sink](applications/vehicle-sink)                                                   | Microservice streaming sink for storing Vehicle data in GemFire                              |
-| [applications/vehicle-telemetry-jdbc-streaming-sink](applications/vehicle-telemetry-jdbc-streaming-sink) | Microservice for historical telemetry sink to relational database such as Postgres/Greenplum |
+| [applications/vehicle-telemetry-jdbc-streaming-sink](applications/vehicle-telemetry-sink) | Microservice for historical telemetry sink to relational database such as Postgres/Greenplum |
 
 # Env prerequisite
 

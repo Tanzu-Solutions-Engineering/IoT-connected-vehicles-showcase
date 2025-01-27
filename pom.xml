@@ -13,8 +13,10 @@
     <modules>
         <module>components/vehicle-domain</module>
         <module>applications/vehicle-sink</module>
+        <module>applications/vehicle-telemetry-sink</module>
         <module>applications/vehicle-generator-source</module>
         <module>applications/vehicle-dashboard</module>
+
     </modules>
     <build>
         <pluginManagement>
