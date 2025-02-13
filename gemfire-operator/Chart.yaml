@@ -1,5 +1,0 @@
-apiVersion: v2
-description: GemFire Operator
-name: gemfire-operator
-type: application
-version: 1.0.1

@@ -3,33 +3,25 @@
 ## Build Applications
 
 ```shell
-./gradlew build
+mvn package
 ```
-
 
 ## RabbitMQ
 
 ```shell
-cd /Users/devtools/integration/messaging/rabbit/rabbit-devOps
-./start.sh
+./deployments/local/dataServices/rabbit/rabbit-start.sh
 ```
 
-## Geode 
+## GemFire 
 
 ```shell
-cd /Users/devtools/repositories/IMDG/geode/apache-geode-1.13.7/bin
-./gfsh
+./deployments/local/dataServices/gemfire/start-docker-gemfire.sh
 ```
-
-In gfsh
-
-See datastores/geode/README.md
-
 
 ### Pulse
 
 ```shell
-open -n -a "Google Chrome" --args "--new-window" "http://localhost:7070/pulse/clusterDetail.html"
+open http://localhost:7070/pulse/clusterDetail.html
 ````
 
 User admin/admin
@@ -39,37 +31,24 @@ User admin/admin
 ## Dashboard
 
 ```shell script
-java -jar applications/iot-connected-vehicle-dashboard/build/libs/iot-connected-vehicle-dashboard-0.0.2-SNAPSHOT.jar --server.port=1000
+java -jar applications/vehicle-dashboard/target/vehicle-dashboard-0.0.1-SNAPSHOT.jar --server.port=1000
 ```
 
 ```shell script
-open -n -a "Google Chrome" --args "--new-window" "http://localhost:1000"
+open "http://localhost:1000"
 ```
 
-
-Added record
-
-```shell
-query --query="select * from /VehicleAggregation"
-```
-
-
-Eviction after 
-```shell
-query --query="select * from /Vehicle"
-
-```
 
 ## Sink
 
 ```shell script
- java -jar applications/vehicles-geode-sink/build/libs/vehicles-geode-sink-0.0.4-SNAPSHOT.jar --server.port=-1
+ java -jar applications/vehicle-sink/target/vehicle-sink-0.0.1-SNAPSHOT.jar --server.port=-1 --spring.rabbitmq.username=user --spring.rabbitmq.password=bitnami
 ```
 
 ## Generator
 
 ```shell script
-java -jar applications/vehicle-generator-source/build/libs/vehicle-generator-source-0.0.4-SNAPSHOT.jar --delayMs=5 --server.port--1 
+java -jar applications/vehicle-generator-source/target/vehicle-generator-source-0.0.6-SNAPSHOT.jar --delayMs=20 --server.port--1 --spring.rabbitmq.username=user --spring.rabbitmq.password=bitnami
 
 ```
 
