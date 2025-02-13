@@ -1,6 +1,8 @@
 # IoT-data-showCase
 
 
+ ![dashboard-map.png](docs/images/dashboard-map.png)
+
 **Use cases**
 
 - Hundreds of thousands of vehicles driving across the globe, 24 hours a day, 7 days a week.
@@ -14,7 +16,7 @@
 - Low latency data read/write operations with GemFire
 
 
-![img.png](docs/images/overview.png)
+
 
 **Demo/Records/Webinars**
 
