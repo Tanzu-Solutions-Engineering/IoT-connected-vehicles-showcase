@@ -12,10 +12,12 @@
 
     <modules>
         <module>components/vehicle-domain</module>
+        <module>components/vehicle-engine</module>
         <module>applications/vehicle-sink</module>
         <module>applications/vehicle-telemetry-sink</module>
         <module>applications/vehicle-generator-source</module>
         <module>applications/vehicle-dashboard</module>
+        <module>applications/server/vehicle-server</module>
 
     </modules>
     <build>

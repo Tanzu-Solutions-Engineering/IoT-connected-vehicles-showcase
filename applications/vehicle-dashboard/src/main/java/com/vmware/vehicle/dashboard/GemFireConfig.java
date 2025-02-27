@@ -7,6 +7,7 @@ import org.apache.geode.cache.GemFireCache;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.gemfire.client.ClientRegionFactoryBean;
 import org.springframework.data.gemfire.config.annotation.ClientCacheApplication;
 import org.springframework.data.gemfire.config.annotation.EnablePdx;
@@ -18,6 +19,7 @@ import org.springframework.data.gemfire.repository.config.EnableGemfireRepositor
 @EnableSecurity
 @EnablePdx
 @EnableGemfireRepositories
+@Profile("gemfire")
 public class GemFireConfig {
 
     @Value("${spring.data.gemfire.pool.default.locators:localhost[10334]}")
