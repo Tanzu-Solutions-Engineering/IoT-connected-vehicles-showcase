@@ -15,8 +15,25 @@
 	<description>vehicle-server</description>
 	<properties>
 		<java.version>17</java.version>
+		<vmwareGemFire.version>10.1.0</vmwareGemFire.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>com.vmware.gemfire</groupId>
+			<artifactId>gemfire-server-all</artifactId>
+			<version>${vmwareGemFire.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vmware.gemfire</groupId>
+					<artifactId>gemfire-log4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>11.0.24</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>

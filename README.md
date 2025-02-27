@@ -32,3 +32,10 @@
 | [applications/vehicle-sink](applications/vehicle-sink)           | Microservice streaming sink for storing Vehicle data in GemFire                              |
 | [vehicle-telemetry-sink](applications/vehicle-telemetry-sink)    | Microservice streaming sink for storing Vehicle data in GemFire                              |
 
+## Build Jar
+
+This project using Tanzu GemFire.
+
+You will need to set your Broadcom Maven Repository user credentials.
+
+See https://gemfire.dev/quickstart/java/
