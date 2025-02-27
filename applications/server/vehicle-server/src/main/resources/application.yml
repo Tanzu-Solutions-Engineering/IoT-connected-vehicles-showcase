@@ -1,0 +1,19 @@
+server.port: 7017
+gemfire:
+  working:
+    dir: "runtime/vehicle-server"
+spring:
+  application:
+    name: vehicle-server
+  data:
+    gemfire:
+      name: vehicle-server
+      pool:
+        default:
+          locators: localhost[10334]
+
+vehicle:
+  vin: vin001
+  distanceIncrements: 0.1
+#
+management.endpoints.web.exposure.include: "*"

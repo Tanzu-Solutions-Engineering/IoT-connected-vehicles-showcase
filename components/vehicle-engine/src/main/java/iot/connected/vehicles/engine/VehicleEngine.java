@@ -71,4 +71,33 @@ public class VehicleEngine implements Creator<Vehicle> {
 
         return new Double[]{latO, lonO};
     }
+
+    /**
+     * Change position of the vehicle based on the discount increments
+     * @param vehicle the vehicle to move
+     * @return the moved vehicle
+     */
+    public Vehicle move(Vehicle vehicle) {
+
+        var newOdometer = vehicle.getOdometer() + distanceIncrements.longValue();
+
+        vehicle.setSpeed(new Random().nextInt(15, 100));
+        vehicle.setOdometer(newOdometer);
+
+        var gpsLocation = vehicle.getGpsLocation();
+        if(gpsLocation == null)
+        {
+//            val latLong = getFinalLatLong(vehicle.gpsLocation!!.latitude,vehicle.gpsLocation!!.longitude, distanceIncrements);
+            vehicle.setGpsLocation( new GpsLocation(minLatitude, maxLongitude));
+        }
+        else
+        {
+            var latLong = getFinalLatLong(gpsLocation.getLatitude(),gpsLocation.getLongitude(), distanceIncrements);
+
+            vehicle.getGpsLocation().setLatitude(latLong[0]);
+            vehicle.getGpsLocation().setLongitude(latLong[1]);
+        }
+
+        return vehicle;
+    }
 }

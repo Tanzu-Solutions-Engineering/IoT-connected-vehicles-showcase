@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.3</version>
+		<version>3.3.9</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>iot.connected.vehicle</groupId>
@@ -27,6 +27,10 @@
 					<groupId>com.vmware.gemfire</groupId>
 					<artifactId>gemfire-log4j</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>com.vmware.gemfire</groupId>
+					<artifactId>prometheus-metrics</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -44,6 +48,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+			<version>1.13.11</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
@@ -57,9 +67,19 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.micrometer</groupId>-->
+<!--			<artifactId>micrometer-registry-prometheus</artifactId>-->
+<!--		</dependency>-->
+
 		<dependency>
 			<groupId>com.vmware</groupId>
 			<artifactId>vehicle-domain</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vmware</groupId>
+			<artifactId>vehicle-engine</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
