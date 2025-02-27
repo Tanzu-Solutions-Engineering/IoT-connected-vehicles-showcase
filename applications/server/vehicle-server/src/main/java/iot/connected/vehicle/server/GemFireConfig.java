@@ -40,8 +40,6 @@ public class GemFireConfig {
     @Value("${gemfire.working.dir}")
     private String workingDirectory;
 
-    @Value("${gemfire.pdx.disk.store:PDX_DS}")
-    private String pdxDiskStore;
 
     @Value("${gemfire.statistic.archive.file:vehicle-server.gfs}")
     private String statisticArchiveFile;
@@ -57,6 +55,9 @@ public class GemFireConfig {
 
     @Value("${gemfire.pdx.disk.store.name:PDX_STORE}")
     private String pdxDataStoreName;
+
+    @Value("${gemfire.startLocators:localhost[10334]}")
+    private String startLocators;
 
     @Bean
     Cache cacheFactory(ServerLauncher launcher)
@@ -77,15 +78,16 @@ public class GemFireConfig {
                 .setWorkingDirectory(workingDirectory)
                 .setMemberName(serverName)
                 .setServerPort(serverPort)
-                .set("start-locator","localhost[10334]")
+                .setPdxDiskStore(pdxDataStoreName)
+                .set("start-locator",startLocators)
 //                .set("locators",locators)
                 .set("statistic-sampling-enabled","true")
                 .set("statistic-archive-file",workingDirectory+"/"+statisticArchiveFile)
                 .set("archive-disk-space-limit",archiveDiskSpaceLimit)
                 .set("archive-file-size-limit",archiveFileSizeLimit)
                 .setPdxReadSerialized(readPdxSerialized)
-                .setPdxDiskStore(pdxDiskStore)
                 .setPdxSerializer(pdxSerializer)
+                .setPdxPersistent(true)
                 .build();
 
         serverLauncher.start();
@@ -93,13 +95,6 @@ public class GemFireConfig {
         return serverLauncher;
     }
 
-    @Bean
-    Region<String, Vehicle> partitioned(Cache cache)
-    {
-        Region<String, Vehicle>  region  =  (Region)cache.createRegionFactory(RegionShortcut.PARTITION)
-                .create("Vehicle");
-        return region;
-    }
 
     @Bean
     VehicleServerRepository repository(Region<String, Vehicle> vehicleRegion)
@@ -134,7 +129,7 @@ public class GemFireConfig {
     {
         Region<String, Vehicle>  region  =  (Region)cache.createRegionFactory(RegionShortcut.PARTITION_PERSISTENT)
                 .setDiskStoreName(diskStore.getName())
-                .create("Vehicle_persisted");
+                .create("Vehicle");
         return region;
     }
 

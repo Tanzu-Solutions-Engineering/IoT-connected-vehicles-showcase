@@ -1,29 +1,51 @@
 package iot.connected.vehicle.server.controller;
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle;
-import iot.connected.vehicle.server.repository.VehicleServerRepository;
+import iot.connected.vehicle.server.service.SelfDrivingService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Schedulers;
+
+import java.time.Duration;
+import java.util.concurrent.ThreadFactory;
 
 @RestController
 @RequestMapping("vehicle")
+@Slf4j
 public class VehicleServerController {
-    private final VehicleServerRepository repository;
-    private final String vehicle;
 
-    public VehicleServerController(VehicleServerRepository repository,
-                                   @Value("vehicle.id") String vehicle) {
-        this.repository = repository;
-        this.vehicle = vehicle;
+    private final SelfDrivingService service;
+    private final ThreadFactory factory;
+
+    @Value("${vehicle.refresh.rateSeconds:5}")
+    private long refreshRateSecs;
+
+    public VehicleServerController(SelfDrivingService service,
+                                   @Qualifier("reactiveThreadFactory")
+                                   ThreadFactory factory) {
+        this.service = service;
+        this.factory = factory;
     }
 
     @GetMapping
-    public Mono<Vehicle> getVehicle() {
-        return Mono.just(repository.findById(vehicle).orElse(null));
+    public Flux<ServerSentEvent<Vehicle>> getVehicle() {
+
+        var scheduler = Schedulers.newParallel(5,factory);
+        return Flux.interval(Duration.ofSeconds(refreshRateSecs),scheduler)
+                .map(sequence -> ServerSentEvent.<Vehicle> builder()
+                        .data(service.getVehicle())
+                        .build());
     }
 
-
+    @PostMapping
+    public void start() {
+        service.start();
+    }
 }

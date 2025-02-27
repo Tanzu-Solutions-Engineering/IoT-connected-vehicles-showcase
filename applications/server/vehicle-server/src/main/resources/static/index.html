@@ -21,6 +21,16 @@
       });
     });
     </script>
+
+    <script lang="javascript">
+       function startVehicle()
+       {
+            $.post("/vehicle",null,
+            function(data, status){
+              alert("Data: " + data + "\nStatus: " + status);
+            });
+      }
+    </script>
 </head>
 <style>
 input[type=text], select {
@@ -57,7 +67,7 @@ div {
 <body>
 
 
-
+<button id="startVehicleButton" onclick="startVehicle();">start</button> &nbsp;&nbsp;
 <div id="mapid" style="width: 1000px; height: 800px;"></div>
 <script>
 
@@ -167,7 +177,7 @@ div {
             iconSize: [18, 35],
         });
 
-    var source = new EventSource("/updates");
+    var source = new EventSource("/vehicle");
     source.onmessage = function(event) {
 
       var vehicle = JSON.parse(event.data)

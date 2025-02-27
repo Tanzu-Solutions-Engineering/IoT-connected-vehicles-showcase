@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class SelfDrivingService implements Runnable {
+public class SelfDrivingService extends Thread {
     private final VehicleEngine vehicleEngine;
     private final VehicleServerRepository repository;
     private final Vehicle vehicle;
+    private final long SPEED_FACTOR = 3000;
+    private long fixSpeed = 50;
 
     public SelfDrivingService(VehicleEngine vehicleEngine, VehicleServerRepository repository) {
         this.repository = repository;
@@ -33,8 +35,23 @@ public class SelfDrivingService implements Runnable {
     public void run() {
         while(true)
         {
-            // log.info("START Processing  vehicle: ${vehicle.vin} messageCount:${messageCount}");
-            drive();
+
+
+            try {
+                // log.info("START Processing  vehicle: ${vehicle.vin} messageCount:${messageCount}");
+                drive();
+
+                log.info("Sleeping");
+                sleep( SPEED_FACTOR/ fixSpeed);
+                log.info("Slept");
+
+            } catch (Throwable e) {
+                log.warn("Error: {}",e);
+            }
         }
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 }

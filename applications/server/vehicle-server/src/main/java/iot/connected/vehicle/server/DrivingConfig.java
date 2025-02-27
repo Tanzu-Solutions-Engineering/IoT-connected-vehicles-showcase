@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+
 @Configuration
 public class DrivingConfig {
 
@@ -18,4 +21,11 @@ public class DrivingConfig {
     Thread drivingThread(SelfDrivingService service){
         return new Thread(service);
     }
+
+
+    @Bean("reactiveThreadFactory")
+    public ThreadFactory threadFactory() {
+        return Executors.defaultThreadFactory();
+    }
+
 }
