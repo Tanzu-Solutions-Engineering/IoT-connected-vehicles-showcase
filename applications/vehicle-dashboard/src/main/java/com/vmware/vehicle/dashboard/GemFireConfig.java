@@ -2,6 +2,7 @@ package com.vmware.vehicle.dashboard;
 
 
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle;
+import com.vmware.vehicle.dashboard.repository.gemfire.VehicleGemFireRepository;
 import org.apache.geode.cache.DataPolicy;
 import org.apache.geode.cache.GemFireCache;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +19,7 @@ import org.springframework.data.gemfire.repository.config.EnableGemfireRepositor
 @ClientCacheApplication(name = "vehicle-dashboard")
 @EnableSecurity
 @EnablePdx
-@EnableGemfireRepositories
+@EnableGemfireRepositories(basePackageClasses = VehicleGemFireRepository.class)
 @Profile("gemfire")
 public class GemFireConfig {
 

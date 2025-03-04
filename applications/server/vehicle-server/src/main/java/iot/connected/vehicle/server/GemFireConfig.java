@@ -3,7 +3,10 @@ package iot.connected.vehicle.server;
 import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle;
 import iot.connected.vehicle.server.repository.VehicleServerRepository;
 import iot.connected.vehicle.server.repository.gemfire.VehicleGemFireRepository;
+import lombok.SneakyThrows;
 import org.apache.geode.cache.*;
+import org.apache.geode.cache.wan.GatewayReceiver;
+import org.apache.geode.cache.wan.GatewaySender;
 import org.apache.geode.distributed.ServerLauncher;
 import org.apache.geode.pdx.PdxSerializer;
 import org.apache.geode.pdx.ReflectionBasedAutoSerializer;
@@ -15,23 +18,18 @@ import org.springframework.context.annotation.Configuration;
 import java.io.File;
 import java.nio.file.Paths;
 
+import static java.lang.System.setProperty;
+
 @Configuration
 public class GemFireConfig {
 
     @Value("${gemfire.server.name:vehicle-server}")
     private String serverName;
 
-//    @Value("${gemfire.start-locator:true}")
-//    private String startLocator;
-
-
-//    @Value("${gemfire.async.event.queue.id}")
-//    private String asyncEventQueueId;
-
     @Value("${gemfire.pdx.patterns:.*}")
     private String pdxClassPatterns;
 
-    @Value("${gemfire.server.port:40404}")
+    @Value("${gemfire.server.port:20200}")
     private Integer serverPort;
 
     @Value("${gemfire.read.pdx.serialize:false}")
@@ -56,8 +54,35 @@ public class GemFireConfig {
     @Value("${gemfire.pdx.disk.store.name:PDX_STORE}")
     private String pdxDataStoreName;
 
-    @Value("${gemfire.startLocators:localhost[10334]}")
+    @Value("${gemfire.startLocators:localhost[2010]}")
     private String startLocators;
+
+    /**
+     * 	If set, automatically starts a locator in the current process when the member connects
+     * 	to the cluster and stops the locator when the member disconnects.
+     * To use, specify the locator with an optional address or host specification
+     * and a required port number, in one of these formats:
+     */
+    @Value("${gemfire.remoteLocators:localhost[10334]}")
+    private String remoteLocators;
+
+    @Value("${gemfire.distributedSystemId:2}")
+    private String distributedSystemId;
+
+    @Value("${gemfire.sender.id:vehicle-sender}")
+    private String senderId;
+
+    @Value("${gemfire.gateway.diskStore:vehicle-sender}")
+    private String gatewayDiskStore;
+
+    @Value("${gemfire.gateway.sender.name:vehicle-sender}")
+    private String gatewaySenderName;
+
+    @Value("${gemfire.gateway.remote.distributed.id:1}")
+    private int remoteDistributedId;
+
+    @Value("${gemfire.jmx.manager.port:20199}")
+    private String jmxManagerPort;
 
     @Bean
     Cache cacheFactory(ServerLauncher launcher)
@@ -74,20 +99,28 @@ public class GemFireConfig {
     @Bean
     ServerLauncher builder(PdxSerializer pdxSerializer)
     {
+        //
+
+        setProperty("gemfire.remote-locators",remoteLocators);
+        setProperty("gemfire.GatewaySender.REMOVE_FROM_QUEUE_ON_EXCEPTION","false");
+        setProperty("jmx-manager-port",jmxManagerPort);
+
         var serverLauncher = new ServerLauncher.Builder()
                 .setWorkingDirectory(workingDirectory)
                 .setMemberName(serverName)
                 .setServerPort(serverPort)
                 .setPdxDiskStore(pdxDataStoreName)
-                .set("start-locator",startLocators)
+                .set("remote-locators",remoteLocators)
 //                .set("locators",locators)
                 .set("statistic-sampling-enabled","true")
                 .set("statistic-archive-file",workingDirectory+"/"+statisticArchiveFile)
                 .set("archive-disk-space-limit",archiveDiskSpaceLimit)
                 .set("archive-file-size-limit",archiveFileSizeLimit)
+                .set("distributed-system-id", distributedSystemId)
                 .setPdxReadSerialized(readPdxSerialized)
                 .setPdxSerializer(pdxSerializer)
                 .setPdxPersistent(true)
+                .set("start-locator",startLocators)
                 .build();
 
         serverLauncher.start();
@@ -100,6 +133,28 @@ public class GemFireConfig {
     VehicleServerRepository repository(Region<String, Vehicle> vehicleRegion)
     {
         return new VehicleGemFireRepository(vehicleRegion);
+    }
+
+    @SneakyThrows
+    GatewayReceiver receiver(Cache cache){
+        var receiver = cache.createGatewayReceiverFactory().create();
+
+        receiver.start();
+        return receiver;
+    }
+
+    @Bean
+    GatewaySender sender(Cache cache, @Qualifier("gatewayDiskStore") DiskStore gateDS){
+        var sender = cache.createGatewaySenderFactory()
+                .setDiskStoreName(gateDS.getName())
+                .setPersistenceEnabled(true)
+                .setParallel(true)
+                .setMaximumQueueMemory(100)
+                .create(gatewaySenderName,remoteDistributedId);
+
+        sender.start();
+
+        return sender;
     }
 
 
@@ -119,6 +174,18 @@ public class GemFireConfig {
     }
 
     @Bean
+    DiskStore gatewayDiskStore(Cache cache,DiskStoreFactory diskStoreFactory)
+    {
+        return diskStoreFactory.create(gatewayDiskStore);
+    }
+
+    @Bean
+    DiskStore gatewayDiskStoreNameDiskStore(Cache cache, DiskStoreFactory diskStoreFactory)
+    {
+        return diskStoreFactory.create(gatewayDiskStore);
+    }
+
+    @Bean
     DiskStore partitionedPersistedDiskStore(Cache cache, DiskStoreFactory diskStoreFactory)
     {
         return diskStoreFactory.create(partitionedPersistedDiskStoreName);
@@ -129,6 +196,7 @@ public class GemFireConfig {
     {
         Region<String, Vehicle>  region  =  (Region)cache.createRegionFactory(RegionShortcut.PARTITION_PERSISTENT)
                 .setDiskStoreName(diskStore.getName())
+                .addGatewaySenderId(gatewaySenderName)
                 .create("Vehicle");
         return region;
     }
