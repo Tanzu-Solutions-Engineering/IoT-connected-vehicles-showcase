@@ -183,7 +183,7 @@ div {
             window[vehicle.vin].remove();
         }
 
-        if(vehicle.temperature < 220)
+        if(vehicle.checkEngine == false)
         {
                 window[vehicle.vin] = L.marker([vehicle.gpsLocation.latitude, vehicle.gpsLocation.longitude]).addTo(mymap)
                 .bindPopup("<strong>vin:</strong>"+vehicle.vin+"</br/>"
