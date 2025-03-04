@@ -54,4 +54,11 @@ public class SelfDrivingService extends Thread {
     public Vehicle getVehicle() {
         return vehicle;
     }
+
+    public void updateCheckEngine(boolean checkEngine) {
+
+        vehicle.setCheckEngine(checkEngine);
+
+        repository.save(vehicle);
+    }
 }

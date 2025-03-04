@@ -29,7 +29,19 @@
             function(data, status){
               alert("Data: " + data + "\nStatus: " + status);
             });
-      }
+      }//--------------------
+
+        function engineLight(lightBoolean)
+        {
+            $.ajax({
+                  url: "/vehicle/check/engine/"+lightBoolean,
+                  type: 'PUT',
+                  success: function(data) {
+                    alert('check engine:'+lightBoolean);
+                  }
+                });
+        }
+
     </script>
 </head>
 <style>
@@ -67,7 +79,8 @@ div {
 <body>
 
 
-<button id="startVehicleButton" onclick="startVehicle();">start</button> &nbsp;&nbsp;
+<button id="startVehicleButton" onclick="startVehicle();">start</button> &nbsp;&nbsp;Engine Light: <button onclick="engineLight(true);">On</button>
+&nbsp;&nbsp;<button onclick="engineLight(false);">Off</button>
 <div id="mapid" style="width: 1000px; height: 800px;"></div>
 <script>
 
@@ -193,7 +206,7 @@ div {
             window[vehicle.vin].remove();
         }
 
-        if(vehicle.temperature < 220)
+        if(vehicle.checkEngine == false)
         {
                 window[vehicle.vin] = L.marker([vehicle.gpsLocation.latitude, vehicle.gpsLocation.longitude]).addTo(mymap)
                 .bindPopup("<strong>vin:</strong>"+vehicle.vin+"</br/>"

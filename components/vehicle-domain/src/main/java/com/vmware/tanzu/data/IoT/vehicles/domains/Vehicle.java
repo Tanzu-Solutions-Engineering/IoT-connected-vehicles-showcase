@@ -16,8 +16,8 @@ public class Vehicle {
     private Long odometer;
     private int  speed;
     private int temperature;
+    private boolean checkEngine;
     private GpsLocation gpsLocation;
-    private Set<Prediction> predictions;
 
     public String getId() {
         return vin;

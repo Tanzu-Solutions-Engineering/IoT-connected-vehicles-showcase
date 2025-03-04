@@ -18,8 +18,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class SelfDrivingServiceTest {
 
-
     private SelfDrivingService subject;
+    private Vehicle expected = JavaBeanGeneratorCreator.of(Vehicle.class).create();
 
     @Mock
     private VehicleEngine engine;
@@ -36,7 +36,6 @@ class SelfDrivingServiceTest {
     void drive() {
         subject.drive();
 
-
         verify(engine).move(any());
         verify(repository).save(any());
     }
@@ -44,10 +43,21 @@ class SelfDrivingServiceTest {
     @Test
     void getVehicle() {
 
-        var expected = JavaBeanGeneratorCreator.of(Vehicle.class).create();
         when(engine.create()).thenReturn(expected);
         subject = new SelfDrivingService(engine,repository);
 
         assertThat(subject.getVehicle()).isEqualTo(expected);
     }
+
+    @Test
+    void checkEngine() {
+        when(engine.create()).thenReturn(expected);
+        subject = new SelfDrivingService(engine,repository);
+
+        subject.updateCheckEngine(true);
+
+        verify(repository).save(any(Vehicle.class));
+    }
+
+
 }

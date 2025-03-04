@@ -6,10 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.codec.ServerSentEvent;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
@@ -48,4 +45,11 @@ public class VehicleServerController {
     public void start() {
         service.start();
     }
+
+    @PutMapping("check/engine/{checkEngine}")
+    public void updateCheckEngine(@PathVariable boolean checkEngine) {
+        service.updateCheckEngine(checkEngine);
+
+    }
+
 }

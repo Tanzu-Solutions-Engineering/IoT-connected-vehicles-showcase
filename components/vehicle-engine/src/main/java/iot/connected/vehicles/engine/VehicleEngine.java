@@ -35,7 +35,7 @@ public class VehicleEngine implements Creator<Vehicle> {
 
     /**
      * Creates an initial instance of the Vehicle
-     * @return
+     * @return the initialized vehicle
      */
     public Vehicle create() {
         var latitude = new Random().nextDouble(minLatitude,maxLatitude);
@@ -47,11 +47,13 @@ public class VehicleEngine implements Creator<Vehicle> {
                 .speed(new Random().nextInt(15, 100))
                 .temperature(new Random().nextInt(100,300))
                 .odometer(this.odometer + distanceIncrements.longValue())
+                .checkEngine(false)
                 .gpsLocation(
                         GpsLocation
                                 .builder()
                                 .latitude(latLong[0])
-                                .longitude(latLong[1]).build())
+                                .longitude(latLong[1])
+                                .build())
                 .build();
     }
 
@@ -60,7 +62,6 @@ public class VehicleEngine implements Creator<Vehicle> {
                                          Double longitude ,
                                          Double distanceMeters )
     {
-
         //Coordinate offsets in radians
         var dLat = distanceMeters/radius;
         var dLon = distanceMeters/(radius* cos(PI*latitude/180));

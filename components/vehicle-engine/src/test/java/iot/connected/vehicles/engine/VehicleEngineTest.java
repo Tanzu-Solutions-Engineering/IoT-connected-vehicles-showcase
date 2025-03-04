@@ -25,11 +25,9 @@ class VehicleEngineTest {
     @Test
     void create() {
         Vehicle actual = subject.create();
-
-
         assertThat(actual).isNotNull();
-
         assertThat(actual).isNotEqualTo(subject.create());
+        assertThat(false).isEqualTo(actual.isCheckEngine());
     }
 
 

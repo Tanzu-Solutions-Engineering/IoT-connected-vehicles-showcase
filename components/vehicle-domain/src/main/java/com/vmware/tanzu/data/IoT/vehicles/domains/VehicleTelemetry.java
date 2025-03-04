@@ -23,6 +23,5 @@ public class VehicleTelemetry extends Vehicle {
         this.setSpeed(vehicle.getSpeed());
         this.setOdometer(vehicle.getOdometer());
         this.setTemperature(vehicle.getTemperature());
-        this.setPredictions(vehicle.getPredictions());
     }
 }
