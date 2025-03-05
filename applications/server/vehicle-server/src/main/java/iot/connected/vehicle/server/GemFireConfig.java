@@ -4,12 +4,15 @@ import com.vmware.tanzu.data.IoT.vehicles.domains.Vehicle;
 import iot.connected.vehicle.server.repository.VehicleServerRepository;
 import iot.connected.vehicle.server.repository.gemfire.VehicleGemFireRepository;
 import lombok.SneakyThrows;
+import nyla.solutions.core.io.IO;
 import org.apache.geode.cache.*;
 import org.apache.geode.cache.wan.GatewayReceiver;
 import org.apache.geode.cache.wan.GatewaySender;
 import org.apache.geode.distributed.ServerLauncher;
 import org.apache.geode.pdx.PdxSerializer;
 import org.apache.geode.pdx.ReflectionBasedAutoSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +26,7 @@ import static java.lang.System.setProperty;
 @Configuration
 public class GemFireConfig {
 
+    private static final Logger log = LoggerFactory.getLogger(GemFireConfig.class);
     @Value("${gemfire.server.name:vehicle-server}")
     private String serverName;
 
@@ -54,7 +58,7 @@ public class GemFireConfig {
     @Value("${gemfire.pdx.disk.store.name:PDX_STORE}")
     private String pdxDataStoreName;
 
-    @Value("${gemfire.startLocators:localhost[2010]}")
+    @Value("${gemfire.startLocators:localhost[20010]}")
     private String startLocators;
 
     /**
@@ -96,11 +100,13 @@ public class GemFireConfig {
         return new ReflectionBasedAutoSerializer(pdxClassPatterns);
     }
 
+    @SneakyThrows
     @Bean
     ServerLauncher builder(PdxSerializer pdxSerializer)
     {
-        //
+        log.info("********************* startLocators: {}",startLocators);
 
+        IO.mkdir(workingDirectory);
         setProperty("gemfire.remote-locators",remoteLocators);
         setProperty("gemfire.GatewaySender.REMOVE_FROM_QUEUE_ON_EXCEPTION","false");
         setProperty("jmx-manager-port",jmxManagerPort);
@@ -111,16 +117,17 @@ public class GemFireConfig {
                 .setServerPort(serverPort)
                 .setPdxDiskStore(pdxDataStoreName)
                 .set("remote-locators",remoteLocators)
-//                .set("locators",locators)
                 .set("statistic-sampling-enabled","true")
                 .set("statistic-archive-file",workingDirectory+"/"+statisticArchiveFile)
                 .set("archive-disk-space-limit",archiveDiskSpaceLimit)
                 .set("archive-file-size-limit",archiveFileSizeLimit)
                 .set("distributed-system-id", distributedSystemId)
+                .set("bind-address","127.0.0.1")
                 .setPdxReadSerialized(readPdxSerialized)
                 .setPdxSerializer(pdxSerializer)
                 .setPdxPersistent(true)
                 .set("start-locator",startLocators)
+//                .set("locators",startLocators)
                 .build();
 
         serverLauncher.start();

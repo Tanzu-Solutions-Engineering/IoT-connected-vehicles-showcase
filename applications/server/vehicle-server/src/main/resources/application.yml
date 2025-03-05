@@ -9,8 +9,8 @@ spring:
     gemfire:
       name: vehicle-server
       pool:
-        default:
-          locators: localhost[10334]
+#        default:
+#          locators: localhost[10334]
 
 vehicle:
   vin: vin001

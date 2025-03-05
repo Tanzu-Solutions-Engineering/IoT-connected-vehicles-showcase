@@ -21,7 +21,10 @@ public class VehicleEngine implements Creator<Vehicle> {
 
     private static final Double maxLatitude = 40.0;
     private static final Double  maxLongitude = -87.0;
+    //minLatitude = 32.0
     private static final Double  minLatitude = 32.0;
+
+    //minLongitude = -89.470;
     private static final Double  minLongitude = -89.470;
 
     private final Long odometer = new Random().nextLong(15000,500000);
